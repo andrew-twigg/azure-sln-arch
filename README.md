@@ -6,3 +6,4 @@
 - [Exam AZ-303: Microsoft Azure Architect Technologies
 ](https://docs.microsoft.com/en-us/learn/certifications/exams/az-303)
 - [Exam AZ-304: Microsoft Azure Architect Design](https://docs.microsoft.com/en-us/learn/certifications/exams/az-304)
+- [Azure CLI docs](https://docs.microsoft.com/en-gb/cli/azure/)
