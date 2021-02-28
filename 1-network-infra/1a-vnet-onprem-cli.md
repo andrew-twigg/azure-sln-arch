@@ -117,3 +117,73 @@ watch -d -n 5 az network vnet-gateway list \
     --resource-group <resource-group> \
     --output table
 ```
+
+## Update the local network gatewy IP addresses
+
+Check if finished waiting...
+
+```sh
+az network vnet-gateway list \
+    --resource-group learn-0654e7d9-9f71-4b93-91df-fec032271f32 \
+    --query "[?provisioningState=='Succeeded']" \
+    --output table
+```
+
+```sh
+PIPVNGAZUREVNET1=$(az network public-ip show \
+    --resource-group learn-0654e7d9-9f71-4b93-91df-fec032271f32 \
+    --name PIP-VNG-Azure-VNet-1 \
+    --query "[ipAddress]" \
+    --output tsv)
+
+az network local-gateway update \
+    --resource-group learn-0654e7d9-9f71-4b93-91df-fec032271f32 \
+    --name LNG-Azure-VNet-1 \
+    --gateway-ip-address $PIPVNGAZUREVNET1
+
+PIPVNGHQNETWORK=$(az network public-ip show \
+    --resource-group learn-0654e7d9-9f71-4b93-91df-fec032271f32 \
+    --name PIP-VNG-HQ-Network \
+    --query "[ipAddress]" \
+    --output tsv)
+
+az network local-gateway update \
+    --resource-group learn-0654e7d9-9f71-4b93-91df-fec032271f32 \
+    --name LNG-HQ-Network \
+    --gateway-ip-address $PIPVNGHQNETWORK
+
+```
+
+## Create the connections
+
+```sh
+SHAREDKEY=<shared key>
+
+az network vpn-connection create \
+    --resource-group <resource-group> \
+    --name Azure-VNet-1-To-HQ-Network \
+    --vnet-gateway1 VNG-Azure-VNet-1 \
+    --shared-key $SHAREDKEY \
+    --local-gateway2 LNG-HQ-Network
+
+az network vpn-connection create \
+    --resource-group <resource-group> \
+    --name HQ-Network-To-Azure-VNet-1  \
+    --vnet-gateway1 VNG-HQ-Network \
+    --shared-key $SHAREDKEY \
+    --local-gateway2 LNG-Azure-VNet-1
+```
+
+## Verify
+
+```sh
+az network vpn-connection show \
+    --resource-group learn-0654e7d9-9f71-4b93-91df-fec032271f32 \
+    --name Azure-VNet-1-To-HQ-Network  \
+    --output table \
+    --query '{Name:name,ConnectionStatus:connectionStatus}'
+```
+
+now you got this...
+
+![](1a-vnet-onprem-cli-final.png)
