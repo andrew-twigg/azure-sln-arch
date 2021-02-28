@@ -58,3 +58,62 @@ az network local-gateway list \
     --resource-group <resource-group> \
     --output table
 ```
+
+# Create site-to-site VPN gateway with CLI
+
+## Create the Azure-side VPN gateway
+
+```sh
+az network public-ip create \
+    --resource-group <resource-group> \
+    --name PIP-VNG-Azure-VNet-1 \
+    --allocation-method Dynamic
+
+az network vnet create \
+    --resource-group <resource-group> \
+    --name VNG-Azure-VNet-1 \
+    --subnet-name GatewaySubnet
+
+az network vnet-gateway create \
+    --resource-group <resource-group> \
+    --name VNG-Azure-VNet-1 \
+    --public-ip-address PIP-VNG-Azure-VNet-1 \
+    --vnet VNG-Azure-VNet-1 \
+    --gateway-type Vpn \
+    --vpn-type RouteBased \
+    --sku VpnGw1 \
+    --no-wait
+
+```
+
+## Create the on-prem VPN gateway
+
+```sh
+az network public-ip create \
+    --resource-group <resource-group> \
+    --name PIP-VNG-HQ-Network \
+    --allocation-method Dynamic
+
+az network vnet create \
+    --resource-group <resource-group> \
+    --name VNG-HQ-Network \
+    --subnet-name GatewaySubnet 
+
+az network vnet-gateway create \
+    --resource-group <resource-group> \
+    --name VNG-HQ-Network \
+    --public-ip-address PIP-VNG-HQ-Network \
+    --vnet HQ-Network \
+    --gateway-type Vpn \
+    --vpn-type RouteBased \
+    --sku VpnGw1 \
+    --no-wait
+```
+
+Waiting...
+
+```sh
+watch -d -n 5 az network vnet-gateway list \
+    --resource-group <resource-group> \
+    --output table
+```
