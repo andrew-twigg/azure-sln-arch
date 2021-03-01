@@ -7,4 +7,5 @@
     - Revise
         - [ ] Border Gateway Protocol (BGP)
 - [x] [Secure and isolate access to Azure resources by using NSGs and service endpoints](https://docs.microsoft.com/en-us/learn/modules/secure-and-isolate-with-nsg-and-service-endpoints/)
-- [ ] [Distribute services across Azure VNets and integrate them by using VNet peering](https://docs.microsoft.com/en-gb/learn/modules/integrate-vnets-with-vnet-peering/)
+- [x] [Distribute services across Azure VNets and integrate them by using VNet peering](https://docs.microsoft.com/en-gb/learn/modules/integrate-vnets-with-vnet-peering/)
+- [ ] [Enhance your service availability and data locality by using Azure Traffic Manager](https://docs.microsoft.com/en-us/learn/modules/distribute-load-with-traffic-manager/)
