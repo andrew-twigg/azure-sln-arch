@@ -12,6 +12,16 @@
 - Build in redundancy.
 - Dynamic Routing using Border Gateway protocol (BGP).
 
+## When to use
+
+- Low-latency connectivity to services in the cloud
+- Access to high-volume systems in the cloud
+- Consuming Microsoft Cloud Services like Office and Dynamics 365 for orgs with large numbers of users needing to access concurrently
+- Orgs that migrated large-scale on-prem systems to Azure
+- Keeping data off the public internet
+- Large datacenters with high numbers of users and systems accessing SaaS offerings
+- Mission-critical / enterprise-class workloads
+
 ## Connectivity Models
 
 - CloudExchange co-location
