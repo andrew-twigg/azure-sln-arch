@@ -6,5 +6,5 @@
 - [x] [Connect your on-premises network to the Microsoft Global Network using Express Route](https://docs.microsoft.com/en-us/learn/modules/connect-on-premises-network-with-expressroute/1-introduction)
     - Revise
         - [ ] Border Gateway Protocol (BGP)
-- [ ] [Secure and isolate access to Azure resources by using NSGs and service endpoints](https://docs.microsoft.com/en-us/learn/modules/secure-and-isolate-with-nsg-and-service-endpoints/)
-    - next up... [PaaS + service endpoints](https://docs.microsoft.com/en-us/learn/modules/secure-and-isolate-with-nsg-and-service-endpoints/4-vnet-service-endpoints)
+- [x] [Secure and isolate access to Azure resources by using NSGs and service endpoints](https://docs.microsoft.com/en-us/learn/modules/secure-and-isolate-with-nsg-and-service-endpoints/)
+- [ ] [Distribute services across Azure VNets and integrate them by using VNet peering](https://docs.microsoft.com/en-gb/learn/modules/integrate-vnets-with-vnet-peering/)
