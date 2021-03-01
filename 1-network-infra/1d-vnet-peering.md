@@ -41,4 +41,194 @@ Other methods mainly for on-prem to Azure networks.
 
 When VNets are connected through both a gateway and VNet peering, traffic flows through peering connection.
 
- 
+
+## Example
+
+![](1d-prepare-vnets.svg)
+
+
+```sh
+az network vnet create \
+    --resource-group $rg \
+    --name SalesVNet \
+    --address-prefix 10.1.0.0/16 \
+    --subnet-name Apps \
+    --subnet-prefix 10.1.1.0/24 \
+    --location northeurope
+
+az network vnet create \
+    --resource-group $rg \
+    --name MarketingVNet \
+    --address-prefix 10.2.0.0/16 \
+    --subnet-name Apps \
+    --subnet-prefix 10.2.1.0/24 \
+    --location northeurope
+
+az network vnet create \
+    --resource-group $rg \
+    --name ResearchVNet \
+    --address-prefix 10.3.0.0/16 \
+    --subnet-name Data \
+    --subnet-prefix 10.3.1.0/24 \
+    --location westeurope
+```
+
+Check the VNet situation...
+
+```sh
+az network vnet list --output table
+```
+
+Create VMs...
+
+```sh
+az vm create \
+    --resource-group $rg \
+    --no-wait \
+    --name SalesVM \
+    --location northeurope \
+    --vnet-name SalesVNet \
+    --subnet Apps \
+    --image UbuntuLTS \
+    --admin-username azureuser \
+    --admin-password <password>
+
+az vm create \
+    --resource-group $rg \
+    --no-wait \
+    --name MarketingVM \
+    --location northeurope \
+    --vnet-name MarketingVNet \
+    --subnet Apps \
+    --image UbuntuLTS \
+    --admin-username azureuser \
+    --admin-password <password>
+
+az vm create \
+    --resource-group $rg \
+    --no-wait \
+    --name ResearchVM \
+    --location westeurope \
+    --vnet-name ResearchVNet \
+    --subnet Data \
+    --image UbuntuLTS \
+    --admin-username azureuser \
+    --admin-password <password>
+```
+
+Confirm they are created...
+
+```sh
+az vm list \
+    --resource-group $rg \
+    --show-details \
+    --query '[*].{Name:name, ProvisioningState:provisioningState, PowerState:powerState}' \
+    --output table
+```
+
+Hub and spoke peering topology...
+
+
+```sh
+az network vnet peering create \
+    --name SalesVNet-To-MarketingVNet \
+    --remote-vnet MarketingVNet \
+    --resource-group $rg \
+    --vnet-name SalesVNet \
+    --allow-vnet-access
+
+az network vnet peering create \
+    --name MarketingVNet-To-SalesVNet \
+    --remote-vnet SalesVNet \
+    --resource-group $rg \
+    --vnet-name MarketingVNet \
+    --allow-vnet-access
+
+az network vnet peering create \
+    --name MarketingVNet-To-ResearchVNet \
+    --remote-vnet ResearchVNet \
+    --resource-group $rg \
+    --vnet-name MarketingVNet \
+    --allow-vnet-access
+
+az network vnet peering create \
+    --name ResearchVNet-To-MarketingVNet \
+    --remote-vnet MarketingVNet \
+    --resource-group $rg \
+    --vnet-name ResearchVNet \
+    --allow-vnet-access
+```
+
+Check it
+
+```sh
+az network vnet peering list \
+    --resource-group $rg \
+    --vnet-name SalesVNet \
+    --output table
+
+az network vnet peering list \
+    --resource-group $rg \
+    --vnet-name MarketingVNet \
+    --output table
+
+az network vnet peering list \
+    --resource-group $rg \
+    --vnet-name ResearchVNet \ 
+    --output table
+```
+
+![](1d-vnet-peering-configure-connections-result.svg)
+
+Check the routes...
+
+```sh
+az network nic show-effective-route-table \
+    --resource-group $rg \
+    --name SalesVMVMNic \
+    --output table
+
+az network nic show-effective-route-table \
+    --resource-group $rg \
+    --name MarketingVMVMNic \
+    --output table
+
+az network nic show-effective-route-table \
+    --resource-group $rg \
+    --name MarketingVMVMNic \
+    --output table
+```
+
+Connect to the VMs to confirm connectivity between them. SalesVNet and ResearchVNet can't communicate (because not transitive).
+
+Get the IPs...
+
+```sh
+az vm list \
+    --resource-group $rg \
+    --query "[*].{Name:name, PrivateIP:privateIps, PublicIP:publicIps}" \
+    --show-details \
+    --output table
+
+Name         PrivateIP    PublicIP
+-----------  -----------  --------------
+MarketingVM  10.2.1.4     40.127.134.244
+SalesVM      10.1.1.4     40.115.114.40
+ResearchVM   10.3.1.4     104.47.152.193
+```
+
+Connect using (in cloud shell because they're in a vnet):
+
+```sh
+ssh -o StrictHostKeyChecking=no azureuser@<SalesVM public IP>
+```
+
+then run
+
+```sh
+ssh -o StrictHostKeyChecking=no azureuser@<MarketingVM private IP>
+```
+
+Check all of them. See this...
+
+![](1d-vnet-peer-testing.svg)
