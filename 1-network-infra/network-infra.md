@@ -7,3 +7,4 @@
     - Revise
         - [ ] Border Gateway Protocol (BGP)
 - [ ] [Secure and isolate access to Azure resources by using NSGs and service endpoints](https://docs.microsoft.com/en-us/learn/modules/secure-and-isolate-with-nsg-and-service-endpoints/)
+    - next up... [PaaS + service endpoints](https://docs.microsoft.com/en-us/learn/modules/secure-and-isolate-with-nsg-and-service-endpoints/4-vnet-service-endpoints)
