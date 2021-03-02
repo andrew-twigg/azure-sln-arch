@@ -1,6 +1,6 @@
 # Prepare on-prem VNet with CLI
 
-![](1a-vnet-onprem-cli.png)
+![](assets/1a-vnet-onprem-cli.png)
 
 ## Create Azure side resources
 

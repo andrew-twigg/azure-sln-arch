@@ -44,7 +44,7 @@ When VNets are connected through both a gateway and VNet peering, traffic flows 
 
 ## Example
 
-![](1d-prepare-vnets.svg)
+![](assets/1d-prepare-vnets.svg)
 
 
 ```sh
@@ -178,7 +178,7 @@ az network vnet peering list \
     --output table
 ```
 
-![](1d-vnet-peering-configure-connections-result.svg)
+![](assets/1d-vnet-peering-configure-connections-result.svg)
 
 Check the routes...
 
@@ -231,4 +231,4 @@ ssh -o StrictHostKeyChecking=no azureuser@<MarketingVM private IP>
 
 Check all of them. See this...
 
-![](1d-vnet-peer-testing.svg)
+![](assets/1d-vnet-peer-testing.svg)

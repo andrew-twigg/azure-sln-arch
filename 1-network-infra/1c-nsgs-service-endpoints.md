@@ -19,7 +19,7 @@ When applied to both subnet and NIC, each NSG is evaluated independently
 - Firstly inbound at subnet then at the NIC
 - Outbount firstly at the NIC then subnet
 
-![Evaluation Order](1c-nsgs-eval.svg)
+![Evaluation Order](assets/1c-nsgs-eval.svg)
 
 
 - Evaluted by priority, using 5-tuple (source, source port, destination, destination port, protocol) to allow or deny traffic
@@ -50,11 +50,11 @@ Makes admin easier. Configure network security for resources used by specific ap
 - Group network interfaces together and use the app security group as a source or destination rule on NSG
 - Without ASGs you'd need a rule for each VM
 
-![ASG-NSG](1c-asg-nsg.svg)
+![ASG-NSG](assets/1c-asg-nsg.svg)
 
 # Example
 
-![](1c-exercise-first-task.svg)
+![](assets/1c-exercise-first-task.svg)
 
 
 ## VNet and NSG
@@ -215,7 +215,7 @@ ssh -t azureuser@$DATASERVERIP 'wget http://10.0.0.4; exit; bash'
 
 Create an app security group for database servers so that all servers in the group can be assigned the same settings.
 
-![ASG](1c-exercise-second-task.svg)
+![ASG](assets/1c-exercise-second-task.svg)
 
 ```sh
 az network asg create \
@@ -252,7 +252,7 @@ az network nsg rule update \
 
 Extends the private address space in Azure by providing a direct connection to the Azure services. Service traffic remains on the Azure backbone and doesn't go out to the internet.
 
-![Service endpoint](1c-service-endpoint.svg)
+![Service endpoint](assets/1c-service-endpoint.svg)
 
 Azure resources have public IPs because they are designed for internet access by default. Anyone can potentially access these services.
 
@@ -269,13 +269,13 @@ Enabling the service endpoint restricts the flow of traffic, and enables Azure V
 
 Service resources secured using vnet service endpoints are accessible from on-prem networks by default. Use NAT IPs to enable this.
 
-![](1c-service-endpoint-flow.svg)
+![](assets/1c-service-endpoint-flow.svg)
 
 ## Example
 
 Service endpoint using network rules to restrict access to Azure Storage.
 
-![](1c-service-endpoint-exercise-task.svg)
+![](assets/1c-service-endpoint-exercise-task.svg)
 
 Add rules to the NSG to ensure that comms with Azure Storage pass through the service endpoint.
 
