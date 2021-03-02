@@ -98,9 +98,11 @@ Media uploads - use IP affinity also, so you don't fail connections by swapping 
 
 - Distributes load from internal Azure resources to other Azure resources
 - No internet traffic allowed
+- Must be in same vnet as backend resources
 
 
-## Example
+
+## External LB Example
 
 Clone this repo and set it up...
 
@@ -163,3 +165,5 @@ echo http://$(az network public-ip show \
     --query ipAddress \
     --output tsv)
 ```
+
+
