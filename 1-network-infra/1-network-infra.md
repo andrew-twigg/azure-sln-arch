@@ -10,4 +10,5 @@
 - [x] [Distribute services across Azure VNets and integrate them by using VNet peering](https://docs.microsoft.com/en-gb/learn/modules/integrate-vnets-with-vnet-peering/)
 - [x] [Enhance your service availability and data locality by using Azure Traffic Manager](https://docs.microsoft.com/en-us/learn/modules/distribute-load-with-traffic-manager/)
 - [x] [Improve application scalability and resiliency by using Azure Load Balancer](https://docs.microsoft.com/en-gb/learn/modules/improve-app-scalability-resiliency-with-load-balancer/)
-- [ ] [Load balancer your web service traffic with Application Gateway](https://docs.microsoft.com/en-gb/learn/modules/load-balance-web-traffic-with-application-gateway/)
+- [x] [Load balancer your web service traffic with Application Gateway](https://docs.microsoft.com/en-gb/learn/modules/load-balance-web-traffic-with-application-gateway/)
+- [ ] [Manage and control traffic flow in your Azure deployment with routes](https://docs.microsoft.com/en-gb/learn/modules/control-network-traffic-flow-with-routes/)
