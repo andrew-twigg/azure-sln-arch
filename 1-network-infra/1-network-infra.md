@@ -9,4 +9,5 @@
 - [x] [Secure and isolate access to Azure resources by using NSGs and service endpoints](https://docs.microsoft.com/en-us/learn/modules/secure-and-isolate-with-nsg-and-service-endpoints/)
 - [x] [Distribute services across Azure VNets and integrate them by using VNet peering](https://docs.microsoft.com/en-gb/learn/modules/integrate-vnets-with-vnet-peering/)
 - [x] [Enhance your service availability and data locality by using Azure Traffic Manager](https://docs.microsoft.com/en-us/learn/modules/distribute-load-with-traffic-manager/)
-- [ ] [Improve application scalability and resiliency by using Azure Load Balancer](https://docs.microsoft.com/en-gb/learn/modules/improve-app-scalability-resiliency-with-load-balancer/)
+- [x] [Improve application scalability and resiliency by using Azure Load Balancer](https://docs.microsoft.com/en-gb/learn/modules/improve-app-scalability-resiliency-with-load-balancer/)
+- [ ] [Load balancer your web service traffic with Application Gateway](https://docs.microsoft.com/en-gb/learn/modules/load-balance-web-traffic-with-application-gateway/)
