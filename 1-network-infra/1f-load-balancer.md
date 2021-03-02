@@ -100,3 +100,66 @@ Media uploads - use IP affinity also, so you don't fail connections by swapping 
 - No internet traffic allowed
 
 
+## Example
+
+Clone this repo and set it up...
+
+```sh
+git clone https://github.com/MicrosoftDocs/mslearn-improve-app-scalability-resiliency-with-load-balancer.git
+cd mslearn-improve-app-scalability-resiliency-with-load-balancer
+
+bash create-high-availability-vm-with-sets.sh learn-4b1cd597-b232-4688-9c4d-268d59835426
+```
+
+```sh
+az network public-ip create \
+    --resource-group $rg \
+    --allocation-method Static \
+    --name myPublicIP
+
+az network lb create \
+    --resource-group $rg \
+    --name myLoadBalancer \
+    --public-ip-address myPublicIP \
+    --frontend-ip-name myFrontEndPool \
+    --backend-pool-name myBackEndPool
+
+az network lb probe create \
+    --resource-group $rg \
+    --lb-name myLoadBalancer \
+    --name myHealthProbe \
+    --protocol tcp \
+    --port 80
+
+az network lb rule create \
+    --resource-group $rg \
+    --lb-name myLoadBalancer \
+    --name myHTTPRule \
+    --protocol tcp \
+    --frontend-port 80 \
+    --backend-port 80 \
+    --frontend-ip-name myFrontEndPool \
+    --backend-pool-name myBackEndPool \
+    --probe-name myHealthProbe
+
+az network nic ip-config update \
+    --resource-group $rg \
+    --nic-name webNic1 \
+    --name ipconfig1 \
+    --lb-name myLoadBalancer \
+    --lb-address-pools myBackEndPool
+
+az network nic ip-config update \
+    --resource-group $rg \
+    --nic-name webNic2 \
+    --name ipconfig1 \
+    --lb-name myLoadBalancer \
+    --lb-address-pools myBackEndPool
+
+# Public IP address of the load balancer
+echo http://$(az network public-ip show \
+    --resource-group $rg \
+    --name myPublicIP \
+    --query ipAddress \
+    --output tsv)
+```
