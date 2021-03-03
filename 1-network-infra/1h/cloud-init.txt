@@ -1,0 +1,4 @@
+#cloud-config
+package-upgrade: true
+packages:
+    - inetutils-traceroute

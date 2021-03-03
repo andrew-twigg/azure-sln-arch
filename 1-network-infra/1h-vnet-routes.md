@@ -126,5 +126,261 @@ Can't configure multiple user-defined routes with the same address prefix. Azure
 3. System routes
 
 
+## What is an NVA
+
+Its a virtual appliance that consists of various layers like:
+
+- firewall
+- WAN optimizer
+- application-delivery controllers
+- routers
+- load balancers
+- IDS/IPS
+- proxies
+- SD WAN edge
+
+Available through the Azure Marketplace.
+
+![](assets/1h-nva.svg)
+
+- perimeter-network subnet
+- dedicated subnets / microsegmentation
+    - all traffic routed through firewall and inspected by NVAs
+    - forwarding on the NVA nics to pass traffic accepted by appropriate subnet
+    - Layer 4
+    - Layer 7 for app-aware appliances
+    - acts as a router between subnets
 
 
+### HA
+
+Important to include this in any network design that includes NVAs.
+
+
+## User-defined routes
+
+Required when:
+- Access to the internet via on-prem network using forced tunneling
+- Using virtual appliances to control traffic flow
+
+Each routing table is associated with one or more subnets but each subnet is associated with only one routing table.
+
+
+# Exercise - Create custom routes
+
+Use a network virtual applicance to secure and monitor traffic. Ensure comms between public front-end servers and internal private servers is always routed through the appliance.
+
+Network is configured so that all traffic from a public subnet to a private subnet is routed through the NVA.
+- Create custom route from public subnet to perimeter-network subnet
+- Deploy an NVA to perimeter-network subnet
+
+![](assets/1h-virtual-network-subnets-route-table.svg)
+
+
+## Create a route table with custom route
+
+```sh
+# create a route table
+az network route-table create \
+    --name publictable \
+    --resource-group $RG \
+    --disable-bgp-route-propagation false
+
+# create a custom route
+az network route-table route create \
+    --route-table-name publictable \
+    --resource-group $RG \
+    --name productionsubnet \
+    --address-prefix 10.0.1.0/24 \
+    --next-hop-type VirtualAppliance \
+    --next-hop-ip-address 10.0.2.4
+```
+
+## Create a VNet and subnets
+
+Create a vnet and three subnets, publicsubnet, privatesubnet, and dmzsubnet.
+
+
+```sh
+# vnet and publicsubnet
+az network vnet create \
+    --name vnet \
+    --resource-group $RG \
+    --address-prefix 10.0.0.0/16 \
+    --subnet-name publicsubnet \
+    --subnet-prefix 10.0.0.0/24
+
+# create privatesubnet
+az network vnet subnet create \
+    --name privatesubnet \
+    --vnet-name vnet \
+    --resource-group $RG \
+    --address-prefix 10.0.1.0/24
+
+# create dmzsubnet
+az network vnet subnet create \
+    --name dmzsubnet \
+    --vnet-name vnet \
+    --resource-group $RG \
+    --address-prefix 10.0.2.0/24
+
+az network vnet subnet list \
+    --resource-group $RG \
+    --vnet-name vnet \
+    --output table
+```
+
+
+## Associate the route table with the public subnet
+
+```sh
+az network vnet subnet update \
+    --name publicsubnet \
+    --vnet-name vnet \
+    --resource-group $RG \
+    --route-table publictable
+```
+
+
+## Create an NVA and VMs
+
+Deploy an NVA to secure and monitor traffic between front-end public servers and internal private servers. Forward IP traffic.
+
+Deploy the NVA to the dmzsubnet and enable IP forwarding to allow traffic from publicsubnet and traffic that uses the custom route to be sent to the private subnet.
+
+![](assets/1h-nva-ip-forwarding.svg)
+
+
+Enable IP forwarding for the Azure NIC
+
+```sh
+az vm create \
+    --resource-group $RG \
+    --name nva \
+    --vnet-name vnet \
+    --subnet dmzsubnet \
+    --image UbuntuLTS \
+    --admin-username azureuser \
+    --admin-password <password>
+
+NICID=$(az vm nic list \
+    --resource-group $RG \
+    --vm-name nva \
+    --query "[].{id:id}" \
+    --output tsv)
+
+echo $NICID
+
+NICNAME=$(az vm nic show \
+    --resource-group $RG \
+    --vm-name nva \
+    --nic $NICID \
+    --query "{name:name}" \
+    --output tsv)
+
+echo $NICNAME
+
+az network nic update --name $NICNAME \
+    --resource-group $RG \
+    --ip-forwarding true
+```
+
+Enable IP forwarding in the appliance
+
+```sh
+NVAIP="$(az vm list-ip-addresses \
+    --resource-group $RG \
+    --name nva \
+    --query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \
+    --output tsv)"
+
+echo $NVAIP
+
+# Enable IP forwarding withing the NVA
+ssh -t -o StrictHostKeyChecking=no azureuser@$NVAIP 'sudo sysctl -w net.ipv4.ip_forward=1; exit;'
+```
+
+Route traffic through the NVA
+
+![](assets/1h-vms-ip-addresses.svg)
+
+
+
+Deploy and VM into the public and private subnets
+
+```sh
+# check 1h/cloud-init.txt to install the inetutils-traceroute package.
+
+az vm create \
+    --resource-group $RG \
+    --name public \
+    --vnet-name vnet \
+    --subnet publicsubnet \
+    --image UbuntuLTS \
+    --admin-username azureuser \
+    --no-wait \
+    --custom-data 1h/cloud-init.txt \
+    --admin-password <password>
+
+az vm create \
+    --resource-group $RG \
+    --name private \
+    --vnet-name vnet \
+    --subnet privatesubnet \
+    --image UbuntuLTS \
+    --admin-username azureuser \
+    --no-wait \
+    --custom-data 1h/cloud-init.txt \
+    --admin-password 1ntergeNH1tach!
+
+# mac? brew install watch
+watch -d -n 5 "az vm list \
+    --resource-group $RG \
+    --show-details \
+    --query '[*].{Name:name, ProvisioningState:provisioningState, PowerState:powerstate}' \
+    --output table"
+
+PUBLICIP="$(az vm list-ip-addresses \
+    --resource-group $RG \
+    --name public \
+    --query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \
+    --output tsv)"
+
+echo $PUBLICIP
+
+PRIVATEIP="$(az vm list-ip-addresses \
+    --resource-group $RG \
+    --name private \
+    --query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \
+    --output tsv)"
+
+echo $PRIVATEIP
+```
+
+Now the testing!...
+
+Uses traceroute to show how traffic is routed.
+1. ICMP packets sent from public VM to private VM
+2. ICMP packets sent from private VM to public VM
+
+```sh
+andrew@Andrews-MacBook-Air 1-network-infra % ssh -t -o StrictHostKeyChecking=no azureuser@$PUBLICIP 'traceroute private --type=icmp; exit'
+Warning: Permanently added '104.214.218.37' (ECDSA) to the list of known hosts.
+traceroute to private.xfcgjqlfvkvuplrpnod42ft2nb.ax.internal.cloudapp.net (10.0.1.4), 64 hops max
+  1   10.0.2.4  0.796ms  1.183ms  0.504ms 
+  2   10.0.1.4  2.348ms  2.295ms  2.224ms 
+Connection to 104.214.218.37 closed.
+```
+
+![](assets/1h-public-private-route.svg)
+
+
+```sh
+andrew@Andrews-MacBook-Air 1-network-infra % ssh -t -o StrictHostKeyChecking=no azureuser@$PRIVATEIP 'traceroute public --type=icmp; exit'
+Warning: Permanently added '13.81.63.101' (ECDSA) to the list of known hosts. 
+traceroute to public.xfcgjqlfvkvuplrpnod42ft2nb.ax.internal.cloudapp.net (10.0.0.4), 64 hops max
+  1   10.0.0.4  3.347ms  2.191ms  2.348ms 
+Connection to 13.81.63.101 closed.
+```
+
+![](assets/1h-private-public-route)
