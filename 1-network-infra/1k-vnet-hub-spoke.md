@@ -63,4 +63,74 @@ VNet design considerations
 - <b>Connectivity</b>, between vnets via peering, or to on-prem via VPNs or ExpressRoute
 - <b>Routing</b>, and default routes, custom routes fr directing traffic through NVAs
 
- 
+
+## Secure hub-spoke network
+
+![](assets/1k-secure-network.png)
+
+- Network ACLs to ensure services are accessible to only the users and devices you want
+- NSGs and packet filtering firewall to control VNet traffic
+- Route control / forced tunneling to define custom routes through the infra and ensure services can't connect to an internet device
+- NVAs
+- ExpressRoute for a dedicated WAN link to extend your on-prem nets to Azure
+- Azure Security Center to prevent, detect, and respond to threats against Azure services.
+- Azure Firewall as a network security service
+
+### NSG
+
+Put one on each subnet within the topology. Implement security rules to allow or denu network traffic to and from each resource in the topology.
+
+### Perimeter network
+
+In a dedicated subnet in the hub vnet for routing external traffic. Designed to host NVAs for security functionality such as firewals and packet inspection. Route outbound traffic from the perimeter network so that it is monitored, secured and audited.
+
+### Network virtual appliance
+
+NVAs provide a secure network boundary by checking all inbound and outbound network traffic. Passes only traffic  that passes security rules.
+
+
+### ExpressRoute
+
+Created a dedicated private WAN link between on-prem resources and Azure gateway subnet in the hub vnet.
+
+
+## Azure Firewall
+
+Microsoft managed network security service. Protects Azure VNets and their resources by letting you manage and enforce connectivity policies centrally. Uses static, public IPs for vnet resources allowing outside firewalls to identify your traffic.
+
+Fully stateful network firewall that tracks the operating state, and characteristics of network connections traversing it. Enables central control of all network comms through policy enforcement. Policies can be enforced across vnets, regions, and Azure subs. In a hub and spoke, typically provisioned in the hub.
+
+![](assets/1k-azure-firewall.png)
+
+
+Azure Firewall consists of reviewing the firewall activity logs. Its integrated with Azure Monitor Logs.
+
+- Store in an Azure Storage Account
+- Stream to an Event Hub
+- Send to Azure Monitor Logs
+
+
+## NSGs
+
+- Enforce and control network traffic rules
+- Control access by permitting or denying comms between workloads in vnets
+- Rules based, using five-tuple method
+    - Source IP
+    - Source port
+    - Destination IP
+    - Destination port
+    - Protocol
+- Default rules, which can be overridden
+    - Traffic originating from and ending in a vnet is allowed
+    - Outbound traffic to internet is allowed, inbound is blocked
+    - ALB is allowed to probe the health of VMs or role instances
+
+
+## Additional security considerations
+
+- <b>Application Security Groups</b> provide central policy and security management for apps. Used to define detailed network security policies by using a moniker. Then you can use a zero trust approach where only specified flows are permitted.
+- <b>Azure Network Watcher</b> enables insights into network logging and diags. Give understanding of health and  performance of your Azure networks.
+- <b>Virtual network service endpoints</b> extend vnet private address space to make it available to Azure services. The endpoints allow you to restrict access to Azure resources.
+- <b>Azure DDoS Protection</b> Allows you to mitigate volumetric, protocol, and resource layer attacks.
+
+
