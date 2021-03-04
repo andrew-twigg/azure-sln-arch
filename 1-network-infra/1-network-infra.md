@@ -13,4 +13,5 @@
 - [x] [Load balancer your web service traffic with Application Gateway](https://docs.microsoft.com/en-gb/learn/modules/load-balance-web-traffic-with-application-gateway/)
 - [x] [Manage and control traffic flow in your Azure deployment with routes](https://docs.microsoft.com/en-gb/learn/modules/control-network-traffic-flow-with-routes/)
 - [x] [Design an IP addressing schema for your Azure deployment](https://docs.microsoft.com/en-gb/learn/modules/design-ip-addressing-for-azure/)
-- [ ] [Design a hybrid network architecture on Azure](https://docs.microsoft.com/en-us/learn/modules/design-a-hybrid-network-architecture/)
+- [x] [Design a hybrid network architecture on Azure](https://docs.microsoft.com/en-us/learn/modules/design-a-hybrid-network-architecture/)
+- [ ] [Centralize your core services by using hub and spoke Azure virtual network architecture](https://docs.microsoft.com/en-gb/learn/modules/hub-and-spoke-network-architecture/)
