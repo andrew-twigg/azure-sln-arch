@@ -164,7 +164,8 @@ A subnet is a range of IP addresses in the vnet, dividing the vnet into multiple
 
 Azure reserves the first three IPs for all subnets by default. Also, first and last IP addresses of all subnets are also reserved, for protocol conformance. Internal DHCP in Azure assigns and maintains the lease of IP addresses. the .1, .2, .3, and last IP are not visible or configurable by Azure customer.
 
-Number of possible addressses on an Azure subnet is $(2^{n})-5$.
+Number of possible addressses on an Azure subnet is $$(2^{n})-5$$.
+
 
 ## Plan IP addressing
 
