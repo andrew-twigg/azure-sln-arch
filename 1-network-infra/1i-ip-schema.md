@@ -193,4 +193,119 @@ Service isolation provides additional layers of security, but also requires good
 CIDR allows more flexible allocation of IP addresses than was possible with class based addressing scheme. CIDR can be used to slice the IP block into the required subnets and hosts.
 
 
+# Eaxample
 
+Design and implement IP addressing for VNets.
+
+- Implement three vnets and subnets to support resources
+- CoreServicesVnet in US West
+    - hosting largest number of resources
+    - connectivity to on-prem via VPN
+    - web services / databases / others, key to business
+    - shared services (DC / DNS etc) located there
+    - design for growth (large address space)
+- ManufacturingVnet in North Europe
+    - contains systems for ops of manufacturing facilities
+    - large number of internal connected devices
+    - design for growth
+- ResearchVnet in West India
+    - small stable set of resources
+    - not expected to grow
+    - small number of VM workstations
+
+![](assets/1i-design-implement-vnet-peering.svg)
+
+```sh
+# CoreServicesVnet
+az network vnet create \
+    --resource-group $RG \
+    --name CoreServicesVnet \
+    --address-prefix 10.20.0.0/16 \
+    --location westus
+
+# Subnets
+az network vnet subnet create \
+    --resource-group $RG \
+    --vnet-name CoreServicesVnet \
+    --name GatewaySubnet \
+    --address-prefixes 10.20.0.0/27
+
+az network vnet subnet create \
+    --resource-group $RG \
+    --vnet-name CoreServicesVnet \
+    --name SharedServicesSubnet \
+    --address-prefixes 10.20.10.0/24
+
+az network vnet subnet create \
+    --resource-group $RG \
+    --vnet-name CoreServicesVnet \
+    --name DatabaseSubnet \      
+    --address-prefixes 10.20.20.0/24
+
+az network vnet subnet create \
+    --resource-group $RG \
+    --vnet-name CoreServicesVnet \
+    --name PublicWebServiceSubnet \
+    --address-prefixes 10.20.30.0/24
+
+# review...
+az network vnet subnet list \
+    --resource-group $RG \
+    --vnet-name CoreServicesVnet \
+    --output table
+
+
+# Manufacturing
+az network vnet create \
+    --resource-group $RG \
+    --name ManufacturingVnet \
+    --address-prefix 10.30.0.0/16 \
+    --location northeurope
+
+az network vnet subnet create \
+    --resource-group $RG \
+    --vnet-name ManufacturingVnet \
+    --name ManufacturingSystemSubnet \
+    --address-prefixes 10.30.10.0/24
+
+az network vnet subnet create \
+    --resource-group $RG \
+    --vnet-name ManufacturingVnet \
+    --name SonarSubnet1 \             
+    --address-prefixes 10.30.20.0/24
+
+az network vnet subnet create \
+    --resource-group $RG \
+    --vnet-name ManufacturingVnet \
+    --name SonarSubnet2 \
+    --address-prefixes 10.30.21.0/24
+
+az network vnet subnet create \
+    --resource-group $RG \
+    --vnet-name ManufacturingVnet \
+    --name SonarSubnet3 \
+    --address-prefixes 10.30.22.0/24
+
+az network vnet subnet list \
+    --resource-group $RG \
+    --vnet-name ManufacturingVnet \
+    --output table
+
+# Research
+az network vnet create \
+    --resource-group $RG \
+    --name ResearchVnet \
+    --address-prefix 10.40.40.0/24 \
+    --location westindia
+
+az network vnet subnet create \
+    --resource-group $RG \
+    --vnet-name ResearchVnet \
+    --name ResearchSystemSubnet \
+    --address-prefixes 10.40.40.0/24
+
+az network vnet subnet list \
+    --resource-group $RG \
+    --vnet-name ResearchVnet \
+    --output table
+```
