@@ -12,4 +12,5 @@
 - [x] [Improve application scalability and resiliency by using Azure Load Balancer](https://docs.microsoft.com/en-gb/learn/modules/improve-app-scalability-resiliency-with-load-balancer/)
 - [x] [Load balancer your web service traffic with Application Gateway](https://docs.microsoft.com/en-gb/learn/modules/load-balance-web-traffic-with-application-gateway/)
 - [x] [Manage and control traffic flow in your Azure deployment with routes](https://docs.microsoft.com/en-gb/learn/modules/control-network-traffic-flow-with-routes/)
-- [ ] [Design an IP addressing schema for your Azure deployment](https://docs.microsoft.com/en-gb/learn/modules/design-ip-addressing-for-azure/)
+- [x] [Design an IP addressing schema for your Azure deployment](https://docs.microsoft.com/en-gb/learn/modules/design-ip-addressing-for-azure/)
+- [ ] [Design a hybrid network architecture on Azure](https://docs.microsoft.com/en-us/learn/modules/design-a-hybrid-network-architecture/)
