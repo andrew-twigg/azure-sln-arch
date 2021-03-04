@@ -163,3 +163,33 @@ Private IP addresses reserved by Internet Assigned Numbers Authority (IANA) base
 A subnet is a range of IP addresses in the vnet, dividing the vnet into multiple subnet. Each subnet has a unique range (CIDR).
 
 Azure reserves the first three IPs for all subnets by default. Also, first and last IP addresses of all subnets are also reserved, for protocol conformance. Internal DHCP in Azure assigns and maintains the lease of IP addresses. the .1, .2, .3, and last IP are not visible or configurable by Azure customer.
+
+Number of possible addressses on an Azure subnet is $(2^{n})-5$.
+
+## Plan IP addressing
+
+- Explore the requirements for a network IP address scheme
+- Slice IP block to meet you addressing needs, with CIDR
+- Planning IP addressing for Azure VNets
+
+
+### Requirements Capture
+
+- How many devices do you have on the network?
+- How many devices will be added to the network?
+
+You want to avoid the redesign of the IP addressing scheme as the network expands.
+
+- What devices need separating?
+- How many subnets?
+- How many devices per subnet?
+- How many devices will be added to the subnet in the future?
+- Subnet size requirements?
+- Subnet future requirements?
+
+Service isolation provides additional layers of security, but also requires good planning.
+
+CIDR allows more flexible allocation of IP addresses than was possible with class based addressing scheme. CIDR can be used to slice the IP block into the required subnets and hosts.
+
+
+
