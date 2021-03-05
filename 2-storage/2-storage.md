@@ -6,7 +6,7 @@
 
 - [x] [Choose a data storage approach in Azure](https://docs.microsoft.com/en-us/learn/modules/choose-storage-approach-in-azure/)
 - [x] [Create an Azure Storage account](https://docs.microsoft.com/en-us/learn/modules/create-azure-storage-account/)
-- [ ] [Upload, download, and manage data with Azure Storage Explorer](https://docs.microsoft.com/en-us/learn/modules/upload-download-and-manage-data-with-azure-storage-explorer/)
+- [x] [Upload, download, and manage data with Azure Storage Explorer](https://docs.microsoft.com/en-us/learn/modules/upload-download-and-manage-data-with-azure-storage-explorer/)
 - [ ] [Connect an app to Azure Storage](https://docs.microsoft.com/en-us/learn/modules/connect-an-app-to-azure-storage/)
 - [ ] [Make your application storage highly available with read-access geo-redundant storage](https://docs.microsoft.com/en-us/learn/modules/ha-application-storage-with-grs/)
 - [ ] [Secure your Azure Storage account](https://docs.microsoft.com/en-us/learn/modules/secure-azure-storage-account/)
