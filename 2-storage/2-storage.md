@@ -1,5 +1,10 @@
 # Architect storage infrastructure in Azure
 
+- Data classification as structured, semi-structured, or unstructured
+- Determine how data will be used
+- Determine whether data requires transactions
+
+
 ## References
 
 ## Modules
