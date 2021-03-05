@@ -145,3 +145,5 @@ az network watcher configure \
     --enabled true \
     --resource-group $RG
 ```
+
+![](assets/1l-network-topology.png)
