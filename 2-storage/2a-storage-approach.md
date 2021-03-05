@@ -120,4 +120,27 @@ Terminology is dated, used less frequently now.
 - handle large and complex transactions
 
 
+## Azure storage solutions
+
+Correct storage can lead to better performance, cost savings and manageability.
+
+### CosmosDB
+
+- supports semi-structured data and NoSQL data
+- support SQL queries
+- all properties are indexed by default
+- ACID compliant
+- data replication
+- choose one of five consistency levels
+    - determine the tradeoffs to make between consistency, availability, latency, and throughput
+- elastic for cost and scale
+
+
+### Azure SQL
+
+- supports structured data with columns
+- supports semi-structured data [stored as JSON](https://docs.microsoft.com/en-us/azure/azure-sql/database/json-features#working-with-json-data) columns which can be extended
+- explicitly define indexes on semi-structured data
+- Cosmos is better choice for highly unstructure / variable data where you can't predict what are the properties that should be indexed
+
 
