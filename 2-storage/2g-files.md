@@ -79,3 +79,38 @@ Flexibility of moving data and processing into the cloud, and benefit from scala
 |Azure portal	    |Use the portal to import files and folders.|
 |Azure File Sync	|Can be used to do the initial data transfer, and then uninstalled after the data is transferred.|
 |Azure Data Box	    |If you have up to 35 TB of data and you need it imported in less than a week.|
+
+
+## Creating and connecting to Azure Files share
+
+Two steps
+- create a storage account
+- create file shares
+
+```sh
+export STORAGEACCT=afileshare$RANDOM
+
+az storage account create \
+    --name $STORAGEACCT \
+    --resource-group $RG \
+    --sku Standard_GRS
+
+STORAGEKEY=$(az storage account keys list \
+    --resource-group $RG \
+    --account-name $STORAGEACCT \
+    --query "[0].value" | tr -d '"')
+
+az storage share create \
+    --account-name $STORAGEACCT \
+    --account-key $STORAGEKEY \
+    --name "reports"
+
+az storage share create \
+    --account-name $STORAGEACCT \
+    --account-key $STORAGEKEY \
+    --name "data"
+```
+
+Azure Files supports mounting from SMB V3.0. SMB V1.0 has known vulnerabilities. Remove V1.0 to reduce to risk of SMB-based attack.
+
+
