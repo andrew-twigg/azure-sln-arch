@@ -56,17 +56,26 @@ Flexibility of moving data and processing into the cloud, and benefit from scala
     - ZRS limited regions
 
 
-||LRS|ZRS|GRS/GZRS|
-|--|:--|:--|:--|
-|You can easily re-create data, and cost is a priority.|✔|||		
-|Data must be stored in a single known location.|✔|||		
-|Premium performance is required.|✔|✔*||
-|Data needs to be highly available, and redundancy is a priority.||✔|✔|
-|99.999999999% (11 nines) durability.|✔|||
-|99.9999999999% (12 nines) durability.||✔||
-|99.99999999999999% (16 nines) durability.|||✔|
+|                                                                |LRS|ZRS|GRS/GZRS|
+|--                                                              |:--|:--|:--     |
+|You can easily re-create data, and cost is a priority.          |✔  |   |        |		
+|Data must be stored in a single known location.                 |✔  |   |        |		
+|Premium performance is required.                                |✔  |✔  |        |
+|Data needs to be highly available, and redundancy is a priority.|   |✔  |✔       |
+|99.999999999% (11 nines) durability.                            |✔  |   |        |
+|99.9999999999% (12 nines) durability.                           |   |✔  |        |
+|99.99999999999999% (16 nines) durability.                       |   |   |✔       |
 
 
 ## Data migration
 
+![](assets/2g-azure-data-transfer-options.svg)
 
+|Utility	        |Description|
+|-------------------|-----------|
+|AzCopy             |Command-line tool that offers the best performance, especially for a low volume of small files.|
+|Robocopy	        |Command-line tool shipped with Windows and Windows Server. AzCopy is written to be Azure aware and performs better.|
+|Azure Storage      |Explorer	Graphical file management utility that runs on Windows, Linux, and macOS.|
+|Azure portal	    |Use the portal to import files and folders.|
+|Azure File Sync	|Can be used to do the initial data transfer, and then uninstalled after the data is transferred.|
+|Azure Data Box	    |If you have up to 35 TB of data and you need it imported in less than a week.|
