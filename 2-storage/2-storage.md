@@ -12,4 +12,4 @@
 - [x] [Secure your Azure Storage account](https://docs.microsoft.com/en-us/learn/modules/secure-azure-storage-account/)
 - [x] [Store and share files in your app with Azure Files](https://docs.microsoft.com/en-us/learn/modules/store-and-share-with-azure-files/)
 - [x] [Choose the right disk storage for your virtual machine workload](https://docs.microsoft.com/en-us/learn/modules/choose-the-right-disk-storage-for-vm-workload/)
-- [ ] [Monitor, diagnose, and troubleshoot your Azure storage](https://docs.microsoft.com/en-us/learn/modules/monitor-diagnose-and-troubleshoot-azure-storage/)
+- [x] [Monitor, diagnose, and troubleshoot your Azure storage](https://docs.microsoft.com/en-us/learn/modules/monitor-diagnose-and-troubleshoot-azure-storage/)
