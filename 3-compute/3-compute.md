@@ -12,4 +12,4 @@
 - [x] [Build a scalable application with virtual machine scale sets](https://docs.microsoft.com/en-us/learn/modules/build-app-with-scale-sets/)
 - [x] [Choose the best Azure service to automate your business processes](https://docs.microsoft.com/en-us/learn/modules/choose-azure-service-to-integrate-and-automate-business-processes/)
 - [x] [Introduction to high-performance computing (HPC) on Azure](https://docs.microsoft.com/en-us/learn/modules/intro-to-hpc/)
-- [ ] [Run parallel tasks in Azure Batch with the Azure CLI](https://docs.microsoft.com/en-us/learn/modules/run-parallel-tasks-in-azure-batch-with-the-azure-cli/)
+- [x] [Run parallel tasks in Azure Batch with the Azure CLI](https://docs.microsoft.com/en-us/learn/modules/run-parallel-tasks-in-azure-batch-with-the-azure-cli/)
