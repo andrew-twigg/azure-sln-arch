@@ -62,7 +62,10 @@ Retrieve, consolidate, and analyse data by specifying a query to run in Azure Mo
 - Log queries can be tested in Azure portal. 
 - Create custom dashboards in Azure portal which are targetted displays of resourcecs and data
 - Dashboards allow you to combine various data, including both logs and metrics into a single pane.
+- Read-only requests to process data and return result
+    - Dataflow model to make query easy to read, write, automate
 
+[Azure Monitor Demo Logs](https://portal.azure.com/learn.docs.microsoft.com/#blade/Microsoft_Azure_Monitoring_Logs/DemoLogsBlade?azure-portal=true)
 
 You can get to [SQL](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/databasefunction?pivots=azuredataexplorer)
 
