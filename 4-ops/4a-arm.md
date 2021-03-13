@@ -55,5 +55,23 @@ Azure Policy is a service used to create, assign, and manage policies. These pol
 
 ## Secure resources with role-based access control
 
+RBAC provides fine-grained access management for Azure resources. Considered a core service and included with all subscription levels at no cost.
+
+Uses the <b>allow model</b> for access.
+- <i>allows</i> specific actions such as read, write, delete
+- Segregate duties within your team and grant only the amount of access to users they need to perform thier jobs.
+- Least-privilege principle
+- Use resource locks to ensure critical resources aren't modified or deleted
+
+
 ## Use resource locks to protect resources
 
+- Can be applied at any resource to block modification or deletion
+- <b>Delete</b> or <b>Read-only</b>
+- Delete allows all except delete
+- Read-only will only allow read activity
+- Can apply to
+    - subs
+    - resource groups
+    - individual resources
+- Inherited when applied at higher levels
