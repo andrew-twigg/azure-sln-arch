@@ -4,7 +4,7 @@
 
 ## Modules
 
-- [ ] [Control and organize Azure resources with Azure Resource Manager](https://docs.microsoft.com/en-us/learn/modules/control-and-organize-with-azure-resource-manager/)
+- [x] [Control and organize Azure resources with Azure Resource Manager](https://docs.microsoft.com/en-us/learn/modules/control-and-organize-with-azure-resource-manager/)
 - [ ] [Build a cloud governance strategy on Azure](https://docs.microsoft.com/en-us/learn/modules/build-cloud-governance-strategy-azure/)
 - [x] [Design a holistic monitoring strategy on Azure](https://docs.microsoft.com/en-us/learn/modules/design-monitoring-strategy-on-azure/)
 - [x] [Improve incident response with alerting on Azure](https://docs.microsoft.com/en-us/learn/modules/incident-response-with-alerting-on-azure/)
