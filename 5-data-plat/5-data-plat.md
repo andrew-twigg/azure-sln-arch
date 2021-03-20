@@ -10,6 +10,6 @@
 - [x] [Develop and configure an ASP.NET application that queries an Azure SQL database](https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/)
 - [x] [Create an Azure Cosmos DB database built to scale](https://docs.microsoft.com/en-us/learn/modules/create-cosmos-db-for-scale/)
 - [x] [Distribute your data globally with Azure Cosmos DB](https://docs.microsoft.com/en-us/learn/modules/distribute-data-globally-with-cosmos-db/)
-- [ ] [Insert and query data in your Azure Cosmos DB database](https://docs.microsoft.com/en-us/learn/modules/access-data-with-cosmos-db-and-sql-api/)
+- [x] [Insert and query data in your Azure Cosmos DB database](https://docs.microsoft.com/en-us/learn/modules/access-data-with-cosmos-db-and-sql-api/)
 - [ ] [Design a data warehouse with Azure Synapse Analytics](https://docs.microsoft.com/en-us/learn/modules/design-azure-sql-data-warehouse/)
 - [ ] [Import data into Azure Synapse Analytics by using PolyBase](https://docs.microsoft.com/en-us/learn/modules/import-data-into-asdw-with-polybase/)
