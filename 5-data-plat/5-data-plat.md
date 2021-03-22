@@ -12,4 +12,4 @@
 - [x] [Distribute your data globally with Azure Cosmos DB](https://docs.microsoft.com/en-us/learn/modules/distribute-data-globally-with-cosmos-db/)
 - [x] [Insert and query data in your Azure Cosmos DB database](https://docs.microsoft.com/en-us/learn/modules/access-data-with-cosmos-db-and-sql-api/)
 - [x] [Design a data warehouse with Azure Synapse Analytics](https://docs.microsoft.com/en-us/learn/modules/design-azure-sql-data-warehouse/)
-- [ ] [Import data into Azure Synapse Analytics by using PolyBase](https://docs.microsoft.com/en-us/learn/modules/import-data-into-asdw-with-polybase/)
+- [x] [Import data into Azure Synapse Analytics by using PolyBase](https://docs.microsoft.com/en-us/learn/modules/import-data-into-asdw-with-polybase/)
