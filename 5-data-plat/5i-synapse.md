@@ -98,3 +98,89 @@ Capability to prioritise query workloads using Workload Management.
     - pre-compute, store, and maintain data like a table
     - automatically updated when data in underlying tables are changed
     - synchronous op that occurs as soon as data is changed
+
+
+## Solution scenarios
+
+Gartner defines a range of analytical types, including:
+
+- Descriptive analytics
+- Diagnostic analytics
+- Predictive analytics
+- Prescriptive analytics
+
+
+### Descriptive analytics
+
+*What is happening in my business?*
+- typically found through creation of a data warehouse
+- Synapse uses dedicated SQL Pool, enabling you to create a persisted data warehouse for this analysis
+- also can use SQL Serverless to prepare data from files to create a data warehouse interactively
+
+
+### Diagnostic analytics
+
+*Why is this happening?*
+- explore existing information, or wider search of data estate
+- SQL Serverless to interactively explore data within a data lake
+
+![](assets/5i-types-of-analytics.png)
+
+
+### Predictive analytics
+
+*What is likely to happen in the future based on previous trends and patterns?*
+- Apache Spark 
+- Azure Machine Learning Services
+- Azure Databricks
+
+
+### Prescriptive analytics
+
+- executing actions based on real-time or near real-time analysis of data using predictive analytics
+    - Apache Spark
+    - Azure Synapse Link
+    - Azure Stream Analytics
+- Azure Synapse Analytics provides freedom to query data on own terms
+
+
+## Massively parallel processing concepts
+
+- SQL pool
+    - separates compute from storage
+    - bundles CPU, memory, and IO
+    - an abstract, normalised measure of compute resources and performance
+- Data Warehouse Units (DWUs)
+- node-based architecture
+    - commands issued to control node
+    - runs MPP
+        - optimises queries for parallel
+        - passes ops to compute nodes
+    - Control node
+        - warehouse brain
+        - front end, interacts with all apps and connections
+        - distributes queries
+    - Computes nodes
+        - computational power
+        - 1 to 60 determined by service level
+- Data Movement Service (DMS)
+    - data transport technology
+    - coordinates data movement between compute nodes
+
+
+## Table geometries
+
+- Defines how data is sharded into distributions on the available compute nodes
+- three types
+    - Hash
+        - uses a hash to assign each row to one distribution
+        - highest query performance for joins and aggregations on large tables
+    - Round Robin (default)
+        - distributes evenly across all compute nodes
+        - buffers of rows assigned to distributions sequentially
+        - fast performance when used as a stage table for data loads
+        - slow performance due to data movement
+    - Replicate
+        - caches a full copy of each compute node
+        - fastest query performance for small tables
+        - good for small-dimension tables in a star schemawith < 2 GB of storage after compression (~5x compression)
