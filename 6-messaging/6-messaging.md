@@ -4,7 +4,7 @@
 ## Modules
 
 - [x] [Create serverless logic with Azure Functions](https://docs.microsoft.com/en-us/learn/modules/create-serverless-logic-with-azure-functions/)
-- [ ] [Route and process data automatically using Logic Apps](https://docs.microsoft.com/en-us/learn/modules/route-and-process-data-logic-apps/)
+- [x] [Route and process data automatically using Logic Apps](https://docs.microsoft.com/en-us/learn/modules/route-and-process-data-logic-apps/)
 - [ ] [Choose a messaging model in Azure to loosely connect your services](https://docs.microsoft.com/en-us/learn/modules/choose-a-messaging-model-in-azure-to-connect-your-services/)
 - [ ] [Communicate between applications with Azure Queue storage](https://docs.microsoft.com/en-us/learn/modules/communicate-between-apps-with-azure-queue-storage/)
 - [ ] [Enable reliable messaging for Big Data applications using Azure Event Hubs](https://docs.microsoft.com/en-us/learn/modules/enable-reliable-messaging-for-big-data-apps-using-event-hubs/)
