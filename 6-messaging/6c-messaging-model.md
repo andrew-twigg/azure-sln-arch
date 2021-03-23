@@ -143,3 +143,19 @@ Two components:
     - Azure already has loads of the services on the platform
 
 ![](assets/6c-event-journeys.png)
+
+
+## Messages or events?
+
+Question: *Does the sender expect the communication to be processed in a particular way be the destination component?* If yes then choose a message, otherwise it may be events.
+
+Messages
+- contains raw data, not just a reference
+- sending component expects the message content to be processed in a certain way by destination component
+
+Events
+- light weight notifications, doesn't contain data
+- multiple receivers or none at all
+- publisher has no expectation about the action a receiving component take
+
+
