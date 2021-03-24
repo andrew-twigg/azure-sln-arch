@@ -15,6 +15,7 @@ Loosely coupled architectures require mechanisms for components to communicate. 
 - Core messaging services architect - [Clemens Vasters](https://vasters.com)
 - [On .NET Live Messaging Patterns](https://www.youtube.com/watch?v=ef1DK76rseM)
 - Azure docs [Choose between Azure messaging services - Event Grid, Event Hubs, and Service Bus](https://docs.microsoft.com/en-us/azure/event-grid/compare-messaging-services)
+- Azure docs [Event Grid](https://docs.microsoft.com/en-us/azure/event-grid/)
 - New Azure Service Bus client [Azure.Messaging.ServiceBus](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/servicebus/Azure.Messaging.ServiceBus)
 - [Clemens Vasters GitHub](https://github.com/clemensv)
 - [Clemens Vasters GitHub on-dotnet-live-2021-03](https://github.com/clemensv?tab=repositories)
@@ -157,5 +158,139 @@ Events
 - light weight notifications, doesn't contain data
 - multiple receivers or none at all
 - publisher has no expectation about the action a receiving component take
+
+
+## Choosing a message-based delivery with queues
+
+- Azure Queue Storage
+    - store large numbers of messages, limited only by storage account capacity
+    - accessed via REST API from anywhere
+- Azure Service Bus
+    - enterprise message broker
+    - built for enterprise scenarios
+        - multiple comms protocols
+        - different data contracts
+        - high security requirements
+        - cloud + on-prem services
+    - built on dedicated infra
+- Topics
+    - support multiple subscribers
+
+
+### Benefits of queues
+
+- increased reliability
+- delivery guarantees
+    - **At-Least-Once** delivery
+        - delivery to at least one of the components that retrieve messages from the queue
+        - possible same message may be delivered more than once, ex. in long processing time / timeout scenarios
+    - **At-Most-Once** delivery
+        - each message is not guaranteed for delivery
+        - small chance message won't arrive
+        - no change message will be delivered twice
+        - *automatic duplicate detection*
+    - **First-In-First-Out**
+        - if app requires processing of messages in precise order then look for FIFO guarantee
+
+
+### Transactional support
+
+Message transactions succeed or fail as a single unit.
+
+
+### Which service should you choose?
+
+- Service Bus topics
+    - when you have multiple receivers handling a message
+- Service Bus queues
+    - need At-Most-Once
+    - need FIFO guarantee
+    - need transactions
+    - receive without polling
+    - RBAC on queues
+    - need larger messages
+    - max queue size is less than the max limit (80 GB)
+    - publishing / consuming batches of messagees
+- Queue storage
+    - simpler choice without without above features
+    - need an audit trail of all messages
+    - large queue sizes > 80GB
+    - want to track progress for processing a message inside a queue
+
+
+## Choose Azure Event Grid
+
+- supports most Azure services as a publisher or subscriber + third party services
+- dynamically scalable, low-cost, messaging system, allowing publishers to notify subscribers about change
+- concepts connecting source and subscriber
+    - **Events**: what happened
+    - **Event sources**: where event took place
+    - **Topics**: endpoint where publishers send events
+    - **Event subscriptions**: endpoint to route events
+    - **Event handlers**: app / service reacting to events
+
+
+![](assets/6c-event-grid2.png)
+
+
+### When to use
+
+- **Simplicity**: simple to connect sources to subscribers
+- **Advanced filtering**: subscriptions have close control over events they receive
+- **Fan-out**: subscribe to an unlimited number of endpoint to the same events and topics
+- **Reliability**: retries upto 24h per sub
+- **Pay-per-event**: micro billing at event level
+
+
+### Event topics
+
+- categorise events into groups
+- also represented by a public endpoint where the event source sends events *to*
+
+
+### System topics
+
+- built in topics provided by Azure Services
+- as long as you have access to the resource, you can subscribe to events
+
+
+### Custom topics
+
+- application and third party topics
+
+
+## Choose Azure Event Hubs
+
+Provides a distributed stream processing platform with low latency and seamless integration with data and analytics services, inside and outside of Azure, for big-data pipelines.
+
+- timely insights from sources
+- big data streaming platform and event ingestion service
+- capable of receiving and processing millions of events per second
+- fully managed PaaS
+- front door for an event pipeline (***event ingestor***)
+    - component or service that sits between an event publisher and consumer
+    - decouple event stream from consumption of those events
+- time retention buffer
+- capture feature
+    - real-time and batch processing
+    - build for todays batch processing on a platform that supports tomorrows real time processing
+- easiest way to load data into Azure
+    - volume
+    - varienty
+    - velocity
+- partitions (buffers)
+    - Event Hubs divides comms into partitions
+    - buffers into which the comms are saved
+    - events are not completely ephemeral
+    - subscribers can use the buffer to catch up
+
+
+### When to use
+
+- need to support authenticating large number of publisher
+- need to save a stream of events to Data Lake or Blob storage
+- need aggregation or analytics on your event stream
+- need reliable messaging or resiliency
+
 
 
