@@ -10,4 +10,4 @@
 - [x] [Enable reliable messaging for Big Data applications using Azure Event Hubs](https://docs.microsoft.com/en-us/learn/modules/enable-reliable-messaging-for-big-data-apps-using-event-hubs/)
 - [x] [Implement message-based communication workflows with Azure Service Bus](https://docs.microsoft.com/en-us/learn/modules/implement-message-workflows-with-service-bus/)
 - [x] [React to state changes in your Azure services by using Event Grid](https://docs.microsoft.com/en-us/learn/modules/react-to-state-changes-using-event-grid/)
-- [ ] [Expose hybrid services securely with Azure Relay](https://docs.microsoft.com/en-us/learn/modules/expose-hybrid-services-with-azure-relay/)
+- [x] [Expose hybrid services securely with Azure Relay](https://docs.microsoft.com/en-us/learn/modules/expose-hybrid-services-with-azure-relay/)
