@@ -69,3 +69,63 @@ ENTRYPOINT ["dotnet", "myapp.dll"]
 ```sh
 docker build -t myapp:v1 .
 ```
+
+
+## ACR
+
+```sh
+az acr create \
+    --name myregistry \
+    --resource-group $RG \
+    --sku standard \
+    --admin-enabled true
+```
+
+To connect...
+
+```sh
+docker login <registry-name>.azurecr.io
+az acr credential show --name <registry-name>
+```
+
+For pushing...
+
+- create an alias for the image and tag it
+- repo name in format *<login_server>/<image_name>:<tag/>*, using *docker tag*
+
+```sh
+docker tag myapp:v1 myregistry.azurecr.io/myapp:v1
+docker push myregistry.azurecr.io/myapp:v1
+```
+
+Verify the upload...
+
+```sh
+# list repositories in the registry
+az acr repository list --name myregistry
+
+# list the images in the registry
+az acr repository show --repository myapp --name myregistry
+```
+
+> **Note**
+>
+> You'll see at least two tags for each image in a repository. One tag will be a value you specified in the *acr build* command. The other will be *latest*. Every time you rebuild an image, ACR automatically creates the *latest* tag as an alias for the most recent version of the image.
+
+
+Run with ACI...
+
+```sh
+az container create \
+    --resource-group mygroup \
+    --name myinstance \
+    --image myregistry.azurecr.io/myapp:latest \
+    --dns-name-label mydnsname \
+    --registry-username <username> \
+    --registry-password <password>
+
+az container show \
+    --resource-group mygroup \
+    --name myinstance \
+    --query ipAddress.fqdn
+```
