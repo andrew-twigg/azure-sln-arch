@@ -4,7 +4,7 @@
 ## Modules
 
 - [x] [Build a containerized web application with Docker](https://docs.microsoft.com/en-us/learn/modules/intro-to-containers/)
-- [ ] [Run Docker containers with Azure Container Instances](https://docs.microsoft.com/en-us/learn/modules/run-docker-with-azure-container-instances/)
+- [x] [Run Docker containers with Azure Container Instances](https://docs.microsoft.com/en-us/learn/modules/run-docker-with-azure-container-instances/)
 - [ ] [Build and store container images with Azure Container Registry](https://docs.microsoft.com/en-us/learn/modules/build-and-store-container-images/)
 - [ ] [Host a web application with Azure App Service](https://docs.microsoft.com/en-us/learn/modules/host-a-web-app-with-azure-app-service/)
 - [ ] [Run a background task in an App Service Web App with WebJobs](https://docs.microsoft.com/en-us/learn/modules/run-web-app-background-task-with-webjobs/)
