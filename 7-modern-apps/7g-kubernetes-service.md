@@ -66,4 +66,33 @@ You are responsible for maintaining the Kube cluster. Manage OS upgrades, Kube i
 - aligns with other Azure services such as AAD, monitoring, ARM
 
 
+### How workloads are developed and deployed to AKS
+
+AKS supports the Docker image format that means that you can use any development environment to create a workload, package the workload as a container, and deploy the container as a Kube pod.
+
+
+![](assets/7g-development-accelerate.png)
+
+
+### Azure Dev Spaces
+
+- local kube cluster setup can be complex and often single node cluster
+- mocks for dependencies
+
+Azure Dev Spaces helps your dev team be more productive on Kubernetes and allows:
+- minimise local dev machine setup, devs work directly with AKS
+- rapid iteration and debug in kubernetes using VS / VSCode
+- config-as-code assets to use from dev to production
+- develop code in isolation and do integration testing without mocking
+
+
+### Deployment Center
+
+- simplifies setting up a DevOps pipeline for your app
+- automatically create Azure resources (AKS cluster)
+- create App Insights resource for monitoring AKS cluster
+- Azure Monitor for container perf monitoring
+- deployment approvals
+
+
 
