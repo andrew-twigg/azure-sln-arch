@@ -10,5 +10,5 @@
 - [x] [Build a scalable application with virtual machine scale sets](https://docs.microsoft.com/en-us/learn/modules/build-app-with-scale-sets/)
 - [x] [Dynamically meet changing web app performance requirements with autoscale rules](https://docs.microsoft.com/en-us/learn/modules/app-service-autoscale-rules/)
 - [x] [Scale an App Service web app to efficiently meet demand with App Service scale up and scale out](https://docs.microsoft.com/en-us/learn/modules/app-service-scale-up-scale-out/)
-- [ ] [Design a geographically distributed application](https://docs.microsoft.com/en-us/learn/modules/design-a-geographically-distributed-application/)
+- [x] [Design a geographically distributed application](https://docs.microsoft.com/en-us/learn/modules/design-a-geographically-distributed-application/)
 
