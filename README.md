@@ -18,4 +18,4 @@
 - [x] [Architect message brokering and serverless applications in Azure](https://docs.microsoft.com/en-us/learn/paths/architect-messaging-serverless/)
 - [x] [Architect modern applications in Azure](https://docs.microsoft.com/en-us/learn/paths/architect-modern-apps/)
 - [x] [Architect API integration in Azure](https://docs.microsoft.com/en-us/learn/paths/architect-api-integration/)
-- [ ] [Architect migration, business continuity, and disaster recovery in Azure](https://docs.microsoft.com/en-us/learn/paths/architect-migration-bcdr/)
+- [x] [Architect migration, business continuity, and disaster recovery in Azure](https://docs.microsoft.com/en-us/learn/paths/architect-migration-bcdr/)
