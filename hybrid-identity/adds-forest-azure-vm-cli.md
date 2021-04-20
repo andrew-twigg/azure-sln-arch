@@ -24,31 +24,26 @@ Location=westeurope
 RG=adt-rg-$RANDOM
 NetworkSecurityGroup=adt-nsg-dcs
 VNetName=adt-vnet-$RANDOM
-VNetAddress=10.10.0.0/16
+VNetAddress=10.15.0.0/16
 SubnetName=adt-snet-dcs
-SubnetAddress=10.10.10.0/24
+SubnetAddress=10.15.10.0/24
 AvailabilitySet=adt-aset-dcs
 VMSize=Standard_DS1_v2
 DataDiskSize=20
 AdminUsername=azureuser
 AdminPassword=ChangeMe123456
 DomainController1=AZDC01
-DC1IP=10.10.10.11
+DC1IP=10.15.10.11
 DomainController2=AZDC02
-DC2IP=10.10.10.12
+DC2IP=10.15.10.12
 
-# Create a resource group.
 az group create \
     -n $RG \
     -l $Location
-
-# Create a network security group
 az network nsg create \
     -n $NetworkSecurityGroup \
     -g $RG \
     -l $Location
-
-# Create a network security group rule for port 3389.
 az network nsg rule create \
     --resource-group $RG \
     --name PermitRDP \
@@ -59,29 +54,21 @@ az network nsg rule create \
     --source-port-ranges "*" \
     --direction Inbound \
     --destination-port-ranges 3389
-
-# Create a virtual network.
 az network vnet create \
     --name $VNetName \
     --resource-group $RG \
     --address-prefixes $VNetAddress \
     --location $Location
-
-# Create a subnet
 az network vnet subnet create \
     --address-prefix $SubnetAddress \
     --name $SubnetName \
     --resource-group $RG \
     --vnet-name $VNetName \
     --network-security-group $NetworkSecurityGroup
-
-# Create an availability set.
 az vm availability-set create \
     --name $AvailabilitySet \
     --resource-group $RG \
     --location $Location
-
-# Create two virtual machines.
 az vm create \
     --resource-group $RG \
     --availability-set $AvailabilitySet \
@@ -95,7 +82,6 @@ az vm create \
     --nsg $NetworkSecurityGroup \
     --private-ip-address $DC1IP \
     --no-wait
-
 az vm create \
     --resource-group $RG \
     --availability-set $AvailabilitySet \
@@ -108,6 +94,52 @@ az vm create \
     --data-disk-caching None \
     --nsg $NetworkSecurityGroup \
     --private-ip-address $DC2IP
+az vm run-command invoke \
+    --command-id RunPowerShellScript \
+    --name $DomainController1 \
+    --resource-group $RG \
+    --scripts "Get-Disk | Where partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR -PassThru | New-Partition -UseMaximumSize -AssignDriveLetter | Format-Volume -FileSystem NTFS"
+az vm run-command invoke \
+    --command-id RunPowerShellScript \
+    --name $DomainController2 \
+    --resource-group $RG \
+    --scripts "Get-Disk | Where partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR -PassThru | New-Partition -UseMaximumSize -AssignDriveLetter | Format-Volume -FileSystem NTFS"
 ```
 
-Follow the AD DS forest setup guide [here](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/virtual-dc/adds-on-azure-vm)
+
+### Configure the first domain controller
+
+```sh
+az vm run-command invoke \
+    --command-id RunPowerShellScript \
+    --name $DomainController1 \
+    --resource-group $RG \
+    --scripts @adds-forest-create.ps1 \
+    --parameters "DomainName=contoso.com" "DomainNetBIOSName=CONTOSO"
+```
+
+### [Configure DNS](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/virtual-dc/adds-on-azure-vm#configure-dns)
+
+Set the primary and secondary DNS servers for the VNet.
+
+```sh
+az network vnet update \
+    --resource-group $RG \
+    --name $VNetName \
+    --dns-server $DC1IP $DC2IP
+```
+
+
+### Configure the second domain controller
+
+```sh
+az vm run-command invoke \
+    --command-id RunPowerShellScript \
+    --name $DomainController2 \
+    --resource-group $RG \
+    --scripts @adds-forest-create.ps1 \
+    --parameters "DomainName=contoso.com" "DomainNetBIOSName=CONTOSO"
+```
+
+[At this point](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/virtual-dc/adds-on-azure-vm#wrap-up) the environment has a pair of domain controllers, and we have configured the Azure virtual network so that additional servers may be added to the environment.
+
