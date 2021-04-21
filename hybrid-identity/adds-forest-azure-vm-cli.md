@@ -143,3 +143,17 @@ az vm run-command invoke \
 
 [At this point](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/virtual-dc/adds-on-azure-vm#wrap-up) the environment has a pair of domain controllers, and we have configured the Azure virtual network so that additional servers may be added to the environment.
 
+
+### Create a Windows Server AD User
+
+Ref. [docs](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/tutorial-password-hash-sync#create-a-windows-server-ad-user)
+
+
+```sh
+az vm run-command invoke \
+    --command-id RunPowerShellScript \
+    --name $DomainController1 \
+    --resource-group $RG \
+    --scripts @adds-user-create.ps1 \
+    --parameters "GivenName=peter" "Surname=sagan" "DisplayName=Peter Sagan" "Name=psagan" "Password=T0t@a1legend" "Identity=CN=psagan, CN=Users, DC=contoso, DC=com"
+```
