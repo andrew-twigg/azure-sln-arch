@@ -26,7 +26,11 @@ az backup vault create \
     -l northeurope
 ```
 
-[Enable site recovery](https://docs.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-enable-replication#enable-site-recovery) in the portal. TODO: What are the CLI commands?
+[Enable site recovery](https://docs.microsoft.com/en-us/azure/site-recovery/azure-to-azure-tutorial-enable-replication#enable-site-recovery) in the portal.
+
+[CLI deployment isn't currently supported](https://docs.microsoft.com/en-us/azure/site-recovery/azure-to-azure-support-matrix#deployment-method-support).
+
+ARM is supported, template [here](https://docs.microsoft.com/en-us/azure/site-recovery/asr-arm-templates). These are calling PowerShell scripts to do the replication, failover and reprotect.
 
 
 
