@@ -186,4 +186,4 @@ az network vpn-connection show \
 
 now you got this...
 
-![](1a-vnet-onprem-cli-final.png)
+![](assets/1a-vnet-onprem-cli-final.png)
