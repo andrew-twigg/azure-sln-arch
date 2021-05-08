@@ -26,16 +26,18 @@
 
 ### Implement and Monitor an Azure Infrastructure (50-55%)
 
-*Implement cloud infrastructure monitoring*
+Implement cloud infrastructure monitoring
 
-- monitor security
-- monitor performance
-- monitor health and availability
-- monitor cost
-- configure advanced logging
-- configure logging for workloads
-- initiate automated responses by using Action Groups
-- configure and manage advanced alerts
+- [] monitor security
+- [] monitor performance
+- [] monitor health and availability
+- [] monitor cost
+- [] configure advanced logging
+- [] configure logging for workloads
+- [] initiate automated responses by using Action Groups
+- [] configure and manage advanced alerts
+
+
 
 
 ### Implement Management and Security Solutions (25-30%)
