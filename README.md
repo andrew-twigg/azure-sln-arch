@@ -29,9 +29,16 @@
 Implement cloud infrastructure monitoring
 
 - [ ] monitor security
+    - [Azure Security Fundamentals](https://docs.microsoft.com/en-us/azure/security/fundamentals/overview)
+    - [Azure Security Center](https://docs.microsoft.com/en-us/azure/security-center/) - prevent, detect, respond to threats with visibility / control over security of Azure resources.
+    - [Vulnerability scanning with Tinfoil](https://azure.microsoft.com/en-gb/blog/web-vulnerability-scanning-for-azure-app-service-powered-by-tinfoil-security/)
 - [ ] monitor performance
+    - [Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/)
+    - [Azure App Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
+    - [Azure Advisor performance efficiency](https://docs.microsoft.com/en-us/azure/advisor/advisor-performance-recommendations)
 - [ ] monitor health and availability
 - [ ] monitor cost
+    - [Azure Advisor cost optimisation](https://docs.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations)
 - [ ] configure advanced logging
 - [ ] configure logging for workloads
 - [ ] initiate automated responses by using Action Groups
