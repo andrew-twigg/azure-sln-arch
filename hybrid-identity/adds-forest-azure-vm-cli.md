@@ -20,14 +20,15 @@ Creates:
 
 
 ```sh
+id=$RANDOM
 Location=westeurope
-RG=adt-rg-$RANDOM
-NetworkSecurityGroup=adt-nsg-dcs
-VNetName=adt-vnet-$RANDOM
+RG=fl16-rg-$id
+NetworkSecurityGroup=fl16-nsg-$id
+VNetName=fl16-vnet-$id
 VNetAddress=10.15.0.0/16
-SubnetName=adt-snet-dcs
+SubnetName=fl16-snet-$id
 SubnetAddress=10.15.10.0/24
-AvailabilitySet=adt-aset-dcs
+AvailabilitySet=fl16-aset-$id
 VMSize=Standard_DS1_v2
 DataDiskSize=20
 AdminUsername=azureuser
@@ -37,9 +38,7 @@ DC1IP=10.15.10.11
 DomainController2=AZDC02
 DC2IP=10.15.10.12
 
-az group create \
-    -n $RG \
-    -l $Location
+az group create -n $RG -l $Location
 az network nsg create \
     -n $NetworkSecurityGroup \
     -g $RG \
