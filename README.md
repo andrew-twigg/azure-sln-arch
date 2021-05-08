@@ -10,6 +10,9 @@
 - [Azure CLI docs](https://docs.microsoft.com/en-gb/cli/azure/)
 
 ## Preparation
+
+### Microsoft Learn Resources
+
 - [x] [Architect network infrastructure in Azure](https://docs.microsoft.com/en-us/learn/paths/architect-network-infrastructure/)
 - [x] [Architect storage infrastructure in Azure](https://docs.microsoft.com/en-us/learn/paths/architect-storage-infrastructure/)
 - [x] [Architect compute infrastructure in Azure](https://docs.microsoft.com/en-us/learn/paths/architect-compute-infrastructure/)
