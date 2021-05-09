@@ -104,6 +104,7 @@ Implement Azure Active Directory
 Implement and manage [hybrid identities](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/)
 
 - [x] install and configure Azure AD Connect
+    - [Detailed setup commands](hybrid-identity/)
     - [Install a new AD forest using CLI](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/virtual-dc/adds-on-azure-vm)
     - [Installing AD DS using PowerShell](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/install-active-directory-domain-services--level-100-#BKMK_PS)
     - [Install Azure AD Connect with Express Settings (PHS)](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/how-to-connect-install-express)
