@@ -136,9 +136,10 @@ Implement load balancing and network security
 - [ ] implement the Azure Front Door Service
 - [ ] implement Azure Traffic Manager
 - [ ] implement Network Security Groups and Application Security Groups
-- [ ] implement Bastion
+- [x] implement Bastion
     - Secure seamless RDP/SSH connectivity to VMs via Azure Portal. Basically jump servers on the perimeter network.
     - [Bastion documentation](https://docs.microsoft.com/en-us/azure/bastion/)
+    - [Bastion peered network scenario in CLI](scenarios/bastion-vnet-peer.md)
 
 
 Implement and manage Azure governance solutions
