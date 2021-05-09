@@ -101,11 +101,15 @@ Implement Azure Active Directory
 - [ ] manage multiple directories
 
 
-Implement and manage hybrid identities
+Implement and manage [hybrid identities](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/)
 
-- [ ] install and configure Azure AD Connect
-- [ ] identity synchronization options
-- [ ] configure and manage password sync and password writeback
+- [x] install and configure Azure AD Connect
+    - [Install a new AD forest using CLI](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/virtual-dc/adds-on-azure-vm)
+    - [Installing AD DS using PowerShell](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/install-active-directory-domain-services--level-100-#BKMK_PS)
+    - [Install Azure AD Connect with Express Settings (PHS)](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/how-to-connect-install-express)
+- [x] identity synchronization options
+    - [What is Hybrid Identity, common scenarios](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/whatis-hybrid-identity?toc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Factive-directory%2Fhybrid%2Ftoc.json&bc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fbread%2Ftoc.json#common-scenarios-and-recommendations)
+- [x] configure and manage password sync and password writeback
 - [ ] configure single sign-on
 - [ ] use Azure AD Connect Health
 
