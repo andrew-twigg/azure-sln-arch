@@ -178,8 +178,8 @@ Implement an application infrastructure
 
 Implement container-based applications
 
-- [ ] create a container image
-- [ ] configure Azure Kubernetes Service
+- [x] create a container image
+- [x] configure Azure Kubernetes Service
     - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/)
     - [Deploy a cluster with CLI](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough)
     - [Container insights](https://docs.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-overview)
