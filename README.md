@@ -121,6 +121,10 @@ Implement and manage [hybrid identities](https://docs.microsoft.com/en-us/azure/
 Manage workloads in Azure
 
 - [ ] migrate workloads using Azure Migrate
+    - [Virtual Machines docs](https://docs.microsoft.com/en-us/azure/virtual-machines/)
+    - [Prepare a VHD to upload](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/prepare-for-upload-vhd-image)
+    - [Support for gen2 VMs on Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2)
+    - [Add-AzVhd](https://docs.microsoft.com/en-us/powershell/module/az.compute/add-azvhd?view=azps-5.9.0)
 - [ ] implement Azure Backup for VMs
 - [ ] implement disaster recovery
 - [ ] implement Azure Update Management
@@ -184,6 +188,8 @@ Implement container-based applications
     - [Deploy a cluster with CLI](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough)
     - [Container insights](https://docs.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-overview)
 - [ ] publish and automate image deployment to the Azure Container Registry
+    - [Azure DevOps](https://docs.microsoft.com/en-us/azure/devops-project/azure-devops-project-aks)
+    - Lab: [Deploying a multi-container app to AKS](https://azuredevopslabs.com/labs/vstsextend/kubernetes/)
 - [ ] publish a solution on an Azure Container Instance
 
 
