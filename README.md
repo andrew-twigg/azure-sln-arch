@@ -188,6 +188,10 @@ Implement container-based applications
     - [Deploy a cluster with CLI](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough)
     - [Container insights](https://docs.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-overview)
 - [ ] publish and automate image deployment to the Azure Container Registry
+    - [Deployment strategies and Canary](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/kubernetes/deployment-strategies?view=azure-devops)
+    - [Build and deploy to Kubernetes service](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/kubernetes/aks-template?view=azure-devops)
+    - [Canary deployment strategy for Kubernetes deployments](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/kubernetes/canary-demo?view=azure-devops&tabs=yaml)
+    - [Multi-cloud Kubernetes deployments](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/kubernetes/multi-cloud?view=azure-devops)
     - [Azure DevOps](https://docs.microsoft.com/en-us/azure/devops-project/azure-devops-project-aks)
     - Lab: [Deploying a multi-container app to AKS](https://azuredevopslabs.com/labs/vstsextend/kubernetes/)
 - [ ] publish a solution on an Azure Container Instance
