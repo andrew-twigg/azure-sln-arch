@@ -6,6 +6,7 @@
 - [Using Private Endpoints for Azure Web App](https://docs.microsoft.com/en-us/azure/app-service/networking/private-endpoint)
 - [Integrate Key Vault with Azure Private Link](https://docs.microsoft.com/en-us/azure/key-vault/general/private-link-service?tabs=portal)
 - [az webapp vnet-integration](https://docs.microsoft.com/en-us/cli/azure/webapp/vnet-integration?view=azure-cli-latest)
+- [Private Link GA 14th Feb 2020](https://azure.microsoft.com/en-gb/updates/private-link-now-available-in-ga/)
 
 ## Approach
 
