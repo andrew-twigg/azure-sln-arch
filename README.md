@@ -80,16 +80,18 @@ Automate deployment and configuration of resources
 
 Implement virtual networking
 
-- [ ] implement VNet to VNet connections
-- [ ] implement VNet peering
+- [x] implement VNet to VNet connections
+    - [Configure a VNet-to-VNet VPN gateway connection by using the Azure portal](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-resource-manager-portal)
+- [x] implement VNet peering
+    - [Virtual network peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
 
 
 Implement Azure Active Directory
 
-- [ ] implement VNet to VNet connections
-- [ ] implement VNet peering
-- [ ] add custom domains
+- [x] add custom domains
+    - [Add your custom domain name using the Azure Active Directory portal](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-custom-domain)
 - [ ] configure Azure AD Identity Protection
+    - [Azure AD Identity Protection documentation](https://docs.microsoft.com/en-us/azure/active-directory/identity-protection/)
 - [ ] implement self-service password reset
 - [ ] implement Conditional Access including MFA
 - [ ] configure user accounts for MFA
@@ -120,7 +122,7 @@ Implement and manage [hybrid identities](https://docs.microsoft.com/en-us/azure/
 
 Manage workloads in Azure
 
-- [ ] migrate workloads using Azure Migrate
+- [x] migrate workloads using Azure Migrate
     - [Virtual Machines docs](https://docs.microsoft.com/en-us/azure/virtual-machines/)
     - [Prepare a VHD to upload](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/prepare-for-upload-vhd-image)
     - [Support for gen2 VMs on Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2)
@@ -147,6 +149,12 @@ Implement load balancing and network security
 
 
 Implement and manage Azure governance solutions
+
+[Azure AD](https://docs.microsoft.com/en-us/azure/active-directory/)
+[Azure AD Identity Governance](https://docs.microsoft.com/en-us/azure/active-directory/governance/)
+
+https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview
+https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-how-to-start-security-review
 
 - [ ] create and manage hierarchical structure that contains management groups, subscriptions and resource groups
 - [ ] assign RBAC roles
@@ -187,14 +195,14 @@ Implement container-based applications
     - [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/)
     - [Deploy a cluster with CLI](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough)
     - [Container insights](https://docs.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-overview)
-- [ ] publish and automate image deployment to the Azure Container Registry
+- [x] publish and automate image deployment to the Azure Container Registry
     - [Deployment strategies and Canary](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/kubernetes/deployment-strategies?view=azure-devops)
     - [Build and deploy to Kubernetes service](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/kubernetes/aks-template?view=azure-devops)
     - [Canary deployment strategy for Kubernetes deployments](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/kubernetes/canary-demo?view=azure-devops&tabs=yaml)
     - [Multi-cloud Kubernetes deployments](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/kubernetes/multi-cloud?view=azure-devops)
     - [Azure DevOps](https://docs.microsoft.com/en-us/azure/devops-project/azure-devops-project-aks)
     - Lab: [Deploying a multi-container app to AKS](https://azuredevopslabs.com/labs/vstsextend/kubernetes/)
-- [ ] publish a solution on an Azure Container Instance
+- [x] publish a solution on an Azure Container Instance
 
 
 ### Implement and Manage Data Platforms (10-15%)
