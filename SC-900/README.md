@@ -14,28 +14,67 @@
 ### Describe the Concepts of Security, Compliance, and Identity (5-10%)
 
 Describe security methodologies
-- [ ] describe the Zero-Trust methodology
+- [x] describe the Zero-Trust methodology
+    - assume compromise
+    - trust nothing, verify everything
+    - authentication and authorization
+    - least privilege
+        - JIT (just in time) windows for elevations
+        - JEA (just enough admin)
+    - assume breach
+        - segment
+        - encrypt
+        - detect threats
 - [ ] describe the shared responsibility model
-- [ ] define defense in depth
+- [x] define defense in depth
     - physical
-    - identity, MFA etc
+    - identity
+        - user, application, device
     - perimeter, DDoS etc
     - network
     - compute
     - application
     - data encryption
+        - classification
+    - device
+        - monitoring
 
-*C*onfidentiality
-*I*ntegrity
-*A*vailability
+**C**onfidentiality
+**I**ntegrity
+**A**vailability
+
 
 Describe security concepts
-- [ ] describe common threats
-- [ ] describe encryption
+- [x] describe common threats
+    - data breach
+    - identity attack
+        - dictionary attack. Azure AD Smart Lockout
+        - phishing attack 
+        - spear phishing
+    - ransomware
+    - DDoS
+- [x] describe encryption
+    - symmetric, shared key, very efficient for large scale encryption
+    - asymmetric, public/private key encryption
  
 Describe Microsoft Security and compliance principles
 - [ ] describe Microsoft's privacy principles
 - [ ] describe the offerings of the service trust portal
+
+
+|                               | On-prem | IaaS | PaaS |
+| ----------------------------- | :-----: | :--: | :--: |
+| Information + Data            |    x    |  x   |  x   |
+| Devices                       |    x    |  x   |  x   |
+| Accounts                      |    x    |  x   |  x   |
+| Identity and directory infra  |    x    |  x   |      |
+| Application                   |    x    |  x   |      |
+| Network controls              |    x    |  x   |      |
+| OS                            |    x    |  x   |      |
+| Hosts                         |    x    |      |      |
+| Network                       |    x    |      |      |
+| Datacenter                    |    x    |      |      |
+
 
 ### Describe the capabilities of Microsoft Identity and Access Management Solutions (25-30%)
 
