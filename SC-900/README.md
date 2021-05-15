@@ -261,7 +261,18 @@ Describe security management capabilities of Microsoft 365
 - [ ] describe incidents and incident management capabilities
 
 Describe endpoint security with Microsoft Intune
-- [ ] describe what Intune is
+- [x] describe what Intune is
+    - policy engine goes with AAD (there is no group policy)
+    - policy
+    - health
+    - devices, its about the client device
+    - Mobile Device Management (MDM)
+        - enrolling the device
+        - complete management
+    - Mobile App Policy
+        - application policies
+        - can't enforce things at the device level, only at the apps
+        - personal devices
 - [ ] describe endpoint security with Intune
 - [ ] describe the endpoint security with the Microsoft Endpoint Manager admin center
 
