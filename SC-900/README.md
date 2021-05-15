@@ -25,7 +25,7 @@ Describe security methodologies
         - segment
         - encrypt
         - detect threats
-- [ ] describe the shared responsibility model
+- [x] describe the shared responsibility model
 
 |                               | On-prem  | IaaS       | PaaS      | SaaS      |
 | ----------------------------- | :-----:  | :--:       | :--:      | :--:      |
