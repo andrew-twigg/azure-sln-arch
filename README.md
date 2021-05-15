@@ -3,8 +3,7 @@
 ## References
 
 - Azure Certifications Solutions Architect [home page](https://docs.microsoft.com/en-us/learn/certifications/azure-solutions-architect/)
-- [Exam AZ-303: Microsoft Azure Architect Technologies
-](https://docs.microsoft.com/en-us/learn/certifications/exams/az-303)
+- [Exam AZ-303: Microsoft Azure Architect Technologies](https://docs.microsoft.com/en-us/learn/certifications/exams/az-303)
     - [skils outline](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4psD6)
 - [Exam AZ-304: Microsoft Azure Architect Design](https://docs.microsoft.com/en-us/learn/certifications/exams/az-304)
 - [Azure CLI docs](https://docs.microsoft.com/en-gb/cli/azure/)
@@ -31,6 +30,7 @@ Implement cloud infrastructure monitoring
 - [ ] monitor security
     - [Azure Security Fundamentals](https://docs.microsoft.com/en-us/azure/security/fundamentals/overview)
     - [Azure Security Center](https://docs.microsoft.com/en-us/azure/security-center/) - prevent, detect, respond to threats with visibility / control over security of Azure resources.
+    - [Microsoft Cloud App Security (MCAS)](https://docs.microsoft.com/en-us/cloud-app-security/)
     - [Vulnerability scanning with Tinfoil](https://azure.microsoft.com/en-gb/blog/web-vulnerability-scanning-for-azure-app-service-powered-by-tinfoil-security/)
 - [ ] monitor performance
     - [Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/)
