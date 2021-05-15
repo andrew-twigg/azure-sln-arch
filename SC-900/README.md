@@ -26,6 +26,21 @@ Describe security methodologies
         - encrypt
         - detect threats
 - [ ] describe the shared responsibility model
+
+|                               | On-prem  | IaaS       | PaaS      | SaaS      |
+| ----------------------------- | :-----:  | :--:       | :--:      | :--:      |
+| Information + Data            | customer | customer   | customer  | customer  |
+| Devices                       | customer | customer   | customer  | customer  |
+| Accounts                      | customer | customer   | customer  | customer  |
+| Identity and directory infra  | customer | customer   | shared    | shared    |
+| Application                   | customer | customer   | shared    | cloud     |
+| Network controls              | customer | customer   | shared    | cloud     |
+| OS                            | customer | customer   | cloud     | cloud     |
+| Hosts                         | customer | cloud      | cloud     | cloud     |
+| Network                       | customer | cloud      | cloud     | cloud     |
+| Datacenter                    | customer | cloud      | cloud     | cloud     |
+
+
 - [x] define defense in depth
     - physical
     - identity
@@ -60,20 +75,6 @@ Describe security concepts
 Describe Microsoft Security and compliance principles
 - [ ] describe Microsoft's privacy principles
 - [ ] describe the offerings of the service trust portal
-
-
-|                               | On-prem | IaaS | PaaS |
-| ----------------------------- | :-----: | :--: | :--: |
-| Information + Data            |    x    |  x   |  x   |
-| Devices                       |    x    |  x   |  x   |
-| Accounts                      |    x    |  x   |  x   |
-| Identity and directory infra  |    x    |  x   |      |
-| Application                   |    x    |  x   |      |
-| Network controls              |    x    |  x   |      |
-| OS                            |    x    |  x   |      |
-| Hosts                         |    x    |      |      |
-| Network                       |    x    |      |      |
-| Datacenter                    |    x    |      |      |
 
 
 ### Describe the capabilities of Microsoft Identity and Access Management Solutions (25-30%)
