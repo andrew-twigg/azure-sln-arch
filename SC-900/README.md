@@ -9,9 +9,9 @@
 ### Describe the Concepts of Security, Compliance, and Identity (5-10%)
 
 Describe security methodologies
-    - describe the Zero-Trust methodology
-    - describe the shared responsibility model
-    - define defense in depth
+- [ ] describe the Zero-Trust methodology
+- [ ] describe the shared responsibility model
+- [ ] define defense in depth
 
 Describe security concepts
     - describe common threats
