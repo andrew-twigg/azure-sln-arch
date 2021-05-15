@@ -152,6 +152,8 @@ Implement and manage Azure governance solutions
 
 [Azure AD](https://docs.microsoft.com/en-us/azure/active-directory/)
 [Azure AD Identity Governance](https://docs.microsoft.com/en-us/azure/active-directory/governance/)
+[Five disciplines of cloud governance](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/govern/governance-disciplines)
+
 
 https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview
 https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-how-to-start-security-review
