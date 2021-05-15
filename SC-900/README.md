@@ -1,5 +1,10 @@
 # Exam SC-900: Microsoft Security, Compliance, and Identity Fundamentals
 
+- AAD
+- Azure
+- M365
+- Principals
+
 ## References
 
 - [Exam SC-900: Microsoft Security, Compliance, and Identity Fundamentals](https://docs.microsoft.com/en-us/learn/certifications/exams/sc-900)
@@ -12,6 +17,17 @@ Describe security methodologies
 - [ ] describe the Zero-Trust methodology
 - [ ] describe the shared responsibility model
 - [ ] define defense in depth
+    - physical
+    - identity, MFA etc
+    - perimeter, DDoS etc
+    - network
+    - compute
+    - application
+    - data encryption
+
+*C*onfidentiality
+*I*ntegrity
+*A*vailability
 
 Describe security concepts
 - [ ] describe common threats
