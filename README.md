@@ -150,13 +150,18 @@ Implement load balancing and network security
 
 Implement and manage Azure governance solutions
 
-[Azure AD](https://docs.microsoft.com/en-us/azure/active-directory/)
-[Azure AD Identity Governance](https://docs.microsoft.com/en-us/azure/active-directory/governance/)
-[Five disciplines of cloud governance](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/govern/governance-disciplines)
+- [Azure AD](https://docs.microsoft.com/en-us/azure/active-directory/)
+    - [Identity governance](https://docs.microsoft.com/en-us/azure/active-directory/governance/identity-governance-overview)
+    - [Entitlement management](https://docs.microsoft.com/en-us/azure/active-directory/governance/entitlement-management-overview)
+    - [Access reviews](https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview)
+    - [Lifecycle management](https://docs.microsoft.com/en-us/azure/active-directory/governance/what-is-identity-lifecycle-management) - automate and manage the entire digital identity lifecycle process.
+- [Five disciplines of cloud governance](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/govern/governance-disciplines)
 
 
-https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview
 https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-how-to-start-security-review
+https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview
+
+vo4U33G5
 
 - [ ] create and manage hierarchical structure that contains management groups, subscriptions and resource groups
 - [ ] assign RBAC roles
@@ -164,7 +169,7 @@ https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-mana
 - [ ] configure access to Azure resources by assigning roles
 - [ ] configure management access to Azure
 - [ ] interpret effective permissions
-- [ ] set up and perform an access review
+- [x] set up and perform an access review
 - [ ] implement and configure an Azure Policy
 - [ ] implement and configure an Azure Blueprint
 
@@ -217,6 +222,8 @@ Implement NoSQL databases
 
 
 Implement Azure SQL databases
+
+https://docs.microsoft.com/en-us/azure/azure-sql/database/auto-failover-group-overview
 
 - [ ] configure Azure SQL database settings
 - [ ] implement Azure SQL Database managed instances
