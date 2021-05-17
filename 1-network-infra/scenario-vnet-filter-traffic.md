@@ -1,5 +1,7 @@
 # Filter network traffic
 
+Uses a NSG to filter network traffic inbound and outbound from a subnet.
+
 Ref. Tutorial [Filter network traffic](https://docs.microsoft.com/en-us/azure/virtual-network/tutorial-filter-network-traffic)
 
 ```sh
