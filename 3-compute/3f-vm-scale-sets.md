@@ -75,9 +75,9 @@ az vmss extension set \
   --settings @yourConfigV1.json
 ```
 
-- <b>Automatic</b>: doesn't define when the VMs are upgraded. Could all happen at once and cause outage
-- <b>Rolling</b>: rolls out in batches across the VMs with optional pause can minimise or eliminate service outage. Can run different versions for short time.
-- <b>Manual</b>: not updates. All changes done manually. Default.
+- **Automatic**: doesn't define when the VMs are upgraded. Could all happen at once and cause outage
+- **Rolling**: rolls out in batches across the VMs with optional pause can minimise or eliminate service outage. Can run different versions for short time.
+- **Manual**: not updates. All changes done manually. Default.
 
 ## Create a scale set
 
