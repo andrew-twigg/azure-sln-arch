@@ -151,6 +151,8 @@ Implement load balancing and network security
 Implement and manage Azure governance solutions
 
 - [Azure Governance docs](http://aka.ms/governancedocs)
+- [Azure Cloud Adoption Framework](aka.ms/cloudadoption)
+
 - [Azure AD](https://docs.microsoft.com/en-us/azure/active-directory/)
     - [Identity governance](https://docs.microsoft.com/en-us/azure/active-directory/governance/identity-governance-overview)
     - [Entitlement management](https://docs.microsoft.com/en-us/azure/active-directory/governance/entitlement-management-overview)
