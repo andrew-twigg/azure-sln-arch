@@ -176,6 +176,8 @@ vo4U33G5
 
 Manage security for applications
 
+[Azure Security Benchmark](https://docs.microsoft.com/en-us/security/benchmark/azure/introduction)
+
 - [ ] implement and configure Key Vault
 - [ ] implement and configure Managed Identities
 - [ ] register and manage applications in Azure AD
