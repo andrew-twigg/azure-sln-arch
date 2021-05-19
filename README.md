@@ -64,6 +64,7 @@ Implement VMs for Windows and Linux
 - [ ] select virtual machine size
 - [ ] implement Azure Dedicated Hosts
 - [ ] deploy and configure scale sets
+    - [Virtual Machines Scale Sets docs](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/)
 - [ ] configure Azure Disk Encryption
 
 
