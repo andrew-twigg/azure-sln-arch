@@ -156,6 +156,8 @@ Implement and manage Azure governance solutions
 - [Well architected framework](https://docs.microsoft.com/en-us/azure/architecture/framework/)
 - [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architecture/)
 - [John Savill, Azure Master Class Part 3 - Governance](https://www.youtube.com/watch?v=cIh_Nfl67T0)
+- [MS learn, Build a cloud governance strategy on Azure](https://docs.microsoft.com/en-us/learn/modules/build-cloud-governance-strategy-azure/3-create-subscription-governance-strategy)
+- [Azure Policy docs](https://docs.microsoft.com/en-gb/azure/governance/policy/)
 
 - [Azure AD](https://docs.microsoft.com/en-us/azure/active-directory/)
     - [Identity governance](https://docs.microsoft.com/en-us/azure/active-directory/governance/identity-governance-overview)
