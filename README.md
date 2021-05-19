@@ -172,7 +172,7 @@ https://docs.microsoft.com/en-us/azure/active-directory/governance/access-review
 
 vo4U33G5
 
-- [ ] create and manage hierarchical structure that contains management groups, subscriptions and resource groups
+- [x] create and manage hierarchical structure that contains management groups, subscriptions and resource groups
 - [ ] assign RBAC roles
 - [ ] create a custom RBAC role
 - [ ] configure access to Azure resources by assigning roles
