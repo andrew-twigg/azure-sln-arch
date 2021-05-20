@@ -170,11 +170,11 @@ Implement and manage Azure governance solutions
 https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-how-to-start-security-review
 https://docs.microsoft.com/en-us/azure/active-directory/governance/access-reviews-overview
 
-vo4U33G5
-
 - [x] create and manage hierarchical structure that contains management groups, subscriptions and resource groups
 - [ ] assign RBAC roles
 - [ ] create a custom RBAC role
+    - [Azure RBAC docs](https://docs.microsoft.com/en-us/azure/role-based-access-control/)
+    - [Azure custom roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
 - [ ] configure access to Azure resources by assigning roles
 - [ ] configure management access to Azure
 - [ ] interpret effective permissions
