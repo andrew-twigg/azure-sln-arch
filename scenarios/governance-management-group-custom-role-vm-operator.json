@@ -18,6 +18,6 @@
 
   ],
   "AssignableScopes": [
-    "/subscriptions/b70490c4-40b2-4066-afc9-05b797168001"
+    "/providers/Microsoft.Management/managementGroups/VisualStudioEnterprise"
   ]
 }
