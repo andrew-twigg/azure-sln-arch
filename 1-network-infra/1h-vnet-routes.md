@@ -181,16 +181,11 @@ Network is configured so that all traffic from a public subnet to a private subn
 
 ```sh
 # create a route table
-az network route-table create \
-    --name publictable \
-    --resource-group $RG \
-    --disable-bgp-route-propagation false
+az network route-table create -g $rg -n publictable --disable-bgp-route-propagation false
 
 # create a custom route
-az network route-table route create \
+az network route-table route create -g $rg -n productionsubnet \
     --route-table-name publictable \
-    --resource-group $RG \
-    --name productionsubnet \
     --address-prefix 10.0.1.0/24 \
     --next-hop-type VirtualAppliance \
     --next-hop-ip-address 10.0.2.4
@@ -203,42 +198,31 @@ Create a vnet and three subnets, publicsubnet, privatesubnet, and dmzsubnet.
 
 ```sh
 # vnet and publicsubnet
-az network vnet create \
-    --name vnet \
-    --resource-group $RG \
+az network vnet create -g $rg -n vnet \
     --address-prefix 10.0.0.0/16 \
     --subnet-name publicsubnet \
     --subnet-prefix 10.0.0.0/24
 
-# create privatesubnet
-az network vnet subnet create \
-    --name privatesubnet \
-    --vnet-name vnet \
-    --resource-group $RG \
-    --address-prefix 10.0.1.0/24
+az network vnet subnet create -g $rg -n privatesubnet --vnet-name vnet --address-prefix 10.0.1.0/24
+az network vnet subnet create -g $rg -n dmzsubnet --vnet-name vnet --address-prefix 10.0.2.0/24
 
-# create dmzsubnet
-az network vnet subnet create \
-    --name dmzsubnet \
-    --vnet-name vnet \
-    --resource-group $RG \
-    --address-prefix 10.0.2.0/24
-
-az network vnet subnet list \
-    --resource-group $RG \
-    --vnet-name vnet \
-    --output table
+az network vnet subnet list -g $rg --vnet-name vnet -o table
 ```
 
+Subnets...
+
+```sh
+AddressPrefix    Name           PrivateEndpointNetworkPolicies    PrivateLinkServiceNetworkPolicies    ProvisioningState    ResourceGroup
+---------------  -------------  --------------------------------  -----------------------------------  -------------------  ---------------
+10.0.0.0/24      publicsubnet   Enabled                           Enabled                              Succeeded            adt-rg-29702
+10.0.1.0/24      privatesubnet  Enabled                           Enabled                              Succeeded            adt-rg-29702
+10.0.2.0/24      dmzsubnet      Enabled                           Enabled                              Succeeded            adt-rg-29702
+```
 
 ## Associate the route table with the public subnet
 
 ```sh
-az network vnet subnet update \
-    --name publicsubnet \
-    --vnet-name vnet \
-    --resource-group $RG \
-    --route-table publictable
+az network vnet subnet update -g $rg -n publicsubnet --vnet-name vnet --route-table publictable
 ```
 
 
