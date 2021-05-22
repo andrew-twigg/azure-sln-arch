@@ -1,0 +1,11 @@
+disk_setup:
+  /dev/sdc:
+    table_type: gpt
+    layout: True
+    overwrite: True
+fs_setup:
+  - device: /dev/sdc1
+    partition: 1
+    filesystem: ext4
+mounts:
+  - ["/dev/sdc1", "/datadrive"]
