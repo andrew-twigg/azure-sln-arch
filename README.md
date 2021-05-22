@@ -59,6 +59,9 @@ Implement storage accounts
 
 Implement VMs for Windows and Linux
 
+- [Linux, automate configuration](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/tutorial-automate-vm-deployment)
+- [Use cloud init](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/using-cloud-init)
+
 - [ ] configure High Availability
 - [ ] configure storage for VMs
 - [ ] select virtual machine size

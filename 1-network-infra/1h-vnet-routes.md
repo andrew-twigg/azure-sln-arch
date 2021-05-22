@@ -12,7 +12,7 @@ Control Azure vnet traffic by implementing custom routes.
 
 ## Azure routing
 
-Network traffic in Azure is automatically routed across Azure subnets, vnetsm and on-prem networks. This is controlled by system routes which are assigned by default to each subnet in a vnet.
+Network traffic in Azure is automatically routed across Azure subnets, vnets and on-prem networks. This is controlled by system routes which are assigned by default to each subnet in a vnet.
 
 Any Azure VM deployed to a vnet can communicate with all other VMs in subnets in that network, and potentially from on-prem through hybrid network of the internet.
 
@@ -94,11 +94,11 @@ Used to control traffic flow within a network. Like, route traffic through NVAs 
 Overrides the default system routes so that traffic can be routed through firewalls or NVAs. 
 
 Hop type options:
-- <b>Virtual appliance</b> typically used to analyse or filter traffic that is entering/leaving a network.
-- <b>VNet gateway</b> to indicate when routes for a specific address are to be routed to a vnet gateway. VNet gateway is specified as a VPN for the next hop type.
-- <b>VNet</b> to override the default system route within a virtual network.
-- <b>Internet</b> to route traffic to a specified address prefix that is routed to the internet.
-- <b>None</b> to drop traffic sent to a specified address space.
+- **Virtual appliance** typically used to analyse or filter traffic that is entering/leaving a network.
+- **VNet gateway** to indicate when routes for a specific address are to be routed to a vnet gateway. VNet gateway is specified as a VPN for the next hop type.
+- **VNet** to override the default system route within a virtual network.
+- **Internet** to route traffic to a specified address prefix that is routed to the internet.
+- **None** to drop traffic sent to a specified address space.
 
 Can't specify the next hop type <b>VirtualNetworkServiceEndpoint</b> which indicates vnet peering.
 
