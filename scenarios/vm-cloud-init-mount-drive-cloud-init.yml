@@ -1,10 +1,11 @@
+#cloud-config
 disk_setup:
   /dev/sdc:
     table_type: gpt
     layout: True
     overwrite: True
 fs_setup:
-  - device: /dev/sdc1
+  - device: /dev/sdc
     partition: 1
     filesystem: ext4
 mounts:
