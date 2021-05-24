@@ -1,5 +1,9 @@
 # Azure Solutions Architect Expert
 
+## TODO
+
+- [Q60](https://www.examtopics.com/exams/microsoft/az-303/view/12/), go through the tutorials in the [docs](https://docs.microsoft.com/nl-nl/azure/site-recovery/hyper-v-azure-tutorial).
+
 ## References
 
 - Azure Certifications Solutions Architect [home page](https://docs.microsoft.com/en-us/learn/certifications/azure-solutions-architect/)
