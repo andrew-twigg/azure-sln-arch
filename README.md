@@ -10,7 +10,17 @@
 - [T2, Q7](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
 - [T2, Q9](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
 - [T2, Q14](https://www.examtopics.com/exams/microsoft/az-303/view/17/), revisit.
-
+- [T2, Q19](https://www.examtopics.com/exams/microsoft/az-303/view/18/), revisit. Revise update management.
+- [T2, Q26](https://www.examtopics.com/exams/microsoft/az-303/view/20/), revisit. Revise SSO.
+- [T2, Q27](https://www.examtopics.com/exams/microsoft/az-303/view/20/), revisit.
+- [T2, Q28](https://www.examtopics.com/exams/microsoft/az-303/view/20/)
+- [T2, Q29](https://www.examtopics.com/exams/microsoft/az-303/view/20/)
+- [T2, Q30](https://www.examtopics.com/exams/microsoft/az-303/view/20/)
+- [T2, Q35](https://www.examtopics.com/exams/microsoft/az-303/view/21/)
+- [T3, Q2](https://www.examtopics.com/exams/microsoft/az-303/view/22/)
+- [T3, Q16 and Q17](https://www.examtopics.com/exams/microsoft/az-303/view/25/)
+- [T4, Q1](https://www.examtopics.com/exams/microsoft/az-303/view/25/)
+ 
 ## References
 
 - Azure Certifications Solutions Architect [home page](https://docs.microsoft.com/en-us/learn/certifications/azure-solutions-architect/)
