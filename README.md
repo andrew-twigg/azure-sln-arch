@@ -20,7 +20,21 @@
 - [T3, Q2](https://www.examtopics.com/exams/microsoft/az-303/view/22/)
 - [T3, Q16 and Q17](https://www.examtopics.com/exams/microsoft/az-303/view/25/)
 - [T4, Q1](https://www.examtopics.com/exams/microsoft/az-303/view/25/)
- 
+- [T5, Q27](https://www.examtopics.com/exams/microsoft/az-303/view/31/)
+- [T5, Q28](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
+- [T5, Q29](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
+- [T5, Q31](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
+- [T5, Q32](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
+- [T5, Q35 to Q45](https://www.examtopics.com/exams/microsoft/az-303/view/33/) - run though the labs
+- [T5, Q47](https://www.examtopics.com/exams/microsoft/az-303/view/35/)
+- [T5, Q49](https://www.examtopics.com/exams/microsoft/az-303/view/36/)
+- [T5, Q53](https://www.examtopics.com/exams/microsoft/az-303/view/37/) - does the vm have to be in same resource group?
+- [T5, Q56 to Q65](https://www.examtopics.com/exams/microsoft/az-303/view/37/) - lab
+- [T5, Q67](https://www.examtopics.com/exams/microsoft/az-303/view/39/)
+- [T5, Q75](https://www.examtopics.com/exams/microsoft/az-303/view/41/) - peering through the portal
+- [T5, Q79](https://www.examtopics.com/exams/microsoft/az-303/view/42/)
+- [T5, Q86](https://www.examtopics.com/exams/microsoft/az-303/view/43/) - investigate storage lifecycle management
+- [T5, Q99](https://www.examtopics.com/exams/microsoft/az-303/view/46/) - sql pools
 ## References
 
 - Azure Certifications Solutions Architect [home page](https://docs.microsoft.com/en-us/learn/certifications/azure-solutions-architect/)
