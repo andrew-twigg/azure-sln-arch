@@ -2,7 +2,7 @@
 
 ## TODO
 
-- [Q60](https://www.examtopics.com/exams/microsoft/az-303/view/12/), go through the tutorials in the [docs](https://docs.microsoft.com/nl-nl/azure/site-recovery/hyper-v-azure-tutorial).
+- [ ] [Q60](https://www.examtopics.com/exams/microsoft/az-303/view/12/), go through the tutorials in the [docs](https://docs.microsoft.com/nl-nl/azure/site-recovery/hyper-v-azure-tutorial).
 - [Q65](https://www.examtopics.com/exams/microsoft/az-303/view/13/), read vmss [docs](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-networking) and do [deployment](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/tutorial-install-apps-template) to understand. You picked "1 subnet" not "30 nics".
 - [Q69](https://www.examtopics.com/exams/microsoft/az-303/view/14/), VPN gateway HA, whats the correct answer? 
 - [T2, Q4](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
@@ -35,6 +35,15 @@
 - [T5, Q79](https://www.examtopics.com/exams/microsoft/az-303/view/42/)
 - [T5, Q86](https://www.examtopics.com/exams/microsoft/az-303/view/43/) - investigate storage lifecycle management
 - [T5, Q99](https://www.examtopics.com/exams/microsoft/az-303/view/46/) - sql pools
+- [T5, Q105](https://www.examtopics.com/exams/microsoft/az-303/view/47/) - run through the autoscale rules. Is there an OR condition? The question just states conditions but not a logical operator.
+- [T5, Q106](https://www.examtopics.com/exams/microsoft/az-303/view/47/)
+- [T5, Q107](https://www.examtopics.com/exams/microsoft/az-303/view/47/)
+- [T5, Q111](https://www.examtopics.com/exams/microsoft/az-303/view/48/) - recovery services / encryption config on different vm types
+- [T6, Q6](https://www.examtopics.com/exams/microsoft/az-303/view/49/)
+- [T10, Q2, Q3](https://www.examtopics.com/exams/microsoft/az-303/view/51/)
+- [T11, Q1](https://www.examtopics.com/exams/microsoft/az-303/view/52/) - revise the local gateway netowrking thing.
+- [T13, Q1](https://www.examtopics.com/exams/microsoft/az-303/view/52/) - recovery services
+
 ## References
 
 - Azure Certifications Solutions Architect [home page](https://docs.microsoft.com/en-us/learn/certifications/azure-solutions-architect/)
