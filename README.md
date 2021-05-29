@@ -4,45 +4,45 @@
 
 - [x] [Q60](https://www.examtopics.com/exams/microsoft/az-303/view/12/), go through the tutorials in the [docs](https://docs.microsoft.com/nl-nl/azure/site-recovery/hyper-v-azure-tutorial).
 - [x] [Q65](https://www.examtopics.com/exams/microsoft/az-303/view/13/), read vmss [docs](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-networking) and do [deployment](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/tutorial-install-apps-template) to understand. You picked "1 subnet" not "30 nics".
-- [Q69](https://www.examtopics.com/exams/microsoft/az-303/view/14/), VPN gateway HA, whats the correct answer? 
-- [T2, Q4](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
-- [T2, Q5](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
-- [T2, Q7](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
-- [T2, Q9](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
-- [T2, Q14](https://www.examtopics.com/exams/microsoft/az-303/view/17/), revisit.
-- [T2, Q19](https://www.examtopics.com/exams/microsoft/az-303/view/18/), revisit. Revise update management.
-- [T2, Q26](https://www.examtopics.com/exams/microsoft/az-303/view/20/), revisit. Revise SSO.
-- [T2, Q27](https://www.examtopics.com/exams/microsoft/az-303/view/20/), revisit.
-- [T2, Q28](https://www.examtopics.com/exams/microsoft/az-303/view/20/)
-- [T2, Q29](https://www.examtopics.com/exams/microsoft/az-303/view/20/)
-- [T2, Q30](https://www.examtopics.com/exams/microsoft/az-303/view/20/)
-- [T2, Q35](https://www.examtopics.com/exams/microsoft/az-303/view/21/)
-- [T3, Q2](https://www.examtopics.com/exams/microsoft/az-303/view/22/)
-- [T3, Q16 and Q17](https://www.examtopics.com/exams/microsoft/az-303/view/25/)
-- [T4, Q1](https://www.examtopics.com/exams/microsoft/az-303/view/25/)
-- [T5, Q27](https://www.examtopics.com/exams/microsoft/az-303/view/31/)
-- [T5, Q28](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
-- [T5, Q29](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
-- [T5, Q31](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
-- [T5, Q32](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
-- [T5, Q35 to Q45](https://www.examtopics.com/exams/microsoft/az-303/view/33/) - run though the labs
-- [T5, Q47](https://www.examtopics.com/exams/microsoft/az-303/view/35/)
-- [T5, Q49](https://www.examtopics.com/exams/microsoft/az-303/view/36/)
-- [T5, Q53](https://www.examtopics.com/exams/microsoft/az-303/view/37/) - does the vm have to be in same resource group?
-- [T5, Q56 to Q65](https://www.examtopics.com/exams/microsoft/az-303/view/37/) - lab
-- [T5, Q67](https://www.examtopics.com/exams/microsoft/az-303/view/39/)
-- [T5, Q75](https://www.examtopics.com/exams/microsoft/az-303/view/41/) - peering through the portal
-- [T5, Q79](https://www.examtopics.com/exams/microsoft/az-303/view/42/)
-- [T5, Q86](https://www.examtopics.com/exams/microsoft/az-303/view/43/) - investigate storage lifecycle management
-- [T5, Q99](https://www.examtopics.com/exams/microsoft/az-303/view/46/) - sql pools
-- [T5, Q105](https://www.examtopics.com/exams/microsoft/az-303/view/47/) - run through the autoscale rules. Is there an OR condition? The question just states conditions but not a logical operator.
-- [T5, Q106](https://www.examtopics.com/exams/microsoft/az-303/view/47/)
-- [T5, Q107](https://www.examtopics.com/exams/microsoft/az-303/view/47/)
-- [T5, Q111](https://www.examtopics.com/exams/microsoft/az-303/view/48/) - recovery services / encryption config on different vm types
-- [T6, Q6](https://www.examtopics.com/exams/microsoft/az-303/view/49/)
-- [T10, Q2, Q3](https://www.examtopics.com/exams/microsoft/az-303/view/51/)
-- [T11, Q1](https://www.examtopics.com/exams/microsoft/az-303/view/52/) - revise the local gateway netowrking thing.
-- [T13, Q1](https://www.examtopics.com/exams/microsoft/az-303/view/52/) - recovery services
+- [ ] [Q69](https://www.examtopics.com/exams/microsoft/az-303/view/14/), VPN gateway HA, whats the correct answer? 
+- [ ] [T2, Q4](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
+- [ ] [T2, Q5](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
+- [ ] [T2, Q7](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
+- [ ] [T2, Q9](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
+- [ ] [T2, Q14](https://www.examtopics.com/exams/microsoft/az-303/view/17/), revisit.
+- [ ] [T2, Q19](https://www.examtopics.com/exams/microsoft/az-303/view/18/), revisit. Revise update management.
+- [ ] [T2, Q26](https://www.examtopics.com/exams/microsoft/az-303/view/20/), revisit. Revise SSO.
+- [ ] [T2, Q27](https://www.examtopics.com/exams/microsoft/az-303/view/20/), revisit.
+- [ ] [T2, Q28](https://www.examtopics.com/exams/microsoft/az-303/view/20/)
+- [ ] [T2, Q29](https://www.examtopics.com/exams/microsoft/az-303/view/20/)
+- [ ] [T2, Q30](https://www.examtopics.com/exams/microsoft/az-303/view/20/)
+- [ ] [T2, Q35](https://www.examtopics.com/exams/microsoft/az-303/view/21/)
+- [ ] [T3, Q2](https://www.examtopics.com/exams/microsoft/az-303/view/22/)
+- [ ] [T3, Q16 and Q17](https://www.examtopics.com/exams/microsoft/az-303/view/25/)
+- [ ] [T4, Q1](https://www.examtopics.com/exams/microsoft/az-303/view/25/)
+- [ ] [T5, Q27](https://www.examtopics.com/exams/microsoft/az-303/view/31/)
+- [ ] [T5, Q28](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
+- [ ] [T5, Q29](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
+- [ ] [T5, Q31](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
+- [ ] [T5, Q32](https://www.examtopics.com/exams/microsoft/az-303/view/32/)
+- [ ] [T5, Q35 to Q45](https://www.examtopics.com/exams/microsoft/az-303/view/33/) - run though the labs
+- [ ] [T5, Q47](https://www.examtopics.com/exams/microsoft/az-303/view/35/)
+- [ ] [T5, Q49](https://www.examtopics.com/exams/microsoft/az-303/view/36/)
+- [ ] [T5, Q53](https://www.examtopics.com/exams/microsoft/az-303/view/37/) - does the vm have to be in same resource group?
+- [ ] [T5, Q56 to Q65](https://www.examtopics.com/exams/microsoft/az-303/view/37/) - lab
+- [ ] [T5, Q67](https://www.examtopics.com/exams/microsoft/az-303/view/39/)
+- [ ] [T5, Q75](https://www.examtopics.com/exams/microsoft/az-303/view/41/) - peering through the portal
+- [ ] [T5, Q79](https://www.examtopics.com/exams/microsoft/az-303/view/42/)
+- [ ] [T5, Q86](https://www.examtopics.com/exams/microsoft/az-303/view/43/) - investigate storage lifecycle management
+- [ ] [T5, Q99](https://www.examtopics.com/exams/microsoft/az-303/view/46/) - sql pools
+- [ ] [T5, Q105](https://www.examtopics.com/exams/microsoft/az-303/view/47/) - run through the autoscale rules. Is there an OR condition? The question just states conditions but not a logical operator.
+- [ ] [T5, Q106](https://www.examtopics.com/exams/microsoft/az-303/view/47/)
+- [ ] [T5, Q107](https://www.examtopics.com/exams/microsoft/az-303/view/47/)
+- [ ] [T5, Q111](https://www.examtopics.com/exams/microsoft/az-303/view/48/) - recovery services / encryption config on different vm types
+- [ ] [T6, Q6](https://www.examtopics.com/exams/microsoft/az-303/view/49/)
+- [ ] [T10, Q2, Q3](https://www.examtopics.com/exams/microsoft/az-303/view/51/)
+- [ ] [T11, Q1](https://www.examtopics.com/exams/microsoft/az-303/view/52/) - revise the local gateway netowrking thing.
+- [ ] [T13, Q1](https://www.examtopics.com/exams/microsoft/az-303/view/52/) - recovery services
 
 ## References
 
