@@ -3,7 +3,7 @@
 ## TODO
 
 - [x] [Q60](https://www.examtopics.com/exams/microsoft/az-303/view/12/), go through the tutorials in the [docs](https://docs.microsoft.com/nl-nl/azure/site-recovery/hyper-v-azure-tutorial).
-- [Q65](https://www.examtopics.com/exams/microsoft/az-303/view/13/), read vmss [docs](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-networking) and do [deployment](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/tutorial-install-apps-template) to understand. You picked "1 subnet" not "30 nics".
+- [x] [Q65](https://www.examtopics.com/exams/microsoft/az-303/view/13/), read vmss [docs](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-networking) and do [deployment](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/tutorial-install-apps-template) to understand. You picked "1 subnet" not "30 nics".
 - [Q69](https://www.examtopics.com/exams/microsoft/az-303/view/14/), VPN gateway HA, whats the correct answer? 
 - [T2, Q4](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
 - [T2, Q5](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
