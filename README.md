@@ -6,7 +6,7 @@
 - [x] [Q65](https://www.examtopics.com/exams/microsoft/az-303/view/13/), read vmss [docs](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-networking) and do [deployment](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/tutorial-install-apps-template) to understand. You picked "1 subnet" not "30 nics".
 - [x] [Q69](https://www.examtopics.com/exams/microsoft/az-303/view/14/), VPN gateway HA, whats the correct answer? 
 - [x] [T2, Q4](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
-- [ ] [T2, Q5](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
+- [x] [T2, Q5](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
 - [ ] [T2, Q7](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
 - [ ] [T2, Q9](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
 - [ ] [T2, Q14](https://www.examtopics.com/exams/microsoft/az-303/view/17/), revisit.
@@ -284,6 +284,8 @@ Implement Azure SQL databases
 https://docs.microsoft.com/en-us/azure/azure-sql/database/auto-failover-group-overview
 
 - [ ] configure Azure SQL database settings
+    - [Backup and restore](https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/automated-backup)
+    - [Backup and restore decision matrix](https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/backup-restore#decision-matrix)
 - [ ] implement Azure SQL Database managed instances
 - [ ] configure HA for an Azure SQL database
 - [ ] publish an Azure SQL database
