@@ -113,13 +113,15 @@ az network vnet create -g $rg -l $loc -n $vnetbastion \
 
 az network public-ip create -g $rg -n $pipbastion -l $loc --sku Standard
 
-# This not working!
+# This not working! - You need a subnet minimum /27 and called AzureBastionSubnet, ref. https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/bastion/create-host-cli.md
 az network bastion create -g $rg -l $loc -n adt-bastion-$id \
     --public-ip-address $pipbastion \
     --vnet-name $vnetbastion
 
 (InvalidResourceReference) Resource /subscriptions/b70490c4-40b2-4066-afc9-05b797168001/resourceGroups/adt-rg-2210/providers/Microsoft.Network/virtualNetworks/adt-vnet-2210-bastion/subnets/AzureBastionSubnet referenced by resource /subscriptions/b70490c4-40b2-4066-afc9-05b797168001/resourceGroups/adt-rg-2210/providers/Microsoft.Network/bastionHosts/adt-bastion-2210 was not found. Please make sure that the referenced resource exists, and that both resources are in the same region.
 ```
+
+
 
 So got that error. Can configure it in the portal. Is it because the bastion needs to be in the address space of the vnet1?
 
