@@ -10,7 +10,7 @@
 - [x] [T2, Q5](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
 - [x] [T2, Q7](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
 - [x] [T2, Q9](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
-- [ ] [T2, Q14](https://www.examtopics.com/exams/microsoft/az-303/view/17/), revisit.
+- [x] [T2, Q14](https://www.examtopics.com/exams/microsoft/az-303/view/17/), revisit.
 - [ ] [T2, Q19](https://www.examtopics.com/exams/microsoft/az-303/view/18/), revisit. Revise update management.
 - [ ] [T2, Q26](https://www.examtopics.com/exams/microsoft/az-303/view/20/), revisit. Revise SSO.
 - [ ] [T2, Q27](https://www.examtopics.com/exams/microsoft/az-303/view/20/), revisit.
