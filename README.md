@@ -8,7 +8,7 @@
 - [ ] [T1, Q71](https://www.examtopics.com/exams/microsoft/az-303/view/15/) cosmos private endpoints. Answer looks correct. Check responses.
 - [x] [T2, Q4](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
 - [x] [T2, Q5](https://www.examtopics.com/exams/microsoft/az-303/view/15/), revisit.
-- [ ] [T2, Q7](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
+- [x] [T2, Q7](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
 - [ ] [T2, Q9](https://www.examtopics.com/exams/microsoft/az-303/view/16/), revisit.
 - [ ] [T2, Q14](https://www.examtopics.com/exams/microsoft/az-303/view/17/), revisit.
 - [ ] [T2, Q19](https://www.examtopics.com/exams/microsoft/az-303/view/18/), revisit. Revise update management.
