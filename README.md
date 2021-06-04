@@ -19,6 +19,7 @@
 - [ ] [T2, Q29](https://www.examtopics.com/exams/microsoft/az-303/view/20/)
 - [ ] [T2, Q30](https://www.examtopics.com/exams/microsoft/az-303/view/20/)
 - [ ] [T2, Q35](https://www.examtopics.com/exams/microsoft/az-303/view/21/)
+- [ ] [T2, Q47](https://www.examtopics.com/exams/microsoft/az-303/view/26/), is ADFS correct?  
 - [ ] [T3, Q2](https://www.examtopics.com/exams/microsoft/az-303/view/22/)
 - [ ] [T3, Q16 and Q17](https://www.examtopics.com/exams/microsoft/az-303/view/25/)
 - [ ] [T4, Q1](https://www.examtopics.com/exams/microsoft/az-303/view/25/)
@@ -162,6 +163,7 @@ Implement and manage [hybrid identities](https://docs.microsoft.com/en-us/azure/
     - [Install Azure AD Connect with Express Settings (PHS)](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/how-to-connect-install-express)
 - [x] identity synchronization options
     - [What is Hybrid Identity, common scenarios](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/whatis-hybrid-identity?toc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Factive-directory%2Fhybrid%2Ftoc.json&bc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fbread%2Ftoc.json#common-scenarios-and-recommendations)
+    - [AD FS](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/how-to-connect-fed-whatis)
 - [x] configure and manage password sync and password writeback
 - [ ] configure single sign-on
 - [ ] use Azure AD Connect Health
