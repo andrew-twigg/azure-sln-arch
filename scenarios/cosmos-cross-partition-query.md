@@ -3,14 +3,14 @@
 Create the database:
 
 ```sh
-RG=adt-rg-$RANDOM
-az group create -g $RG -l westeurope
+rg=adt-rg-$RANDOM
+az group create -g $rg -l westeurope
 
 NAME=adt-co-$RANDOM
-az cosmosdb create -g $RG -n $NAME --kind GlobalDocumentDB
-az cosmosdb sql database create -g $RG --account-name $NAME -n "Products"
+az cosmosdb create -g $rg -n $NAME --kind GlobalDocumentDB
+az cosmosdb sql database create -g $rg --account-name $NAME -n "Products"
 az cosmosdb sql container create \
-    -g $RG \
+    -g $rg \
     --account-name $NAME \
     --database-name "Products" \
     -n "Clothing" \

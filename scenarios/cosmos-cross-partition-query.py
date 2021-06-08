@@ -1,8 +1,8 @@
 import uuid
 from azure.cosmos import exceptions, CosmosClient, PartitionKey
 
-endpoint = 'https://adt-co-12990.documents.azure.com:443/'
-key = '<deleted>'
+endpoint = 'https://adt-co-15732.documents.azure.com:443/'
+key = 'deleted'
 
 client = CosmosClient(endpoint, key)
 database_name = 'Products'
