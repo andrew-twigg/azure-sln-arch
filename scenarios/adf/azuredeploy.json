@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "name": {
+        "factoryName": {
             "type": "string"
         },
         "location": {
@@ -11,12 +11,47 @@
             "metadata": {
                 "description": "Location for your data factory"
             }
+        },
+        "repoConfigurationType": {
+            "type": "string",
+            "defaultValue": "FactoryGitHubConfiguration",
+            "allowedValues": [
+                "FactoryGitHubConfiguration"
+            ],
+            "metadata": {
+                "description": "The type of the git service, ie. GitHub or Azure DevOps"
+            }
+        },
+        "repoAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the git repository account"
+            }
+        },
+        "repoName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the git repository"
+            }
+        },
+        "repoCollaborationBranch": {
+            "type": "string",
+            "defaultValue": "master",
+            "metadata": {
+                "description": "The collaboration branch"
+            }
+        },
+        "repoRootFolder": {
+            "type": "string",
+            "metadata": {
+                "description": "Repo root folder where the enviroment definitions are"
+            }
         }
     },
     "resources": [
         {
             "apiVersion": "2018-06-01",
-            "name": "[parameters('name')]",
+            "name": "[parameters('factoryName')]",
             "location": "[parameters('location')]",
             "type": "Microsoft.DataFactory/factories",
             "identity": {
@@ -24,11 +59,11 @@
             },
             "properties": {
                 "repoConfiguration": {
-                    "type": "FactoryGitHubConfiguration",
-                    "accountName": "andrew-twigg",
-                    "repositoryName": "azure-sln-arch",
-                    "collaborationBranch": "master",
-                    "rootFolder": "/scenarios/adf/"
+                    "type": "[parameters('repoConfigurationType')]",
+                    "accountName": "[parameters('repoAccountName')]",
+                    "repositoryName": "[parameters('repoName')]",
+                    "collaborationBranch": "[parameters('repoCollaborationBranch')]",
+                    "rootFolder": "[parameters('repoRootFolder')]"
                 }
             }
         }

@@ -12,5 +12,5 @@ loc=westeurope
 az group create -g $rg -l $loc
 az deployment group create -g $rg \
     -f azuredeploy.json \
-    -p name=adt-adf-$id
+    -p azuredeploy.parameters.json factoryName=adt-adf-$id
 ```
