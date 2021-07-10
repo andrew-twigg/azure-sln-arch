@@ -1,5 +1,7 @@
 # Copy data from Azure Blob Storage to Azure SQL Database
 
+Ref. [azure-quickstart-templates](https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.datafactory/data-factory-v2-blob-to-sql-copy).
+
 This template creates:
 
 - Azure Storage Account and container
@@ -16,5 +18,13 @@ az group create -g $rg -l $loc
 
 az deployment group create -g $rg \
     -f azuredeploy.prereqs.json \
-    -p azuredeploy.prereqs.parameters.json storageAccountName adt0sa0$id containerName 
+    -p azuredeploy.prereqs.parameters.json \
+        storageAccountName=adt0sa0$id \
+        containerName=mysourcecontainer \
+        sqlServerName=adt-sql-$id \
+        sqlDBName=adt-db-$id \
+        sqlAdministratorLogin=sqladmin \
+        sqlAdministratorLoginPassword=Pas5w0rd123456
+
+
 ```

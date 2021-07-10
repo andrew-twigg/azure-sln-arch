@@ -4,6 +4,18 @@
     "parameters": {
         "storageAccountName": {
             "value": "GEN-UNIQUE"
+        },
+        "sqlServerName": {
+          "value": "GEN-UNIQUE"
+        },
+        "sqlDBName": {
+            "value": "GEN-UNIQUE"
+        },
+        "sqlAdministratorLogin": {
+          "value": "GEN-UNIQUE"
+        },
+        "sqlAdministratorLoginPassword": {
+          "value": "GEN-PASSWORD"
         }
     }
 }
