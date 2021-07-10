@@ -22,7 +22,15 @@
             "identity": {
                 "type": "SystemAssigned"
             },
-            "properties": {}
+            "properties": {
+                "repoConfiguration": {
+                    "type": "FactoryGitHubConfiguration",
+                    "accountName": "andrew-twigg",
+                    "repositoryName": "azure-sln-arch",
+                    "collaborationBranch": "master",
+                    "rootFolder": "/scenarios/adf/"
+                }
+            }
         }
     ]
 }
