@@ -1,2 +1,7 @@
 aks-helm/
 azure-cosmos-db-graph-gremlindotnet-getting-started/
+
+AzureStorageLinkedService.json
+emp.txt
+InputDataset.json
+OutputDataset.json
