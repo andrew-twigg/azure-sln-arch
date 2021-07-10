@@ -28,3 +28,5 @@ az deployment group create -g $rg \
 
 
 ```
+
+How to then run SQL to setup the tables? Ref. [odetocode](https://odetocode.com/blogs/scott/archive/2018/01/23/interacting-with-azure-sql-using-all-command-line-tools.aspx), use [mssql-cli](https://github.com/dbcli/mssql-cli/blob/master/doc/installation/macos.md#macos-installation).
