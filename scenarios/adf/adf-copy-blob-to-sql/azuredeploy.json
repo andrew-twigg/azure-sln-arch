@@ -85,11 +85,11 @@
         }
     },
     "variables": {
-        "azureStorageLinkedServiceName": "Tutorial2-AzureStorageLinkedService",
-        "azureSqlDatabaseLinkedServiceName": "Tutorial2-AzureSqlDatabaseLinkedService",
-        "inputDatasetName": "Tutorial2-InputBlobDataset",
-        "outputDatasetName": "Tutorial2-OutputSqlDataset",
-        "pipelineName": "Tutorial2-CopyFromBlobToSqlPipeline"
+        "azureStorageLinkedServiceName": "Tutorial2AzureStorageLinkedService",
+        "azureSqlDatabaseLinkedServiceName": "Tutorial2AzureSqlDatabaseLinkedService",
+        "inputDatasetName": "Tutorial2InputBlobDataset",
+        "outputDatasetName": "Tutorial2OutputSqlDataset",
+        "pipelineName": "Tutorial2CopyFromBlobToSqlPipeline"
     },
     "resources": [
         {
