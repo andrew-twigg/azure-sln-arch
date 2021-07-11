@@ -1,0 +1,258 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for your data factory"
+            }
+        },
+        "repoConfigurationType": {
+            "type": "string",
+            "defaultValue": "FactoryGitHubConfiguration",
+            "allowedValues": [
+                "FactoryGitHubConfiguration"
+            ],
+            "metadata": {
+                "description": "The type of the git service, ie. GitHub or Azure DevOps"
+            }
+        },
+        "repoAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the git repository account"
+            }
+        },
+        "repoName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the git repository"
+            }
+        },
+        "repoCollaborationBranch": {
+            "type": "string",
+            "defaultValue": "master",
+            "metadata": {
+                "description": "The collaboration branch"
+            }
+        },
+        "repoRootFolder": {
+            "type": "string",
+            "metadata": {
+                "description": "Repo root folder where the enviroment definitions are"
+            }
+        },
+        "AzureStorage_connectionString": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Connection string for the Azure Storage account."
+            }
+        },
+        "blobContainer": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the blob container in the Azure Storage account."
+            }
+        },
+        "inputBlobFolder": {
+            "type": "string",
+            "metadata": {
+                "description": "The folder in the blob container that has the input file."
+            }
+        },
+        "inputBlobName": {
+            "type": "string",
+            "metadata": {
+              "description": "Name of the input file/blob."
+            }
+        },
+        "AzureSqlDatabase_connectionString": {
+            "type": "secureString",
+            "metadata": {
+                "description": "Connection string for the Azure SQL Database"
+            }
+        },
+        "sqlTableName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the target table in the Azure SQL Database"
+            }
+        }
+    },
+    "variables": {
+        "azureStorageLinkedServiceName": "Tutorial2-AzureStorageLinkedService",
+        "azureSqlDatabaseLinkedServiceName": "Tutorial2-AzureSqlDatabaseLinkedService",
+        "inputDatasetName": "Tutorial2-InputBlobDataset",
+        "outputDatasetName": "Tutorial2-OutputSqlDataset",
+        "pipelineName": "Tutorial2-CopyFromBlobToSqlPipeline"
+    },
+    "resources": [
+        {
+            "apiVersion": "2018-06-01",
+            "name": "[parameters('factoryName')]",
+            "location": "[parameters('location')]",
+            "type": "Microsoft.DataFactory/factories",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "repoConfiguration": {
+                    "type": "[parameters('repoConfigurationType')]",
+                    "accountName": "[parameters('repoAccountName')]",
+                    "repositoryName": "[parameters('repoName')]",
+                    "collaborationBranch": "[parameters('repoCollaborationBranch')]",
+                    "rootFolder": "[parameters('repoRootFolder')]"
+                }
+            },
+            "resources": [
+                {
+                    "type": "linkedservices",
+                    "name": "[variables('azureStorageLinkedServiceName')]",
+                    "dependsOn": [
+                      "[parameters('factoryName')]"
+                    ],
+                    "apiVersion": "2017-09-01-preview",
+                    "properties": {
+                      "type": "AzureStorage",
+                      "description": "Azure Storage linked service",
+                      "typeProperties": {
+                        "connectionString": {
+                          "value": "[parameters('AzureStorage_connectionString')]",
+                          "type": "SecureString"
+                        }
+                      }
+                    }
+                },
+                {
+                   "type": "linkedservices",
+                   "name": "[variables('azureSqlDatabaseLinkedServiceName')]",
+                   "dependsOn": [
+                     "[parameters('factoryName')]"
+                   ],
+                   "apiVersion": "2017-09-01-preview",
+                   "properties": {
+                     "type": "AzureSqlDatabase",
+                     "description": "Azure SQL Database linked service",
+                     "typeProperties": {
+                       "connectionString": {
+                         "value": "[parameters('AzureSqlDatabase_connectionString')]",
+                         "type": "SecureString"
+                       }
+                     }
+                   }
+                },
+                {
+                  "type": "datasets",
+                  "name": "[variables('inputDatasetName')]",
+                  "dependsOn": [
+                    "[parameters('factoryName')]",
+                    "[variables('azureStorageLinkedServiceName')]"
+                  ],
+                  "apiVersion": "2017-09-01-preview",
+                  "properties": {
+                    "type": "AzureBlob",
+                    "structure": [
+                      {
+                        "name": "Prop_0",
+                        "type": "string"
+                      },
+                      {
+                        "name": "Prop_1",
+                        "type": "string"
+                      }
+                    ],
+                    "typeProperties": {
+                      "format": {
+                        "type": "TextFormat",
+                        "columnDelimiter": ",",
+                        "nullValue": "\\N",
+                        "treatEmptyAsNull": false,
+                        "firstRowAsHeader": false
+                      },
+                      "folderPath": "[concat(parameters('blobContainer'), '/', parameters('inputBlobFolder'), '/')]",
+                      "fileName": "[parameters('inputBlobName')]"
+                    },
+                    "linkedServiceName": {
+                      "referenceName": "[variables('azureStorageLinkedServiceName')]",
+                      "type": "LinkedServiceReference"
+                    }
+                  }
+                },
+                {
+                    "type": "datasets",
+                    "name": "[variables('outputDatasetName')]",
+                    "dependsOn": [
+                      "[parameters('factoryName')]",
+                      "[variables('azureSqlDatabaseLinkedServiceName')]"
+                    ],
+                    "apiVersion": "2017-09-01-preview",
+                    "properties": {
+                      "type": "AzureSqlTable",
+                      "structure": [
+                        {
+                          "name": "FirstName",
+                          "type": "string"
+                        },
+                        {
+                          "name": "LastName",
+                          "type": "string"
+                        }
+                      ],
+                      "typeProperties": {
+                        "tableName": "[parameters('sqlTableName')]"
+                      },
+                      "linkedServiceName": {
+                        "referenceName": "[variables('azureSqlDatabaseLinkedServiceName')]",
+                        "type": "LinkedServiceReference"
+                      }
+                    }
+                },
+                {
+                  "type": "pipelines",
+                  "name": "[variables('pipelineName')]",
+                  "dependsOn": [
+                    "[parameters('factoryName')]",
+                    "[variables('inputDatasetName')]",
+                    "[variables('outputDatasetName')]"
+                  ],
+                  "apiVersion": "2017-09-01-preview",
+                  "properties": {
+                    "activities": [
+                      {
+                        "type": "Copy",
+                        "typeProperties": {
+                          "source": {
+                            "type": "BlobSource",
+                            "recursive": true
+                          },
+                          "sink": {
+                            "type": "SqlSink",
+                            "writeBatchSize": 10000
+                          }
+                        },
+                        "name": "MyCopyActivity",
+                        "inputs": [
+                          {
+                            "referenceName": "[variables('inputDatasetName')]",
+                            "type": "DatasetReference"
+                          }
+                        ],
+                        "outputs": [
+                          {
+                            "referenceName": "[variables('outputDatasetName')]",
+                            "type": "DatasetReference"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+            ]
+        }
+    ]
+}

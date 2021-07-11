@@ -65,3 +65,14 @@ GO
 
 CREATE CLUSTERED INDEX IX_emp_ID ON dbo.emp (ID);
 ```
+
+### Create the Azure Data Factory
+
+```sh
+az deployment group create -g $rg \
+    -f azuredeploy.json \
+    -p azuredeploy.parameters.json \
+        factoryName=adt-adf-$id \
+        AzureStorage_connectionString="DefaultEndpointsProtocol=https;AccountName=adt0sa028261;AccountKey=+BCWPMCHBxSAfTho4llVAAVisw968BpTGlTkejh5rni/xlx6QQPkKpPnkhYyTi8LCOiSS0mfoM9rZwOgjpRBKw==" \
+        AzureSqlDatabase_connectionString="Server=tcp:adt-sql-28261.database.windows.net,1433;Initial Catalog=adt-db-28261;Persist Security Info=False;User ID=sqladmin;Password=sql@]m1nPas5w0rd;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+```
