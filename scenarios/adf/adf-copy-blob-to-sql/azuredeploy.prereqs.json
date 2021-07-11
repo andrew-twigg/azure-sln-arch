@@ -82,6 +82,19 @@
       },
       "resources": [
         {
+          "name": "AllowAllWindowsAzureIps",
+          "type": "firewallrules",
+          "location": "[parameters('location')]",
+          "apiVersion": "2020-08-01-preview",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
+          ],
+          "properties": {
+            "startIpAddress": "0.0.0.0",
+            "endIpAddress": "0.0.0.0"
+          }
+        },
+        {
           "type": "databases",
           "apiVersion": "2020-08-01-preview",
           "name": "[parameters('sqlDBName')]",
@@ -96,5 +109,15 @@
         }
       ]
     }
-  ]
+  ],
+  "outputs": {
+    "AzureStorage_connectionString": {
+      "type": "string",
+      "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2016-01-01').keys[0].value)]"
+    },
+    "AzureSqlDatabase_connectionString": {
+      "type": "string",
+      "value": "[concat('Server=tcp:', parameters('sqlServerName'),'.database.windows.net,1433;Initial Catalog=',parameters('sqlDBName'), ';Persist Security Info=False;User ID=', parameters('sqlAdministratorLogin'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;')]"
+    }
+  }
 }
