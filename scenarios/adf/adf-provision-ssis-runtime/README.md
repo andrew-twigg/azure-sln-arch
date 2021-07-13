@@ -17,7 +17,7 @@ id=$RANDOM
 rg=adt-rg-$id
 loc=westeurope
 sqlAdminAccount=sqladmin
-sqlAdminAccountPw=Pas5w0rd123456
+sqlAdminAccountPw=<some-password>
 vnet=adt-vnet-$id
 snet=adt-snet-$id
 
@@ -36,12 +36,16 @@ az deployment group create -g $rg \
 ### Create the Azure Data Factory
 
 ```sh
+az provider register --namespace Microsoft.Batch                            
+az provider show -n Microsoft.Batch --query "registrationState" -o tsv
+Registered
+
 az deployment group create -g $rg \
     -f azuredeploy.json \
     -p azuredeploy.parameters.json \
         factoryName=adt-adf-$id \
         virtualNetworkName=$vnet \
-        subNetName:$snet \
+        subNetName=$snet \
         azureSqlServerName=adt-sql-$id \
         databaseAdminUsername=$sqlAdminAccount \
         databaseAdminPassword=$sqlAdminAccountPw
