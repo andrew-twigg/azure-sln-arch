@@ -1,0 +1,172 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "factoryName": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for your data factory"
+      }
+    },
+    "repoConfigurationType": {
+      "type": "string",
+      "defaultValue": "FactoryGitHubConfiguration",
+      "allowedValues": [
+        "FactoryGitHubConfiguration"
+      ],
+      "metadata": {
+        "description": "The type of the git service, ie. GitHub or Azure DevOps"
+      }
+    },
+    "repoAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the git repository account"
+      }
+    },
+    "repoName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the git repository"
+      }
+    },
+    "repoCollaborationBranch": {
+      "type": "string",
+      "defaultValue": "master",
+      "metadata": {
+        "description": "The collaboration branch"
+      }
+    },
+    "repoRootFolder": {
+      "type": "string",
+      "metadata": {
+        "description": "Repo root folder where the enviroment definitions are"
+      }
+    },
+    "virtualNetworkName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of your Azure virtual network."
+      }
+    },
+    "subNetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the subnet in the virtual network."
+      }
+    },
+    "nodeSize": {
+      "type": "string",
+      "defaultValue": "Standard_D2_v3",
+      "metadata": {
+        "description": "Location of the data factory."
+      }
+    },
+    "nodeNumber": {
+      "type": "int",
+      "defaultValue": 1,
+      "metadata": {
+        "description": "Number of nodes in the cluster."
+      }
+    },
+    "maximumParallelExecutionsPerNode": {
+      "type": "int",
+      "defaultValue": 1,
+      "metadata": {
+        "description": "Maximum number of parallel executions per node in the cluster."
+      }
+    },
+    "azureSqlServerName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Azure SQL server that hosts the SSISDB database (SSIS Catalog)."
+      }
+    },
+    "databaseAdminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Azure SQL database user."
+      }
+    },
+    "databaseAdminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Password for the database user."
+      }
+    },
+    "catalogPricingTier": {
+      "type": "string",
+      "defaultValue": "Basic",
+      "metadata": {
+        "description": "Pricing tier of the SSIS Catalog (SSISDB datbase)"
+      }
+    }
+  },
+  "variables": {
+    "azureStorageLinkedServiceName": "Tutorial2AzureStorageLinkedService",
+    "azureSqlDatabaseLinkedServiceName": "Tutorial2AzureSqlDatabaseLinkedService",
+    "inputDatasetName": "Tutorial2InputBlobDataset",
+    "outputDatasetName": "Tutorial2OutputSqlDataset",
+    "pipelineName": "Tutorial2CopyFromBlobToSqlPipeline"
+  },
+  "resources": [
+    {
+      "apiVersion": "2018-06-01",
+      "name": "[parameters('factoryName')]",
+      "location": "[parameters('location')]",
+      "type": "Microsoft.DataFactory/factories",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "repoConfiguration": {
+          "type": "[parameters('repoConfigurationType')]",
+          "accountName": "[parameters('repoAccountName')]",
+          "repositoryName": "[parameters('repoName')]",
+          "collaborationBranch": "[parameters('repoCollaborationBranch')]",
+          "rootFolder": "[parameters('repoRootFolder')]"
+        }
+      },
+      "resources": [
+        {
+          "name": "[concat(parameters('factoryName'), '/SPAzureSsisIR')]",
+          "type": "Microsoft.DataFactory/factories/integrationRuntimes",
+          "dependsOn": [
+            "[parameters('factoryName')]"
+          ],
+          "apiVersion": "2018-06-01",
+          "properties": {
+            "type": "Managed",
+            "typeProperties": {
+              "computeProperties": {
+                "location": "[parameters('location')]",
+                "nodeSize": "[parameters('nodeSize')]",
+                "numberOfNodes": "[parameters('nodeNumber')]",
+                "maxParallelExecutionsPerNode": "[parameters('maximumParallelExecutionsPerNode')]",
+                "vNetProperties": {
+                  "vNetId": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+                  "subnet": "[parameters('subNetName')]"
+                }
+              },
+              "ssisProperties": {
+                "catalogInfo": {
+                  "catalogServerEndpoint": "[parameters('azureSqlServerName')]",
+                  "catalogAdminUserName": "[parameters('databaseAdminUsername')]",
+                  "catalogAdminPassword": {
+                    "type": "SecureString",
+                    "value": "[parameters('databaseAdminPassword')]"
+                  },
+                  "catalogPricingTier": "[parameters('catalogPricingTier')]"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
