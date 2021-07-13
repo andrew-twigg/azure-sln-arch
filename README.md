@@ -7,6 +7,7 @@
     - [skils outline](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4psD6)
 - [Exam AZ-304: Microsoft Azure Architect Design](https://docs.microsoft.com/en-us/learn/certifications/exams/az-304)
 - [Azure CLI docs](https://docs.microsoft.com/en-gb/cli/azure/)
+- [Azure Well-Architected Framework - intro](https://azure.microsoft.com/en-gb/blog/introducing-the-microsoft-azure-wellarchitected-framework/)
 
 ## Microsoft Learn Resources
 
