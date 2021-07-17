@@ -2,7 +2,7 @@
 
 Ref. https://docs.microsoft.com/en-us/azure/batch/tutorial-parallel-python
 
-## Prereqa
+## Prereqs
 
 - [An Azure Batch Account with linked storage account](batch-quickstart.md)
 
