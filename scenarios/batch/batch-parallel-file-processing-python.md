@@ -4,7 +4,7 @@ Ref. https://docs.microsoft.com/en-us/azure/batch/tutorial-parallel-python
 
 ## Prereqa
 
-- [An Azure Batch Account with linked storage account](batch-quickstart.md()
+- [An Azure Batch Account with linked storage account](batch-quickstart.md)
 
 ## Get Creds 
 
