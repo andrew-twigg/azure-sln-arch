@@ -2,7 +2,7 @@
 
 This repo contains notes and examples for passing the AZ-303 / AZ-304 exams and getting Azure Solutions Architect Expert certified.
 
-The repository has a notes from the MS Learn series for the certification and CLI code for all the different technologies. The ![scenarios](./scenarios) folder contains CLI examples of deploying the technologies into a subscription.
+The repository has a notes from the MS Learn series for the certification and CLI code for all the different technologies. The [scenarios](./scenarios) folder contains CLI examples of deploying the technologies into a subscription.
 
 ## Certification
 
