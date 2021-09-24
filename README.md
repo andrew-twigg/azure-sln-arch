@@ -1,5 +1,9 @@
 # Azure Solutions Architect Expert
 
+## Certification
+
+[![Credential](.assets/microsoft-certified-azure-solutions-architect-expert.1.png)](https://www.credly.com/badges/73421bf2-99d8-45f1-9320-90f3e24c0aff/public_url)
+
 ## References
 
 - Azure Certifications Solutions Architect [home page](https://docs.microsoft.com/en-us/learn/certifications/azure-solutions-architect/)
