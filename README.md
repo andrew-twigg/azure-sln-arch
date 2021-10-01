@@ -256,3 +256,9 @@ https://docs.microsoft.com/en-us/azure/azure-sql/database/auto-failover-group-ov
 - [ ] configure HA for an Azure SQL database
 - [ ] publish an Azure SQL database
 
+
+### Azure Arc
+
+- [ ] [Azure Arc Jumpstart](https://azurearcjumpstart.io)
+- [ ] [Azure Arc docs](https://docs.microsoft.com/en-us/azure/azure-arc/)
+
