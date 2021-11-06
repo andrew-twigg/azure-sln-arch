@@ -9,6 +9,31 @@ Azure provides several technologies that can be used for reliable communication,
 
 Loosely coupled architectures require mechanisms for components to communicate. Reliable messaging is often a critical problem.
 
+## Contents
+
+* [Contents](#contents)
+* [References](#references)
+* [Vasters On.NET Live notes](#vasters-on.net-live-notes)
+    * [Service Bus Architectural Patterns](#service-bus-architectural-patterns)
+        * [Competing consumers](#competing-consumers)
+        * [Load Leveling](#load-leveling)
+    * [Event Hubs Architectural Patterns](#event-hubs-architectural-patterns)
+    * [Event Grid Architectural Patterns](#event-grid-architectural-patterns)
+    * [Relay Architectural Patterns](#relay-architectural-patterns)
+    * [Big picture](#big-picture)
+* [Messages or events?](#messages-or-events?)
+* [Choosing a message-based delivery with queues](#choosing-a-message-based-delivery-with-queues)
+    * [Benefits of queues](#benefits-of-queues)
+    * [Transactional support](#transactional-support)
+    * [Which service should you choose?](#which-service-should-you-choose?)
+* [Choose Azure Event Grid](#choose-azure-event-grid)
+    * [When to use Event Grid](#when-to-use-event-grid)
+    * [Event topics](#event-topics)
+    * [System topics](#system-topics)
+    * [Custom topics](#custom-topics)
+* [Choose Azure Event Hubs](#choose-azure-event-hubs)
+    * [When to use Event Hubs](#when-to-use-event-hubs)
+
 ## References
 
 * Core messaging services architect - [Clemens Vasters](https://vasters.com)
