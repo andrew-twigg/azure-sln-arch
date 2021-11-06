@@ -20,13 +20,13 @@ Loosely coupled architectures require mechanisms for components to communicate. 
 - [Clemens Vasters GitHub](https://github.com/clemensv)
 - [Clemens Vasters GitHub on-dotnet-live-2021-03](https://github.com/clemensv?tab=repositories)
 - [Claim-Check Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/claim-check)
-
+- [Key differences between Apache Kafka and Event Hubs](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-for-kafka-ecosystem-overview#key-differences-between-apache-kafka-and-event-hubs)
 
 ## Vasters On.NET Live notes
 
 Services don't compete, they are a family for different messaging patters.
 
-![](assets/6c-eventing-messaging-core-services.png) 
+![](assets/6c-eventing-messaging-core-services.png)
 
 - Event grids
     - push-push broker
@@ -67,7 +67,7 @@ Two components:
 - Topics
     - publish subscriber
     - route to 2K different destinations (commonly not done!)
- 
+
 ![](assets/6c-service-bus-patterns.png)
 
 
@@ -291,6 +291,3 @@ Provides a distributed stream processing platform with low latency and seamless 
 - need to save a stream of events to Data Lake or Blob storage
 - need aggregation or analytics on your event stream
 - need reliable messaging or resiliency
-
-
-
