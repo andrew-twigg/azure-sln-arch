@@ -12,7 +12,7 @@ The repository has a notes from the MS Learn series for the certification and CL
 
 - Azure Certifications Solutions Architect [home page](https://docs.microsoft.com/en-us/learn/certifications/azure-solutions-architect/)
 - [Exam AZ-303: Microsoft Azure Architect Technologies](https://docs.microsoft.com/en-us/learn/certifications/exams/az-303)
-    - [skils outline](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4psD6)
+  - [skils outline](https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4psD6)
 - [Exam AZ-304: Microsoft Azure Architect Design](https://docs.microsoft.com/en-us/learn/certifications/exams/az-304)
 - [Azure CLI docs](https://docs.microsoft.com/en-gb/cli/azure/)
 - [Azure Well-Architected Framework - intro](https://azure.microsoft.com/en-gb/blog/introducing-the-microsoft-azure-wellarchitected-framework/)
@@ -28,7 +28,6 @@ The repository has a notes from the MS Learn series for the certification and CL
 - [x] [Architect modern applications in Azure](https://docs.microsoft.com/en-us/learn/paths/architect-modern-apps/)
 - [x] [Architect API integration in Azure](https://docs.microsoft.com/en-us/learn/paths/architect-api-integration/)
 - [x] [Architect migration, business continuity, and disaster recovery in Azure](https://docs.microsoft.com/en-us/learn/paths/architect-migration-bcdr/)
-
 
 ## Microsoft Docs
 
@@ -52,7 +51,6 @@ Implement cloud infrastructure monitoring
 - [ ] configure logging for workloads
 - [ ] initiate automated responses by using Action Groups
 - [ ] configure and manage advanced alerts
-
 
 Implement storage accounts
 
