@@ -1,0 +1,18 @@
+{
+  "managedApiConnections": {
+    "outlook": {
+      "api": {
+        "id": "/subscriptions/b70490c4-40b2-4066-afc9-05b797168001/providers/Microsoft.Web/locations/westeurope/managedApis/outlook"
+      },
+      "connection": {
+        "id": "/subscriptions/b70490c4-40b2-4066-afc9-05b797168001/resourceGroups/adt-rg-logicapps/providers/Microsoft.Web/connections/outlook"
+      },
+      "connectionRuntimeUrl": "https://1eefebf039a202d3.09.common.logic-westeurope.azure-apihub.net/apim/outlook/2677e5ab55744447916de41356645fbf/",
+      "authentication": {
+        "type": "Raw",
+        "scheme": "Key",
+        "parameter": "@appsetting('outlook-connectionKey')"
+      }
+    }
+  }
+}
