@@ -17,7 +17,7 @@
     * [ ] Monitoring
     * [ ] Security
     * [ ] Availability
-    * [ ] Custom built-in connectors and can they be used for legacy system comms?
+    * [ ] Custom built-in connectors and can they be used for legacy system comms? See [Built-in connector extensibility](https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/azure-logic-apps-running-anywhere-built-in-connector/ba-p/1921272)
     * [ ] [Stateless vs stateful workflows](https://docs.microsoft.com/en-us/azure/logic-apps/single-tenant-overview-compare#stateful-stateless), and stateful workflow resilience.
     * [ ] [Integration service environment (ISE)](https://docs.microsoft.com/en-us/azure/logic-apps/connect-virtual-network-vnet-isolated-environment-overview)
     * [ ] [App Service Environment v3 (ASEv3)](https://docs.microsoft.com/en-us/azure/app-service/environment/overview)
