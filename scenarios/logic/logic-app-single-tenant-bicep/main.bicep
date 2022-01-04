@@ -8,7 +8,9 @@ param rgLocation string = resourceGroup().location
 // 3 - Workflows, how are they deployed?
 //    * Does it need a logic app resource to deploy workflows to?
 //    * Or do we just deploy workflows to the plan?
+// 4 - App Insights
 
+var logicAppName = 'adt-la-samplebicep'
 var logicAppPlanName = 'adt-plan-samplebicep'
 var logicAppStorageName = 'adt0sa0samplebicep'
 
@@ -40,12 +42,41 @@ resource myPlan 'Microsoft.Web/serverfarms@2021-02-01' = {
 
 resource myStorage 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   name: logicAppStorageName
-  location:rgLocation
+  location: rgLocation
   sku:{
     name: 'Standard_LRS'
   }
   kind: 'StorageV2'
   properties: {
     supportsHttpsTrafficOnly: true
+  }
+}
+
+resource myLogicAppStandard 'Microsoft.Web/sites@2021-02-01' = {
+  name: logicAppName
+  location: rgLocation
+  kind: 'functionapp,workflowapp'
+  properties: {
+    serverFarmId: myPlan.id
+    siteConfig:{
+      appSettings: [
+        {
+          name: 'APP_KIND'
+          value: 'workflowApp'
+        }
+        {
+          name: 'FUNCTIONS_EXTENSION_VERSION'
+          value: '~3'
+        }
+        {
+          name: 'FUNCTIONS_WORKER_RUNTIME'
+          value: 'node'
+        }
+        {
+          name: 'WEBSITE_NODE_DEFAULT_VERSION'
+          value: '~12'
+        }
+      ]
+    }
   }
 }
