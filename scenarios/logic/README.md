@@ -7,6 +7,11 @@
 * [Azure Samples, Serverless Microservices Reference Architecture](https://github.com/Azure-Samples/Serverless-microservices-reference-architecture)
 * [Workflow definition language](https://docs.microsoft.com/en-gb/azure/logic-apps/logic-apps-workflow-definition-language)
 
+## Sections
+
+* [Logic App Standard deployment with Bicep](.\logic-app-single-tenant-bicep)
+* [Logic App Standard deployment with VSCode](.\logic-app-single-tenant-vscode) 
+
 ## TODOs
 
 * [x] Read the Serverless Microservices Reference Architecture
@@ -23,7 +28,7 @@
     * [ ] [App Service Environment v3 (ASEv3)](https://docs.microsoft.com/en-us/azure/app-service/environment/overview)
     * [x] [Azure Logic Apps runtime deep dive](https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/azure-logic-apps-running-anywhere-runtime-deep-dive/ba-p/1835564)
     * [ ] Unit testing workflow. [Mock data](https://docs.microsoft.com/en-us/azure/logic-apps/test-logic-apps-mock-data-static-results?tabs=consumption)? Check [this blog](https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/automated-testing-with-logic-apps-standard/ba-p/2960623).
-    * [ ] [Template deployments](https://docs.microsoft.com/en-us/azure/templates/microsoft.logic/workflows?tabs=bicep)
+    * [x] [Template deployments](https://docs.microsoft.com/en-us/azure/templates/microsoft.logic/workflows?tabs=bicep)
 
 ## Prerequisites
 
