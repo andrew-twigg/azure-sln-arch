@@ -13,6 +13,7 @@ param rgLocation string = resourceGroup().location
 var logicAppName = 'adt-la-samplebicep'
 var logicAppPlanName = 'adt-plan-samplebicep'
 var logicAppStorageName = 'adt0sa0samplebicep'
+var logicAppInsightsName  = 'adt-ai-samplebicep'
 
 // https://docs.microsoft.com/en-us/azure/templates/microsoft.web/serverfarms?tabs=bicep
 resource myPlan 'Microsoft.Web/serverfarms@2021-02-01' = {
@@ -52,6 +53,19 @@ resource myStorage 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   }
 }
 
+resource myInsights 'Microsoft.Insights/components@2020-02-02' = {
+  name: logicAppInsightsName
+  location: rgLocation
+  kind: 'web'
+  properties: {
+    Application_Type: 'web'
+    RetentionInDays: 90
+    IngestionMode: 'ApplicationInsights'
+    publicNetworkAccessForIngestion: 'Enabled'
+    publicNetworkAccessForQuery: 'Enabled'
+  }
+}
+
 resource myLogicAppStandard 'Microsoft.Web/sites@2021-02-01' = {
   name: logicAppName
   location: rgLocation
@@ -75,6 +89,14 @@ resource myLogicAppStandard 'Microsoft.Web/sites@2021-02-01' = {
         {
           name: 'WEBSITE_NODE_DEFAULT_VERSION'
           value: '~12'
+        }
+        {
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: myInsights.properties.InstrumentationKey
+        }
+        {
+          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+          value: myInsights.properties.ConnectionString 
         }
       ]
     }
