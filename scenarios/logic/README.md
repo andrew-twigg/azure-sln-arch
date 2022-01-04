@@ -28,8 +28,8 @@
 
 * .NET 5.0
     > Note: Build process also [requires](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library?tabs=v2%2Ccmd#supported-versions) SDK for [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1). Without it I kept getting an error from VSCode. Also, ensure the correct version of .NET is being used by setting the version in the [global.json](global.json) file.
-* [Azure Functions Core Tools - 3.x version](https://github.com/Azure/azure-functions-core-tools/releases/tag/3.0.3904) - Not v4!
-
-```sh
-winget install -e --id Microsoft.AzureFunctionsCoreTools -v 3.0.3904
-```
+* [Azure Functions Core Tools - 3.x version](https://github.com/Azure/azure-functions-core-tools/releases/tag/3.0.3904)
+    > Not v4!
+    > ```sh
+    > winget install -e --id Microsoft.AzureFunctionsCoreTools -v 3.0.3904
+    > ```
