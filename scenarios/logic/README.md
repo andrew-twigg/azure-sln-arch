@@ -23,6 +23,7 @@
     * [ ] [App Service Environment v3 (ASEv3)](https://docs.microsoft.com/en-us/azure/app-service/environment/overview)
     * [x] [Azure Logic Apps runtime deep dive](https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/azure-logic-apps-running-anywhere-runtime-deep-dive/ba-p/1835564)
     * [ ] Unit testing workflow. [Mock data](https://docs.microsoft.com/en-us/azure/logic-apps/test-logic-apps-mock-data-static-results?tabs=consumption)? Check [this blog](https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/automated-testing-with-logic-apps-standard/ba-p/2960623).
+    * [ ] [Template deployments](https://docs.microsoft.com/en-us/azure/templates/microsoft.logic/workflows?tabs=bicep)
 
 ## Prerequisites
 
