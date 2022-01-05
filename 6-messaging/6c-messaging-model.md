@@ -46,6 +46,7 @@ Loosely coupled architectures require mechanisms for components to communicate. 
 * [Claim-Check Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/claim-check)
 * [Key differences between Apache Kafka and Event Hubs](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-for-kafka-ecosystem-overview#key-differences-between-apache-kafka-and-event-hubs)
 * [Azure Integration Services Whitepaper](https://azure.microsoft.com/mediahandler/files/resourcefiles/azure-integration-services/Azure-Integration-Services-Whitepaper-v1-0.pdf)
+* [Messaging technology choices](https://docs.microsoft.com/en-us/azure/architecture/guide/technology-choices/messaging)
 
 ## Vasters On.NET Live notes
 
