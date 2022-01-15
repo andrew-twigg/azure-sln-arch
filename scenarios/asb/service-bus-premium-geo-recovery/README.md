@@ -1,6 +1,8 @@
-# Azure Service Bus Premium Geo-DR Config and Demo
+# Azure Service Bus Premium Geo-Recovery Config and Demo
 
 This scenario deploys Azure Service Bus Premium namespaces across multiple regions and pairs them for Geo-DR failover scenario. The configuration is from [azure quickstart template](https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.servicebus/servicebus-create-namespace-geo-recoveryconfiguration). The scenario builds on the quickstart template to add producer consumer apps so that you can fail over the service bus namespaces and check the behaviour.
+
+![geo-recovery config](.assets/service-bus-geo-recovery-config.png)
 
 ## Running the sample
 
