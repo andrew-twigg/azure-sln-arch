@@ -22,3 +22,39 @@ az group create -g $rg -l westeurope
 // Deploy the environment
 az deployment group create -g $rg -f main.bicep -p azuredeploy.parameters.json
 ```
+
+## Cleaning up
+
+Break the pairing...
+
+```sh
+// See the partner namespace
+az servicebus georecovery-alias show -g $rg \
+    -a adt-sb-geodr \
+    --namespace-name adt-sb-geodr-pri \
+    --query "partnerNamespace"
+
+// Break the pair because you cannot delete if paired
+az servicebus georecovery-alias break-pair -g $rg \
+    --namespace-name adt-sb-geodr-pri \
+    --alias adt-sb-geodr
+
+// Check the status (takes a min or so)
+az servicebus georecovery-alias show -g $rg \
+    -a adt-sb-geodr \
+    --namespace-name adt-sb-geodr-pri \
+    --query provisioningState \
+    -o tsv
+
+Succeeded
+```
+
+Delete the resource group.
+
+```sh
+// Check the resource group name to make sure its the one you want...
+echo $rg
+
+// Delete the resource group
+az group delete -g $rg --no-wait -y
+```

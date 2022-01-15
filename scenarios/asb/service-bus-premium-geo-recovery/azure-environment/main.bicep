@@ -25,6 +25,9 @@ resource serviceBusNamespaceSecondary 'Microsoft.ServiceBus/namespaces@2021-06-0
     tier: 'Premium'
     capacity: 1
   }
+  properties: {
+    zoneRedundant: true
+  }
 }
 
 // Service Bus Namespace (Primary)
@@ -35,6 +38,9 @@ resource serviceBusNamespacePrimary 'Microsoft.ServiceBus/namespaces@2021-06-01-
     name: 'Premium'
     tier: 'Premium'
     capacity: 1
+  }
+  properties: {
+    zoneRedundant: true
   }
 }
 

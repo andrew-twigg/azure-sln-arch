@@ -3,13 +3,13 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "serviceBusNamespaceNamePrimary": {
-      "value": "adt-sb-geodr-pri"
+      "value": "adt-sb-geodr-pri2"
     },
     "serviceBusNamespaceNameSecondary": {
-      "value": "adt-sb-geodr-sec"
+      "value": "adt-sb-geodr-sec2"
     },
     "aliasName": {
-      "value": "adt-sb-geodr"
+      "value": "adt-sb-geodr2"
     },
     "locationSecondaryNamespace": {
       "value": "northeurope"
