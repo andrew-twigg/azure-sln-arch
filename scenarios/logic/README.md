@@ -6,6 +6,8 @@
 * [Azure Samples, Digital Integration Hub](https://github.com/Azure-Samples/digital-integration-hub)
 * [Azure Samples, Serverless Microservices Reference Architecture](https://github.com/Azure-Samples/Serverless-microservices-reference-architecture)
 * [Workflow definition language](https://docs.microsoft.com/en-gb/azure/logic-apps/logic-apps-workflow-definition-language)
+* [App Service Environment](https://docs.microsoft.com/en-us/azure/app-service/environment/overview)
+* [Azure Logic Apps (Standard) VSCode Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurelogicapps)
 
 ## TODOs
 
