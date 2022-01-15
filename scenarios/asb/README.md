@@ -9,3 +9,4 @@ This section includes Service Bus samples including simple quickstarts to demons
 * [Azure.Messaging.ServiceBus Client library for .NET](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/servicebus/Azure.Messaging.ServiceBus)
 * [Microsoft.ServiceBus Bicep and ARM templates](https://docs.microsoft.com/en-us/azure/templates/microsoft.servicebus/namespaces?tabs=bicep)
 * [Microsoft.ServiceBus.Messaging Geo Replication sample](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.ServiceBus.Messaging/GeoReplication)
+* [Azure.Identity client library for .NET](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md)
