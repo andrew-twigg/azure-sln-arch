@@ -6,6 +6,11 @@ This scenario deploys Azure Service Bus Premium namespaces across multiple regio
 
 ## Running the sample
 
+### Create the Azure Environment
+
+TODO: Add the queue to the environment.
+TODO: Add the shared access policies to the bus for receiver and sender
+
 ```sh
 // A unique ID for the sample deployment
 // Powershell prompt? Use $id=Get-Random.
@@ -22,6 +27,16 @@ az group create -g $rg -l westeurope
 // Deploy the environment
 az deployment group create -g $rg -f main.bicep -p azuredeploy.parameters.json
 ```
+
+### Run the Client
+
+TODO: Get the connection string
+TODO: Run the client woith the connection string
+
+### Run the Receiver
+
+TODO: Write the receiver
+TODO: Run the receiver witht he connection string
 
 ## Cleaning up
 
