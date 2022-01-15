@@ -53,3 +53,9 @@ resource serviceBusNamespaceDrConfig 'Microsoft.ServiceBus/namespaces/disasterRe
     partnerNamespace: serviceBusNamespaceSecondary.id
   }
 }
+
+// Service Bus Queue to run the sample app through.
+resource serviceBusNamespaceQueue 'Microsoft.ServiceBus/namespaces/queues@2021-06-01-preview' = {
+  name: 'myqueue'
+  parent: serviceBusNamespacePrimary
+}
