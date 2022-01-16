@@ -16,8 +16,8 @@ This section includes Service Bus samples including simple quickstarts to demons
 
 * [Azure Service Bus Quickstart](quickstart/README.md)
 * [Azure Service Bus Premium Geo-Recovery](service-bus-premium-geo-recovery/README.md)
-* Coming Soon! Azure Service Bus Standard active replication
+* [Azure Service Bus Standard active replication](service-bus-standard-active-replication/README.md)
 * Coming Soon! Azure Service Bus Standard passive replication
 * Coming Soon! Azure Service Bus Standard cross-region federation all-active replication
 * Coming Soon! Azure Service Bus Standard cross-region federation active-passive replication
-* Coming Soon! Azure Service Bus Standard cross-region feneration spillover replication
+* Coming Soon! Azure Service Bus Standard cross-region federation spillover replication
