@@ -6,6 +6,8 @@ This scenario deploys Azure Service Bus Premium namespaces across multiple regio
 
 The scenario runs under the local user account. The scenario creates the queue sender and receiver role assignments for the local logged on user.
 
+![queue role assignments](.assets/service-bus-geo-recovery-queue-role-assignments.png)
+
 ## Running the sample
 
 ### Create the Azure Environment
