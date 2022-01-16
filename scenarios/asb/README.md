@@ -11,3 +11,13 @@ This section includes Service Bus samples including simple quickstarts to demons
 * [Microsoft.ServiceBus.Messaging Geo Replication sample](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.ServiceBus.Messaging/GeoReplication)
 * [Azure.Identity client library for .NET](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md)
 * [Azure SDK Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#logging)
+
+## Samples
+
+* [Azure Service Bus Quickstart](quickstart/README.md)
+* [Azure Service Bus Premium Geo-Recovery](service-bus-premium-geo-recovery/README.md)
+* Coming Soon! Azure Service Bus Standard active replication
+* Coming Soon! Azure Service Bus Standard passive replication
+* Coming Soon! Azure Service Bus Standard cross-region federation all-active replication
+* Coming Soon! Azure Service Bus Standard cross-region federation active-passive replication
+* Coming Soon! Azure Service Bus Standard cross-region feneration spillover replication
