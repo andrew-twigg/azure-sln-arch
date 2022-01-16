@@ -11,6 +11,10 @@ This section includes Service Bus samples including simple quickstarts to demons
 * [Microsoft.ServiceBus.Messaging Geo Replication sample](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.ServiceBus.Messaging/GeoReplication)
 * [Azure.Identity client library for .NET](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md)
 * [Azure SDK Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#logging)
+* [Azure Service Bus message replication and cross-region federation](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-federation-overview)
+* [Azure Functions Replication Tasks for BCDR](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-federation-replicator-functions)
+* [Azure Logic Apps Replication Tasks for BCDR](https://docs.microsoft.com/en-us/azure/logic-apps/create-replication-tasks-azure-resources?tabs=portal)
+* [Azure Samples for messaging replication](https://github.com/Azure-Samples/azure-messaging-replication-dotnet/)
 
 ## Samples
 
