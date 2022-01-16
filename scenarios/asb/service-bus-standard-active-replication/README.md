@@ -28,3 +28,7 @@ az deployment group create -g $rg \
     -f main.bicep \
     -p azuredeploy.parameters.json userObjectId=$userId serviceBusNamespaceNamePrimary=adt-sb-$id-pri serviceBusNamespaceNameSecondary=adt-sb-$id-sec
 ```
+
+Creates an environment like...
+
+![Environment created](.assets/service-bus-standard-pri-sec.png)
