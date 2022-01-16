@@ -19,16 +19,19 @@ namespace SenderPassiveReplication
 
             const string queueName = "myqueue";
 
-            await using var clientActive = new ServiceBusClient($"{sbPrimary}.servicebus.windows.net", new DefaultAzureCredential());
-            await using var clientBackup = new ServiceBusClient($"{sbSecondary}.servicebus.windows.net", new DefaultAzureCredential());
+            await using var clientPri = new ServiceBusClient($"{sbPrimary}.servicebus.windows.net", new DefaultAzureCredential());
+            await using var clientSec = new ServiceBusClient($"{sbSecondary}.servicebus.windows.net", new DefaultAzureCredential());
 
             // Create the sender
-            var activeSender = clientActive.CreateSender(queueName);
-            var backupSender = clientBackup.CreateSender(queueName);
+            var activeSender = clientPri.CreateSender(queueName);
+            var backupSender = clientSec.CreateSender(queueName);
 
             Console.WriteLine("\nSending messages to primary or secondary queues...\n");
 
             object swapMutex = new();
+
+            // Force an error after 5 seconds by taking down the primary client
+            await Task.Delay(5000).ContinueWith(async _ => await activeSender.CloseAsync());
 
             for (int i = 1; i <= 500; i++)
             {
