@@ -70,18 +70,6 @@ namespace MessagingSender
                     exceptionCount++;
                 }
             }
-
-            //while (true)
-            //{
-            //    var messages = new Queue<ServiceBusMessage>();
-            //    for (int i = 0; i < 1000; i++)
-            //    {
-            //        messages.Enqueue(new ServiceBusMessage(String.Format("Message {0}", i)));
-            //    }
-
-            //    // Send the message
-            //    await sender.SendMessagesAsync(messages);
-            //}
         }
     }
 }
