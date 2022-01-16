@@ -6,7 +6,7 @@ using System.CommandLine.DragonFruit;
 using Azure.Identity;
 using Azure.Messaging.ServiceBus;
 
-namespace MessagingSender
+namespace SenderActiveReplication
 {
     public static class Program
     {
