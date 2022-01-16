@@ -6,4 +6,6 @@ App was created by...
 dotnet new console -f net6.0
 dotnet add package Azure.Identity
 dotnet add package Azure.Messaging.ServiceBus
+dotnet add package System.CommandLine --prerelease
+dotnet add package System.CommandLine.DragonFruit --prerelease
 ```

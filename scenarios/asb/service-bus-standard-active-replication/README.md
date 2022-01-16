@@ -32,3 +32,10 @@ az deployment group create -g $rg \
 Creates an environment like...
 
 ![Environment created](.assets/service-bus-standard-pri-sec.png)
+
+### Run the client
+
+```sh
+cd application/MessageSender
+dotnet run --sb-primary adt-sb-$id-pri --sb-secondary adt-sb-$id-sec
+```
