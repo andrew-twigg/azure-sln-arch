@@ -12,7 +12,7 @@ namespace MessagingReceiver
             const string queueName = "MyQueue";
 
             // Ref https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/servicebus/Azure.Messaging.ServiceBus#authenticating-with-azureidentity
-            const string fullyQualifiedNamespace = "adt-sb-geodr-pri.servicebus.windows.net";
+            const string fullyQualifiedNamespace = "adt-sb-geodr.servicebus.windows.net";
             await using var client = new ServiceBusClient(fullyQualifiedNamespace, new DefaultAzureCredential());
 
             // create the options to use for configuring the processor
