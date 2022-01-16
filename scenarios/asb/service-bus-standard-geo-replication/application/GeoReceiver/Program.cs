@@ -12,7 +12,7 @@ namespace GeoReceiver
     {
         static async Task Main(string sbPrimary="adt-sb-pri", string sbSecondary="adt-db-sec")
         {
-            Console.WriteLine($"Messaging Sender started. Primary bus: {sbPrimary}, Secondary bus: {sbSecondary}");
+            Console.WriteLine($"Messaging receiver started. Primary bus: {sbPrimary}, Secondary bus: {sbSecondary}");
 
             const string queueName = "myqueue";
 
@@ -44,7 +44,7 @@ namespace GeoReceiver
 
             processorPri.ProcessErrorAsync += ErrorHandler;
             processorSec.ProcessErrorAsync += ErrorHandler;
- 
+
             async Task MessageHandler(ProcessMessageEventArgs args)
             {
                 // Duplicate message detection.
