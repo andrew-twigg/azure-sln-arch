@@ -77,6 +77,22 @@ resource serviceBusDataReceiverRoleDefinition 'Microsoft.Authorization/roleDefin
   name: '4f6d3b9b-027b-4f4c-9142-0e5a2a2247e0'
 }
 
+// TODO: Do we really need these lookups for the secondary? Can they just be looked up once on scope subscription()?
+
+// The built in Azure Service Bus Data Sender role.
+// Role definition IDs are at https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
+resource serviceBusDataSenderRoleDefinitionSecondary 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
+  scope: serviceBusNamespaceSecondary
+  name: '69a216fc-b8fb-44d8-bc22-1f3c2cd27a39'
+}
+
+// The built in Azure Service Bus Data Sender role.
+// Role definition IDs are at https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
+resource serviceBusDataReceiverRoleDefinitionSecondary 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
+  scope: serviceBusNamespaceSecondary
+  name: '4f6d3b9b-027b-4f4c-9142-0e5a2a2247e0'
+}
+
 resource serviceBusNamespaceQueueDataSenderRoleAssignment 'Microsoft.Authorization/roleAssignments@2021-04-01-preview' = {
   // A role assignment's resource name must be a globally unique identifier (GUID). It's a good practice to create a GUID 
   // that uses the scope, principal ID, and role ID together. Role assignment resource names must be unique within the 
@@ -102,6 +118,44 @@ resource serviceBusNamespaceQueueDataReceiverRoleAssignment 'Microsoft.Authoriza
   scope: serviceBusNamespaceQueue
   properties: {
     roleDefinitionId: serviceBusDataReceiverRoleDefinition.id
+    principalId: userObjectId
+    principalType: 'User'
+  }  
+}
+
+// Role assignments for the secondary queue. We don't create the queue, it's synced by the geo-recovery pairing.
+// Get a handle on it. How's this meant to work, because the sync might not have happened yet!
+
+resource serviceBusNamespaceQueueSecondary 'Microsoft.ServiceBus/namespaces/queues@2021-06-01-preview' existing = {
+  name: 'myqueue'
+  parent: serviceBusNamespaceSecondary
+}
+
+resource serviceBusNamespaceQueueDataSenderRoleAssignmentSecondary 'Microsoft.Authorization/roleAssignments@2021-04-01-preview' = {
+  // A role assignment's resource name must be a globally unique identifier (GUID). It's a good practice to create a GUID 
+  // that uses the scope, principal ID, and role ID together. Role assignment resource names must be unique within the 
+  // Azure Active Directory tenant, even if the scope is narrower.
+  name: guid(subscription().id, userObjectId, serviceBusDataSenderRoleDefinitionSecondary.id)
+
+  // Scope the assignment to the specific queue
+  scope: serviceBusNamespaceQueueSecondary
+  properties: {
+    roleDefinitionId: serviceBusDataSenderRoleDefinitionSecondary.id
+    principalId: userObjectId
+    principalType: 'User'
+  }  
+}
+
+resource serviceBusNamespaceQueueDataReceiverRoleAssignmentSecondary 'Microsoft.Authorization/roleAssignments@2021-04-01-preview' = {
+  // A role assignment's resource name must be a globally unique identifier (GUID). It's a good practice to create a GUID 
+  // that uses the scope, principal ID, and role ID together. Role assignment resource names must be unique within the 
+  // Azure Active Directory tenant, even if the scope is narrower.
+  name: guid(subscription().id, userObjectId, serviceBusDataReceiverRoleDefinitionSecondary.id)
+
+  // Scope the assignment to the specific queue
+  scope: serviceBusNamespaceQueueSecondary
+  properties: {
+    roleDefinitionId: serviceBusDataReceiverRoleDefinitionSecondary.id
     principalId: userObjectId
     principalType: 'User'
   }  

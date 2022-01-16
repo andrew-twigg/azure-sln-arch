@@ -35,13 +35,19 @@ az deployment group create -g $rg -f main.bicep -p azuredeploy.parameters.json u
 
 ### Run the Client
 
-TODO: Get the connection string
-TODO: Run the client woith the connection string
+```sh
+cd application/MessagingSender
+
+dotnet run
+```
 
 ### Run the Receiver
 
-TODO: Write the receiver
-TODO: Run the receiver witht he connection string
+```sh
+cd application/MessagingReceiver
+
+dotnet run
+```
 
 ## Cleaning up
 

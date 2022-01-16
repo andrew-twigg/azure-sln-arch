@@ -1,7 +1,7 @@
 ﻿using Azure.Identity;
 using Azure.Messaging.ServiceBus;
 
-namespace HelloWorld
+namespace MessagingSender
 {
     public static class Program
     {
@@ -9,15 +9,10 @@ namespace HelloWorld
         {
             Console.WriteLine("Messaging Sender started.");
 
-            // TODO read the connection string from args
-
             const string queueName = "MyQueue";
 
-            // Implements IAsyncDisposable so create with "await using"
-            //await using var client = new ServiceBusClient(connectionString);
-
             // Ref https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/servicebus/Azure.Messaging.ServiceBus#authenticating-with-azureidentity
-            const string fullyQualifiedNamespace = "adt-sb-geodr-pri.servicebus.windows.net";
+            const string fullyQualifiedNamespace = "adt-sb-geodr.servicebus.windows.net";
             await using var client = new ServiceBusClient(fullyQualifiedNamespace, new DefaultAzureCredential());
 
             // Create the sender
