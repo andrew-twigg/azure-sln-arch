@@ -4,12 +4,11 @@ This scenario deploys Azure Service Bus Premium namespaces across multiple regio
 
 ![geo-recovery config](.assets/service-bus-geo-recovery-config.png)
 
+The scenario runs under the local user account. The scenario creates the queue sender and receiver role assignments for the local logged on user.
+
 ## Running the sample
 
 ### Create the Azure Environment
-
-TODO: Add the queue to the environment.
-TODO: Add the shared access policies to the bus for receiver and sender
 
 ```sh
 // A unique ID for the sample deployment
@@ -24,8 +23,12 @@ rg=adt-rg-$id
 // Create resource group
 az group create -g $rg -l westeurope
 
+// Look up the object ID of the account that will run the scenario.
+// This is for queue authorization.
+userId=$(az ad user list --upn andrew.twigg@hitachivantara.com --query "[].objectId" -o tsv)
+
 // Deploy the environment
-az deployment group create -g $rg -f main.bicep -p azuredeploy.parameters.json
+az deployment group create -g $rg -f main.bicep -p azuredeploy.parameters.json userObjectId=$userId
 ```
 
 ### Run the Client
