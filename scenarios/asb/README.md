@@ -28,14 +28,14 @@ This section includes Service Bus samples including simple quickstarts to demons
 
 ## Configurations
 
-| Technology           | Configuration                       | Availability                                                                  | Implications                                           | BCDR     |
-|----------------------|-------------------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------|----------|
-| Service Bus Standard | Single region                       | [99.9](https://azure.microsoft.com/en-gb/support/legal/sla/service-bus/v1_1/) |                                                        | None     |
-| Service Bus Standard | Two region, no data replication     | Queue 99.99999, Data 99.9                                                     |                                                        |          |
-| Service Bus Standard | Two region, active replication(*)   | Queue 99.99999, Data 99.99999                                                 | Dupe data. Consumer dedupe.                            |          |
-| Service Bus Standard | Two region, passive replication(**) | Queue 99.99999, Data 99.99999                                                 | Dupe data. Data loss. Consumer dedupe. Cost optimised. |          |
-| Service Bus Premium  | Two region, no data replication     | Not stated. 3x sync data replication in region.                               |                                                        | Built-in |
-|                      |                                     |                                                                               |                                                        |          |
+| Technology           | Configuration                       | Availability                                                                  | Implications                                                                 | BCDR     |
+|----------------------|-------------------------------------|-------------------------------------------------------------------------------|------------------------------------------------------------------------------|----------|
+| Service Bus Standard | Single region                       | [99.9](https://azure.microsoft.com/en-gb/support/legal/sla/service-bus/v1_1/) |                                                                              | None     |
+| Service Bus Standard | Two region, no data replication     | Queue 99.9999, Data 99.9                                                      |                                                                              |          |
+| Service Bus Standard | Two region, active replication(*)   | Queue 99.9999, Data 99.9999                                                   | Dupe data. Consumer dedupe (Each consumer gets all messages).                |          |
+| Service Bus Standard | Two region, passive replication(**) | Queue 99.9999, Data 99.9999                                                   | Dupe data. Data loss. Consumer dedupe (For failover period). Cost optimised. |          |
+| Service Bus Premium  | Two region, no data replication     | Not stated. 3x sync data replication in region.                               |                                                                              | Built-in |
+|                      |                                     |                                                                               |                                                                              |          |
 
 * (*) Achievable through cross-region federation all-active replication pattern.
 * (**) Achievable through cross-region federation active-passive replication pattern.
