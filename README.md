@@ -6,7 +6,7 @@ The repository has a notes from the MS Learn series for the certification and CL
 
 ## Certification
 
-[![Credential](.assets/microsoft-certified-azure-solutions-architect-expert.1.png)](https://www.credly.com/badges/73421bf2-99d8-45f1-9320-90f3e24c0aff/public_url)
+[![Credential](.assets/microsoft-certified-azure-solutions-architect-expert.1.png)](https://www.credly.com/badges/60e941a4-18ad-45e1-a72a-fdf5a0d028e2/public_url)
 
 ## References
 
@@ -259,4 +259,3 @@ https://docs.microsoft.com/en-us/azure/azure-sql/database/auto-failover-group-ov
 
 - [ ] [Azure Arc Jumpstart](https://azurearcjumpstart.io)
 - [ ] [Azure Arc docs](https://docs.microsoft.com/en-us/azure/azure-arc/)
-
