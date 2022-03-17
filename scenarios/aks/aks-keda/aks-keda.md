@@ -13,7 +13,17 @@ KEDA lets you scale deployments in Kubernetes based on **external** events or me
 
 In Kubernetes, you can use Horizontal Pod Autoscaler (HPA) to scale Deployments based on metrics generated **inside** of the cluster. Especially when running Kubernetes in combination with external, cloud-based services such as Azure Service Bus, your application artifacts have to scale on those external metrics.
 
+## Scenario Setup
+
+Run the setup script to create the Azure resources and install KEDA. It's taken from [Thinktecture, Serverless workloads in K8s with KEDA](https://www.thinktecture.com/en/kubernetes/serverless-workloads-with-keda/serverless-workloads-with-keda/).
+
+```sh
+./scripts/create-azure-resources.sh
+```
+
 ## Installing KEDA on Kubernetes
+
+> Note: You don't need to do this if you run the script to setup the environment. It's included in the script.
 
 ### Create the K8s cluster
 
