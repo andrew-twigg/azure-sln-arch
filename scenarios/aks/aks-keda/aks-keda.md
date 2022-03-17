@@ -15,10 +15,30 @@ In Kubernetes, you can use Horizontal Pod Autoscaler (HPA) to scale Deployments 
 
 ## Scenario Setup
 
+### Azure Environment Setup
+
 Run the setup script to create the Azure resources and install KEDA. It's taken from [Thinktecture, Serverless workloads in K8s with KEDA](https://www.thinktecture.com/en/kubernetes/serverless-workloads-with-keda/serverless-workloads-with-keda/).
 
 ```sh
 ./scripts/create-azure-resources.sh
+```
+
+### Azure Function
+
+```sh
+% mkdir Thinktecture.MessageTransformer
+% cd Thinktecture.MessageTransformer
+% func version
+4.0.3971
+% func init --worker-runtime dotnet --docker
+
+Writing /azure-sln-arch/scenarios/aks/aks-keda/Thinktecture.MessageTransformer/.vscode/extensions.json
+Writing Dockerfile
+Writing .dockerignore
+% func new -n MessageTransformer -l csharp -t ServiceBusQueueTrigger
+Select a number for template:Function name: MessageTransformer
+
+The function "MessageTransformer" was created successfully from the "ServiceBusQueueTrigger" template.
 ```
 
 ## Installing KEDA on Kubernetes
