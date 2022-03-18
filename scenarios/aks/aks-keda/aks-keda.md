@@ -41,6 +41,58 @@ Select a number for template:Function name: MessageTransformer
 The function "MessageTransformer" was created successfully from the "ServiceBusQueueTrigger" template.
 ```
 
+There's some code updates in the function. See the code and the Thinktecture blog. It's updated to work with the inbound and outbound queues and has functionality to reverse the message.
+
+### Build and Publish the Docker Image
+
+```sh
+docker build . -t $acr.azurecr.io/message-transformer:0.0.1 \
+    -t $acr.azurecr.io/message-transformer:latest
+
+docker push $acr.azurecr.io/message-transformer:0.0.1
+docker push $acr.azurecr.io/message-transformer:latest
+```
+
+### Deploy Azure Functions to Kubernetes
+
+Run command to split out Kubernetes definitions which we can then modify.
+
+```sh
+func kubernetes deploy --namespace tt \
+    --name transformer-fn \
+    --image-name $acr.azurecr.io/message-transformer:0.0.1 \
+    --polling-interval 5 \
+    --cooldown-interval 10 \
+    --min-replicas 0 \
+    --max-replicas 50 \
+    --secret-name tt-func-auth \
+    --dry-run > keda-deployment.yaml
+```
+
+This gives you a keda-deployment.yaml file which then needs updating to add the *TriggerAuthentication* resource, and modify the *ScaledObject* resource.
+
+### Create Load
+
+Create a new console app for adding messages to the queue.
+
+```sh
+dotnet new console -n Thinktecture.Samples.KEDA.Publisher -o ./Publisher
+cd Publisher
+```
+
+Code was written to load messages to the queue.
+
+You need to add the creds for the publisher to the app config. Get the key:
+
+```sh
+az servicebus queue authorization-rule keys list -g $rg \
+    --namespace-name adt-sb-2659 \
+    --queue-name inbound \
+    -n publisher-app \
+    --query "primaryConnectionString" \
+    -o tsv
+```
+
 ## Installing KEDA on Kubernetes
 
 > Note: You don't need to do this if you run the script to setup the environment. It's included in the script.
