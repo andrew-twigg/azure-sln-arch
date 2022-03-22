@@ -5,6 +5,10 @@
 - CI/CD support
 - autoscale
 
+## References
+
+- [Custom Deployment Script](https://github.com/projectkudu/kudu/wiki/Custom-Deployment-Script)
+- [Customising Deployments](https://github.com/projectkudu/kudu/wiki/Customizing-deployments)
 
 ## Bootstrap a web app
 
