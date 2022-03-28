@@ -41,3 +41,8 @@ An architectural style that structures an application as a collection of indepen
 | Designed for continuous delivery                        | Hard to troubleshoot issues across services |
 | Easier to adopt new, varied tech                        | Can't use transactions across services      |
 | Grants autonomy to teams and lets them work in parallel | Raises the required skillset for the team   |
+
+## Demo Description
+
+* API tier in dotnet 6
+* MongoDB backend
