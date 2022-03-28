@@ -46,3 +46,9 @@ An architectural style that structures an application as a collection of indepen
 
 * API tier in dotnet 6
 * MongoDB backend
+
+### Docker commands
+
+```sh
+docker run -d --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo
+```
