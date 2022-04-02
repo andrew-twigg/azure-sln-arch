@@ -1,5 +1,6 @@
 using Play.Common.MongoDB;
 using Play.Common.Settings;
+using Play.Inventory.Service.Clients;
 using Play.Inventory.Service.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,14 @@ ServiceSettings serviceSettings = builder.Configuration.GetSection(nameof(Servic
 
 builder.Services.AddMongo()
                 .AddMongoRepository<InventoryItem>("inventoryitems");
+
+builder.Services.AddHttpClient<CatalogClient>(client => client.BaseAddress = new Uri("https://localhost:7242"))
+    .ConfigurePrimaryHttpMessageHandler(() =>
+        new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
+        }
+    );
 
 var app = builder.Build();
 
