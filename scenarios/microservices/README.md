@@ -47,8 +47,17 @@ An architectural style that structures an application as a collection of indepen
 * API tier in dotnet 6
 * MongoDB backend
 
-### Docker commands
+### Packaging Common Libraries
 
 ```sh
-docker run -d --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo
+dotnet pack -p:PackageVersion=1.0.1 -o ../../../packages/
+```
+
+### Docker commands
+
+Start the dependencies:
+
+```sh
+cd Play.Infra
+docker-compose up -d
 ```
