@@ -1,3 +1,4 @@
+using Play.Common.MassTransit;
 using Play.Common.MongoDB;
 using Play.Common.Settings;
 using Play.Inventory.Service.Clients;
@@ -17,51 +18,11 @@ builder.Services.AddSwaggerGen();
 ServiceSettings serviceSettings = builder.Configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
 
 builder.Services.AddMongo()
-                .AddMongoRepository<InventoryItem>("inventoryitems");
+                .AddMongoRepository<InventoryItem>("inventoryitems")
+                .AddMongoRepository<CatalogItem>("catalogItems")
+                .AddMassTransitWithRabbitMq();
 
-Random jitterer = new();
-
-builder.Services.AddHttpClient<CatalogClient>(client => client.BaseAddress = new Uri("https://localhost:7242"))
-    .AddTransientHttpErrorPolicy(b => b.Or<TimeoutRejectedException>().WaitAndRetryAsync(
-        retryCount: 5,
-        // Backoff with randomness
-        retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)) + TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)),
-        // Don't do this in production code. It's here to monitor the retry behavior.
-        // Warning ASP0000: Calling 'BuildServiceProvider' from application code results in an additional copy
-        // of singleton services being created.
-        onRetry: (outcome, timespan, retryAttempt) =>
-        {
-            var servcieProvider = builder.Services.BuildServiceProvider();
-            servcieProvider.GetService<ILogger<CatalogClient>>()?
-                .LogWarning($"Delaying for {timespan.TotalSeconds} seconds, then making retry {retryAttempt}");
-        }
-    ))
-    .AddTransientHttpErrorPolicy(b => b.Or<TimeoutRejectedException>().CircuitBreakerAsync(
-        handledEventsAllowedBeforeBreaking: 3,
-        durationOfBreak: TimeSpan.FromSeconds(15),
-        onBreak: (outcome, timespan) =>
-        {
-            var servcieProvider = builder.Services.BuildServiceProvider();
-            servcieProvider.GetService<ILogger<CatalogClient>>()?
-                .LogWarning($"Opening the circuit for {timespan.TotalSeconds} seconds...");
-        },
-        onReset: () =>
-        {
-            var servcieProvider = builder.Services.BuildServiceProvider();
-            servcieProvider.GetService<ILogger<CatalogClient>>()?
-                .LogWarning("Closing the circuit.");
-
-        }
-    ))
-    .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(1))
-    // Ignore SSL validation errors.
-    // Don't do this in production.
-    .ConfigurePrimaryHttpMessageHandler(() =>
-        new HttpClientHandler
-        {
-            ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
-        }
-    );
+AddCatalogClient(builder.Services);
 
 var app = builder.Build();
 
@@ -79,3 +40,49 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+static void AddCatalogClient(IServiceCollection services)
+{
+    Random jitterer = new();
+
+    services.AddHttpClient<CatalogClient>(client => client.BaseAddress = new Uri("https://localhost:7242"))
+        .AddTransientHttpErrorPolicy(builder => builder.Or<TimeoutRejectedException>().WaitAndRetryAsync(
+            retryCount: 5,
+            // Backoff with randomness
+            retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)) + TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)),
+            // Don't do this in production code. It's here to monitor the retry behavior.
+            // Warning ASP0000: Calling 'BuildServiceProvider' from application code results in an additional copy
+            // of singleton services being created.
+            onRetry: (outcome, timespan, retryAttempt) =>
+            {
+                var serviceProvider = services.BuildServiceProvider();
+                serviceProvider.GetService<ILogger<CatalogClient>>()?
+                    .LogWarning($"Delaying for {timespan.TotalSeconds} seconds, then making retry {retryAttempt}");
+            }
+        ))
+        .AddTransientHttpErrorPolicy(builder => builder.Or<TimeoutRejectedException>().CircuitBreakerAsync(
+            handledEventsAllowedBeforeBreaking: 3,
+            durationOfBreak: TimeSpan.FromSeconds(15),
+            onBreak: (outcome, timespan) =>
+            {
+                var servcieProvider = services.BuildServiceProvider();
+                servcieProvider.GetService<ILogger<CatalogClient>>()?
+                    .LogWarning($"Opening the circuit for {timespan.TotalSeconds} seconds...");
+            },
+            onReset: () =>
+            {
+                var servcieProvider = services.BuildServiceProvider();
+                servcieProvider.GetService<ILogger<CatalogClient>>()?
+                    .LogWarning("Closing the circuit.");
+            }
+        ))
+        .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(1))
+        // Ignore SSL validation errors.
+        // Don't do this in production.
+        .ConfigurePrimaryHttpMessageHandler(() =>
+            new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
+            }
+        );
+}
