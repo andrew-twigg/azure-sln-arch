@@ -22,9 +22,9 @@ az cosmosdb create -g $rg -n $acc \
 
 az cosmosdb gremlin database create -g $rg -a $acc -n $db
 
-printf ' 
+printf '
 {
-    "indexingMode": "consistent", 
+    "indexingMode": "consistent",
     "includedPaths": [
         {"path": "/*"}
     ],
