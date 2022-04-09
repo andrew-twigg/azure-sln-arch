@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+   wordpress:
+     image: mcr.microsoft.com/azuredocs/multicontainerwordpress
+     ports:
+       - "8000:80"
+     restart: always
+
+   redis:
+     image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+     environment: 
+      - ALLOW_EMPTY_PASSWORD=yes
+     restart: always
