@@ -47,3 +47,27 @@ az webapp config appsettings set -g $rg \
         WORDPRESS_DB_NAME="wordpress" \
         MYSQL_SSL_CA="BaltimoreCyberTrustroot.crt.pem"
 ```
+
+Update the container to the Microsoft prepped mcr.microsoft.com/azuredocs/multicontainerwordpress one:
+
+> Note: Also had to remove the App Service config applied in the last step.
+
+```sh
+az webapp config container set -g $rg \
+    -n adt-as-$id \
+    --multicontainer-config-type compose \
+    --multicontainer-config-file docker-compose-wordpress.yml
+```
+
+Configure persistant storage:
+
+```sh
+az webapp config appsettings set -g $rg \
+    -n adt-as-$id \
+    --settings WORDPRESS_DB_NAME="wordpress" WEBSITES_ENABLE_APP_SERVICE_STORAGE=TRUE
+
+az webapp config container set -g $rg \
+    -n adt-as-$id \
+    --multicontainer-config-type compose \
+    --multicontainer-config-file docker-compose-wordpress.yml
+```
