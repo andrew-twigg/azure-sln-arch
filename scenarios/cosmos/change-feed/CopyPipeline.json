@@ -1,0 +1,34 @@
+{
+    "name": "ImportLabNutritionData",
+    "properties": {
+        "activities": [
+            {
+                "name": "ImportLabData",
+                "type": "Copy",
+                "inputs": [
+                    {
+                        "referenceName": "BlobDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "CosmosDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "typeProperties": {
+                    "source": {
+                        "type": "BlobSource"
+                    },
+                    "sink": {
+                        "type": "DocumentDbCollectionSink",
+                        "nestingSeparator": ".",
+                        "writeBehavior": "insert"
+                    }
+                }
+            }
+        ],
+        "parameters": {}
+    }
+}
