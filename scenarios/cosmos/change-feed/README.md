@@ -1,5 +1,7 @@
 # Cosmos DB Change Feed
 
+This is the scenario for [Cosmos DB change feed with Azure Functions](https://azurecosmosdb.github.io/labs/dotnet/labs/08-change_feed_with_azure_functions.html). The [Lab Setup](#setup-the-lab) section implements the [Lab Setup](https://azurecosmosdb.github.io/labs/dotnet/labs/00-account_setup.html) steps.
+
 ## References
 
 * [Change Feed Overview](https://docs.microsoft.com/en-us/azure/cosmos-db/change-feed)
@@ -7,7 +9,15 @@
 * [Change Feed Examples](https://docs.microsoft.com/en-us/azure/cosmos-db/sql/sql-api-dotnet-v3sdk-samples#change-feed-examples)
 * [Change Feed Labs, Azure Functions](https://azurecosmosdb.github.io/labs/dotnet/labs/08-change_feed_with_azure_functions.html)
 
-## Setup
+## Setup the lab
+
+This creates the components needed to show the scenario:
+
+* Cosmos DB Account
+* Data Factory
+* Event Hubs Namespace
+* Storage Account
+* Stream Analytics job
 
 Comes from the [lab setup](https://github.com/AzureCosmosDB/labs/blob/master/dotnet/setup/labSetup.ps1) script.
 
@@ -15,7 +25,7 @@ Comes from the [lab setup](https://github.com/AzureCosmosDB/labs/blob/master/dot
 
 ```sh
 id=$RANDOM
-loc=northeurope
+loc=eastus
 rg=adt-rg-$id
 
 az group create -g $rg -l $loc
@@ -85,8 +95,8 @@ wget https://raw.githubusercontent.com/AzureCosmosDB/labs/master/dotnet/setup/Nu
 
 # Had to do manually because of timeout
 az storage blob upload --account-name $sa \
-    --name nutritiondata/NutritionData.json \
-    --container-name data \
+    --name NutritionData.json \
+    --container-name nutritiondata \
     --file NutritionData.json \
     --auth-mode key
 
