@@ -2,6 +2,16 @@
 
 This is the scenario for [Cosmos DB change feed with Azure Functions](https://azurecosmosdb.github.io/labs/dotnet/labs/08-change_feed_with_azure_functions.html). The [Lab Setup](#setup-the-lab) section implements the [Lab Setup](https://azurecosmosdb.github.io/labs/dotnet/labs/00-account_setup.html) steps.
 
+* [References](#references)
+* [Setup the lab](#setup-the-lab)
+  * [Resource Group](#resource-group)
+  * [Cosmos DB](#cosmos-db)
+  * [Azure Storage](#azure-storage)
+  * [Event Hub](#event-hub)
+  * [Stream Processor](#stream-processor)
+  * [Azure Data Factory](#azure-data-factory)
+* [Exercise 1: Build .NET Console App to Generate Data](#exercise-1:-build-.net-console-app-to-generate-data)
+
 ## References
 
 * [Change Feed Overview](https://docs.microsoft.com/en-us/azure/cosmos-db/change-feed)
@@ -236,4 +246,23 @@ Create a pipeline run:
 az datafactory pipeline create-run -g $rg \
     --factory-name $adf \
     --pipeline-name $pipelineName
+```
+
+## Exercise 1: Build .NET Console App to Generate Data
+
+Comes from the [lab](https://github.com/AzureCosmosDB/labs/tree/master/dotnet/solutions/08-change_feed_with_azure_Functions/DataGenerator).
+
+Simulates data flowing into a store, in the form of actions on an e-commerce website. Adds docs to the Cosmos DB CartContainer.
+
+```sh
+dotnet new console -n DataGenerator
+cd DataGenerator
+
+dotnet add package Microsoft.Extensions.Configuration.UserSecrets
+dotnet add package Microsoft.Azure.Cosmos
+dotnet add package Bogus
+
+cs=$(az cosmosdb keys list --type connection-strings -g $rg -n $cdb --query "connectionStrings[?description=='Primary SQL Connection String'].connectionString" -o tsv)
+dotnet user-secrets init
+dotnet user-secrets set "ConnectionStrings:CosmosSqlApi" $cs
 ```
