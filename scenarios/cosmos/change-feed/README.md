@@ -6,6 +6,16 @@ The scenario creates a data generator to simulate documents creating in a databa
 
 There is also an example of how to [use Azure Cosmos DB Change Feed to Write Data to EventHub using Azure Functions](https://azurecosmosdb.github.io/labs/dotnet/labs/08-change_feed_with_azure_functions.html#use-azure-cosmos-db-change-feed-to-write-data-to-eventhub-using-azure-functions).
 
+* [References](#references)
+* [Setup the lab](#setup-the-lab)
+    * [Resource Group](#resource-group)
+    * [Cosmos DB](#cosmos-db)
+    * [Azure Storage](#azure-storage)
+    * [Event Hub](#event-hub)
+    * [Stream Processor](#stream-processor)
+    * [Azure Data Factory](#azure-data-factory)
+* [Exercise 1: Build .NET Console App to Generate Data](#exercise-1:-build-.net-console-app-to-generate-data)
+
 ## References
 
 * [Change Feed Overview](https://docs.microsoft.com/en-us/azure/cosmos-db/change-feed)
