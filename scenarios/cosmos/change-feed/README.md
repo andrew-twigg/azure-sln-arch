@@ -2,15 +2,9 @@
 
 This is the scenario for [Cosmos DB change feed with Azure Functions](https://azurecosmosdb.github.io/labs/dotnet/labs/08-change_feed_with_azure_functions.html). The [Lab Setup](#setup-the-lab) section implements the [Lab Setup](https://azurecosmosdb.github.io/labs/dotnet/labs/00-account_setup.html) steps.
 
-* [References](#references)
-* [Setup the lab](#setup-the-lab)
-  * [Resource Group](#resource-group)
-  * [Cosmos DB](#cosmos-db)
-  * [Azure Storage](#azure-storage)
-  * [Event Hub](#event-hub)
-  * [Stream Processor](#stream-processor)
-  * [Azure Data Factory](#azure-data-factory)
-* [Exercise 1: Build .NET Console App to Generate Data](#exercise-1:-build-.net-console-app-to-generate-data)
+The scenario creates a data generator to simulate documents creating in a database, and clients which use the Cosmos DB change feed to receive documents. The Console client uses the SDK to register for change and syncs to another collection. The Function client demonstrates the materialised view pattern.
+
+There is also an example of how to [use Azure Cosmos DB Change Feed to Write Data to EventHub using Azure Functions](https://azurecosmosdb.github.io/labs/dotnet/labs/08-change_feed_with_azure_functions.html#use-azure-cosmos-db-change-feed-to-write-data-to-eventhub-using-azure-functions).
 
 ## References
 
