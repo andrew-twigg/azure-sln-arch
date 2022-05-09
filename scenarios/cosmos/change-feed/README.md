@@ -22,6 +22,7 @@ There is also an example of how to [use Azure Cosmos DB Change Feed to Write Dat
 * [Change Feed Design Patterns](https://docs.microsoft.com/en-us/azure/cosmos-db/sql/change-feed-design-patterns)
 * [Change Feed Examples](https://docs.microsoft.com/en-us/azure/cosmos-db/sql/sql-api-dotnet-v3sdk-samples#change-feed-examples)
 * [Change Feed Labs, Azure Functions](https://azurecosmosdb.github.io/labs/dotnet/labs/08-change_feed_with_azure_functions.html)
+* [azure-cosmos-dotnet-v3 samples](https://github.com/Azure/azure-cosmos-dotnet-v3/tree/master/Microsoft.Azure.Cosmos.Samples/Usage/ChangeFeed)
 
 ## Setup the lab
 
