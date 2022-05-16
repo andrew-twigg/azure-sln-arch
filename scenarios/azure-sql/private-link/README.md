@@ -26,10 +26,10 @@ sql2=adt-sql-$id2
 az group create -g $rg1 -l $loc1
 az group create -g $rg2 -l $loc2
 
-az sql server create -l $loc1 -g $rg1 -n $sql1 -u sql-admin -p 'Pas5w0rd1234'
+az sql server create -l $loc1 -g $rg1 -n $sql1 -u sql-admin -p '<something>'
 az sql db create -g $rg1 -s $sql1 -n adt-db-$id1 --sample-name 'AdventureWorksLT'
 
-az sql server create -l $loc2 -g $rg2 -n $sql2 -u sql-admin -p 'Pas5w0rd1234'
+az sql server create -l $loc2 -g $rg2 -n $sql2 -u sql-admin -p '<something>'
 az sql db replica create -g $rg1 \
     -s $sql1 \
     -n adt-db-$id1 \
