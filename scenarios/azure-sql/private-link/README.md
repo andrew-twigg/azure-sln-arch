@@ -8,6 +8,8 @@ This example scenario discusses a highly available solution for a web app with p
 * [Bicep and ARM templates Microsoft.Sql servers](https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers?tabs=bicep)
 * [Azure quickstart templates web app consuming an Azure SQL private endpoint](https://github.com/Azure/azure-quickstart-templates/tree/master/demos/private-endpoint-sql-from-appservice)
 * [Azure SQL active geo-replication and failover](https://docs.microsoft.com/en-us/azure/azure-sql/database/active-geo-replication-configure-portal?view=azuresql&tabs=azure-cli)
+* [Web app private link with Azure SQL DB and storage](https://azure.microsoft.com/en-gb/resources/templates/web-app-regional-vnet-private-endpoint-sql-storage/)
+* [Web app private connectivity to Azure SQL Database](https://docs.microsoft.com/en-us/azure/architecture/example-scenario/private-web-app/private-web-app#deploy-this-scenario)
 
 ## CLI Setup
 

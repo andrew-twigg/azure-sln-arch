@@ -8,8 +8,18 @@ param isSecondary bool = false
 
 param sourceDatabaseId string = ''
 
+module vnets 'modules/create-networking/main.bicep' = {
+  name: 'vnet-deploy'
+  params: {
+    namePrefix: 'adt'
+    deploymentId: deploymentId
+    location: location
+    isSecondary: isSecondary
+  }
+}
+
 module sqlAzure 'modules/create-azure-sql/main.bicep' = {
-  name: 'azure-sql-deploy-primary'
+  name: 'azure-sql-deploy'
   params: {
     sqlNamePrefix: 'adt'
     deploymentId: deploymentId
