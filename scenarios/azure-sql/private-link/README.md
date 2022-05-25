@@ -59,6 +59,6 @@ loc2=eastus
 az group create -g $rg1 -l $loc1
 az group create -g $rg2 -l $loc2
 
-az deployment group create -g $rg1 -f azure-sql-private-link.bicep -p deploymentId=$id1
-az deployment group create -g $rg2 -f azure-sql-private-link.bicep -p deploymentId=$id2 isSecondary=true primaryDeploymentResourceGroup=$rg1 primaryDeploymentId=$id1
+az deployment group create -g $rg1 -f azure-sql-private-link.bicep -p primaryDeploymentId=$id1 sqlAdminPassword=<something>
+az deployment group create -g $rg2 -f azure-sql-private-link.bicep -p primaryDeploymentId=$id1 sqlAdminPassword=<something> isSecondary=true secondaryDeploymentId=$id2 primaryDeploymentResourceGroup=$rg1
 ```
