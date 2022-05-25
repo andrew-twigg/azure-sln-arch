@@ -10,12 +10,15 @@ param location string = resourceGroup().location
 
 param adminPassword string
 
-param isReplica bool = false
+param isSecondary bool = false
 
-param sourceDatabaseId string = ''
+param primaryDeploymentResourceGroup string = ''
+param primaryDeploymentId string = ''
 
 var sqlServerName = '${sqlNamePrefix}-sql-${deploymentId}'
 var sqlDatabaseName = '${sqlNamePrefix}-db-awlt'
+
+var primarySqlServerName = '${sqlNamePrefix}-sql-${primaryDeploymentId}'
 
 resource sqlServer 'Microsoft.Sql/servers@2021-11-01-preview' = {
   name: sqlServerName
@@ -31,6 +34,16 @@ resource sqlServer 'Microsoft.Sql/servers@2021-11-01-preview' = {
   }
 }
 
+// If deploying secondary region (SQL replica) then get the primary source SQL database.
+resource sourceSqlServer 'Microsoft.Sql/servers@2021-11-01-preview' existing = if (isSecondary) {
+  name: primarySqlServerName
+  scope: resourceGroup(primaryDeploymentResourceGroup)
+}
+resource sourceDatabase 'Microsoft.Sql/servers/databases@2021-11-01-preview' existing = if (isSecondary) {
+  name: sqlDatabaseName
+  parent: sourceSqlServer
+}
+
 resource sqlDatabase 'Microsoft.Sql/servers/databases@2021-11-01-preview' = {
   name: sqlDatabaseName
   location: location
@@ -40,14 +53,15 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2021-11-01-preview' = {
     tier: 'Basic'
     capacity: 5
   }
-  properties: {
+  properties: isSecondary ? {
+    collation: 'SQL_Latin1_General_CP1_CI_AS'
+    maxSizeBytes: 104857600 
+    createMode: 'Secondary'
+    sourceDatabaseId: sourceDatabase.id
+    secondaryType: 'Geo'
+  } : {
     collation: 'SQL_Latin1_General_CP1_CI_AS'
     maxSizeBytes: 104857600
-    sampleName: !isReplica ? 'AdventureWorksLT': null
-    createMode: isReplica ? 'Secondary': 'Default'
-    sourceDatabaseId: isReplica ? sourceDatabaseId : null
-    secondaryType: isReplica ? 'Geo' : null
+    sampleName: 'AdventureWorksLT'
   }
 }
-
-output sqlDatabaseId string = sqlDatabase.id

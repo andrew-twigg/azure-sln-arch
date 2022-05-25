@@ -59,6 +59,6 @@ loc2=eastus
 az group create -g $rg1 -l $loc1
 az group create -g $rg2 -l $loc2
 
-sourceDatabaseId=$(az deployment group create -g $rg1 -f azure-sql-private-link.bicep -p deploymentId=$id1 --query "properties.outputs.sqlDatabaseId.value" -o tsv)
-az deployment group create -g $rg2 -f azure-sql-private-link.bicep -p deploymentId=$id2 isSecondary=true sourceDatabaseId=$sourceDatabaseId
+az deployment group create -g $rg1 -f azure-sql-private-link.bicep -p deploymentId=$id1
+az deployment group create -g $rg2 -f azure-sql-private-link.bicep -p deploymentId=$id2 isSecondary=true primaryDeploymentResourceGroup=$rg1 primaryDeploymentId=$id1
 ```

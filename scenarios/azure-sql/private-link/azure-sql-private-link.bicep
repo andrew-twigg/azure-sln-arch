@@ -7,7 +7,11 @@ param deploymentId string
 @description('Indicates if the deployment is for a secondary region.')
 param isSecondary bool = false
 
-param sourceDatabaseId string = ''
+@description('The resource group name of the primary deployment. This is for referencing resources when deploying the secondary.')
+param primaryDeploymentResourceGroup string = ''
+
+@description('The deployment identifier of the primary deployment. This is for referencing resources when deploying secondary.')
+param primaryDeploymentId string = ''
 
 @description('An environment name prefix for all resources.')
 param namePrefix string = 'adt'
@@ -102,9 +106,8 @@ module sqlAzure 'modules/create-azure-sql/main.bicep' = {
     deploymentId: deploymentId
     adminPassword: 'PAs5w0rd1234'
     location: location
-    isReplica: isSecondary
-    sourceDatabaseId: sourceDatabaseId
+    isSecondary: isSecondary
+    primaryDeploymentResourceGroup: primaryDeploymentResourceGroup
+    primaryDeploymentId: primaryDeploymentId
   }
 }
-
-output sqlDatabaseId string = sqlAzure.outputs.sqlDatabaseId
