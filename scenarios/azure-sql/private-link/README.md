@@ -46,8 +46,9 @@ az sql db replica create -g $rg1 \
 ## Bicep Setup
 
 ```sh
-id1=$RANDOM
-id2=$RANDOM
+id=$RANDOM
+id1=$id-wus
+id2=$id-eus
 
 rg1=adt-rg-$id1
 rg2=adt-rg-$id2
