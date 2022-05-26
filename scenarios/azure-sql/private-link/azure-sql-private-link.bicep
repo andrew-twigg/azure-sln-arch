@@ -199,15 +199,30 @@ module vnetPeeringsGlobalSecondary 'modules/vnet-peering-global.bicep' = [for vn
 
 // Regional Azure SQL configuration.
 
-module sqlAzure 'modules/azure-sql.bicep' = {
+module sql 'modules/azure-sql.bicep' = {
   name: 'azure-sql-deploy'
   params: {
-    sqlNamePrefix: 'adt'
-    deploymentId: deploymentId
-    adminPassword: sqlAdminPassword
     location: location
+    sqlAdministratorLoginPassword: sqlAdminPassword
+    sqlServerName: '${namePrefix}-sql-${deploymentId}'
+    sqlDatabaseName: '${namePrefix}-db-awlt'
     isSecondary: isSecondary
     primaryDeploymentResourceGroup: primaryDeploymentResourceGroup
-    primaryDeploymentId: primaryDeploymentId
+    primarySqlServerName: '${namePrefix}-sql-${primaryDeploymentId}'
+  }
+}
+
+//output mySubnetID array = vnets[1].outputs.subnets  
+
+module sqlPrivateLink 'modules/private-link.bicep' = {
+  name: 'azure-sql-private-link-deploy'
+  params: {
+    location: location
+    namePrefix: namePrefix
+    nameSuffix: '${deploymentId}-sql'
+    resourceType: 'Microsoft.Sql/servers'
+    resourceName: sql.outputs.sqlServerName
+    groupType: 'sqlServer'
+    subnet: vnets[1].outputs.subnets[0].id 
   }
 }

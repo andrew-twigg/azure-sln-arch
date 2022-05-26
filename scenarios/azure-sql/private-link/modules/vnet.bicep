@@ -3,7 +3,7 @@ param location string = resourceGroup().location
 @description('The settings defining the VNet.')
 param vnetSettings object
 
-resource vnets 'Microsoft.Network/virtualNetworks@2021-08-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2021-08-01' = {
   name: vnetSettings.name
   location: location
   properties: {
@@ -23,3 +23,5 @@ resource vnets 'Microsoft.Network/virtualNetworks@2021-08-01' = {
     }]
   }
 }
+
+output subnets array = vnet.properties.subnets
