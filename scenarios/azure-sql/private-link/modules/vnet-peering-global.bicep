@@ -1,18 +1,24 @@
-param sourceVnetName string
+@description('The settings defining the VNet.')
+param vnetSettings object
 
-param targetVnetName string
+resource vnet 'Microsoft.Network/virtualNetworks@2021-08-01' existing = {
+  name: vnetSettings.name
+}
 
-param targetVnetId string
+resource peerToVnets 'Microsoft.Network/virtualNetworks@2021-08-01' existing = [for peering in vnetSettings.globalPeerings : {
+  name: peering.peerTo
+  scope: resourceGroup(peering.resourceGroup)
+}]
 
-resource globalPeering 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2021-08-01' = {
-  name: '${sourceVnetName}/global-peering-to-${targetVnetName}'
+resource peerings 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2021-08-01' = [for (peering, i) in vnetSettings.globalPeerings: {
+  name: '${vnet.name}/global-peering-to-${peerToVnets[i].name}'
   properties: {
     allowVirtualNetworkAccess: true
     allowForwardedTraffic: true
     allowGatewayTransit: false
     useRemoteGateways: false
     remoteVirtualNetwork: {
-      id: targetVnetId
+      id: peerToVnets[i].id
     }
   }
-}
+}]

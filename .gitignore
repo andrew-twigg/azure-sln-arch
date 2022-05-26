@@ -1,3 +1,5 @@
 .DS_Store
 .vscode/
 azure-pipelines-canary-k8s/
+
+*.md.swp
