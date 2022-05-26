@@ -1,8 +1,11 @@
+@description('Specifies the location for the resources.')
 param location string = resourceGroup().location
 
+@description('An environment name prefix for all resources.')
 param namePrefix string
+
+@description('An environment name suffix for all resources.')
 param nameSuffix string
-//param deploymentId string
 
 @description('Private link resource type')
 param resourceType string
