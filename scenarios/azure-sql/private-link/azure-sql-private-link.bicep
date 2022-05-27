@@ -212,8 +212,6 @@ module sql 'modules/azure-sql.bicep' = {
   }
 }
 
-//output mySubnetID array = vnets[1].outputs.subnets  
-
 module sqlPrivateLink 'modules/private-link.bicep' = {
   name: 'azure-sql-private-link-deploy'
   params: {
@@ -223,6 +221,29 @@ module sqlPrivateLink 'modules/private-link.bicep' = {
     resourceType: 'Microsoft.Sql/servers'
     resourceName: sql.outputs.sqlServerName
     groupType: 'sqlServer'
+
+    // Hub VNet, Private Link subnet
+    // Don't like this indexing, but wanting to use the output to avoid 'dependsOn'
     subnet: vnets[1].outputs.subnets[0].id 
   }
 }
+
+var privateDnsZoneName = 'privatelink${environment().suffixes.sqlServerHostname}'
+
+// Create the private DNS zone in the primary only.
+// The secondary VNets will link to this global resource.
+resource privateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = if (!isSecondary) {
+  name: privateDnsZoneName
+  location: 'global'
+}
+
+// Link virtual networks of the resource group we're deploying to the Private DNS Zone in the primary.
+module privateDnsZoneLinks 'modules/private-dns-link.bicep' = [for (vnetSettings, i) in environmentVnetConfig: {
+  name: 'private-dns-link-deploy-${vnetSettings.Name}'
+  scope: resourceGroup(primaryDeploymentResourceGroup)
+  params: {
+    privateDnsZoneName: privateDnsZone.name
+    virtualNetworkName: vnets[i].outputs.vnetName
+    virtualNetworkResourceGroup: resourceGroup().name
+  }
+}]
