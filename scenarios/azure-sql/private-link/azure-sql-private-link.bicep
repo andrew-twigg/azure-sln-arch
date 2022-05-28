@@ -25,6 +25,8 @@ var deploymentId = isSecondary ? secondaryDeploymentId: primaryDeploymentId
 // This is only needed when deploying the secondary region.
 var secondaryDeploymentResourceGroup = isSecondary ? resourceGroup().name: ''
 
+// Networking Configuration Set
+// https://docs.microsoft.com/bs-latn-ba/azure/azure-resource-manager/bicep/patterns-configuration-set
 var vnetConfigurationSet = {
   Primary: [
     {
