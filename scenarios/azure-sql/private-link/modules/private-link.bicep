@@ -42,3 +42,5 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-08-01' = {
     }
   }
 }
+
+output privateLinkNic string = privateEndpoint.properties.networkInterfaces[0].id

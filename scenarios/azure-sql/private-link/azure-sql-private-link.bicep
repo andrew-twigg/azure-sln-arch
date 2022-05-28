@@ -249,3 +249,13 @@ module privateDnsZoneLinks 'modules/private-dns-link.bicep' = [for (vnetSettings
     virtualNetworkResourceGroup: resourceGroup().name
   }
 }]
+
+// What's up with this?
+module sqlPrivateLinkIpConfigs 'modules/private-link-ipconfigs.bicep' = {
+  name: 'azure-sql-private-link-ip-configs-deploy'
+  scope: resourceGroup(primaryDeploymentResourceGroup)
+  params: {
+    privateDnsZoneName: privateDnsZone.name
+    privateLinkNic: sqlPrivateLink.outputs.privateLinkNic
+  }
+}
