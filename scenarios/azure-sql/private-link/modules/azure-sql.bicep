@@ -72,4 +72,6 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2021-11-01-preview' = {
   }
 }
 
+output sqlDatabaseId string = sqlDatabase.id
+output sqlServerId string = sqlServer.id
 output sqlServerName string = sqlServerName

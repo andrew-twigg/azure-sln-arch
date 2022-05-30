@@ -1,6 +1,12 @@
 # Multi-region web app with private connectivity to database
 
-This example scenario discusses a highly available solution for a web app with private connectivity to a SQL database.
+This example shows a secure and highly available deployment if Azure SQL.
+
+* Multi-region Azure SQL Failover Group
+* Hub and spoke virtual networks with the Azure SQL instances exposed in each region via Private Endpoints in the hub networks
+* Azure App Service VNet integrated into each regions spoke network
+* Azure SQL read/write primary and readonly secondary with auto-failover of the DNS CNAME to save needing to update connection strings.
+* Configuration of the Private DNS, adding the SQL Private endpoint records, and adding the VNet links to all VNets across regions.
 
 ## References
 
@@ -15,11 +21,12 @@ This example scenario discusses a highly available solution for a web app with p
 
 ```sh
 id=$RANDOM
-id1=$id-wus
-id2=$id-eus
 
-rg1=adt-rg-$id1
-rg2=adt-rg-$id2
+env1=wus
+env2=eus
+
+rg1=adt-rg-$id-$env1
+rg2=adt-rg-$id-$env2
 
 loc1=westus
 loc2=eastus
@@ -28,12 +35,15 @@ az group create -g $rg1 -l $loc1
 az group create -g $rg2 -l $loc2
 
 az deployment group create -g $rg1 -f azure-sql-private-link.bicep \
-    -p  primaryDeploymentId=$id1 \
+    -p  deploymentId=$id \
+        envNamePrimary=$env1 \
+        envNameSecondary=$env2 \
         sqlAdminPassword=<something>
 az deployment group create -g $rg2 -f azure-sql-private-link.bicep \
-    -p  primaryDeploymentId=$id1 \
-        sqlAdminPassword=<something> \
-        isSecondary=true \
-        secondaryDeploymentId=$id2 \
-        primaryDeploymentResourceGroup=$rg1
+    -p  isSecondary=true \
+        primaryDeploymentResourceGroup=$rg1 \
+        deploymentId=$id \
+        envNamePrimary=$env1 \
+        envNameSecondary=$env2 \
+        sqlAdminPassword=<something>
 ```

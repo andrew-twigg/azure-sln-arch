@@ -7,11 +7,16 @@ param isSecondary bool = false
 @description('The resource group name of the primary deployment. This is for referencing resources when deploying the secondary.')
 param primaryDeploymentResourceGroup string = ''
 
-@description('The deployment identifier of the primary deployment.')
-param primaryDeploymentId string = ''
+param deploymentId string
 
-@description('The deployment identifier of the deployment deployment.')
-param secondaryDeploymentId string = ''
+param envNamePrimary string
+param envNameSecondary string
+
+//@description('The deployment identifier of the primary deployment.')
+//param primaryDeploymentId string = ''
+
+//@description('The deployment identifier of the deployment deployment.')
+//param secondaryDeploymentId string = ''
 
 @description('An environment name prefix for all resources.')
 param namePrefix string = 'adt'
@@ -20,7 +25,13 @@ param namePrefix string = 'adt'
 @secure()
 param sqlAdminPassword string
 
-var deploymentId = isSecondary ? secondaryDeploymentId: primaryDeploymentId
+//var deploymentId = isSecondary ? secondaryDeploymentId: primaryDeploymentId
+
+
+var primaryNameSuffix = '${deploymentId}-${envNamePrimary}'
+var secondaryNameSuffix = '${deploymentId}-${envNameSecondary}'
+
+var nameSuffix = isSecondary ? secondaryNameSuffix : primaryNameSuffix
 
 // This is only needed when deploying the secondary region.
 var secondaryDeploymentResourceGroup = isSecondary ? resourceGroup().name: ''
@@ -30,7 +41,7 @@ var secondaryDeploymentResourceGroup = isSecondary ? resourceGroup().name: ''
 var vnetConfigurationSet = {
   Primary: [
     {
-      name: '${namePrefix}-vnet-spoke-${primaryDeploymentId}'
+      name: '${namePrefix}-vnet-spoke-${primaryNameSuffix}'
       addressPrefix: '10.1.2.0/24'
       subnets: [
         {
@@ -50,18 +61,18 @@ var vnetConfigurationSet = {
       ]
       peerings: [
         {
-          peerTo: '${namePrefix}-vnet-hub-${primaryDeploymentId}'
+          peerTo: '${namePrefix}-vnet-hub-${primaryNameSuffix}'
         }
       ]
       globalPeerings: [
         {
-          peerTo: '${namePrefix}-vnet-hub-${secondaryDeploymentId}'
+          peerTo: '${namePrefix}-vnet-hub-${secondaryNameSuffix}'
           resourceGroup: secondaryDeploymentResourceGroup
         }
       ]
     }
     {
-      name: '${namePrefix}-vnet-hub-${primaryDeploymentId}'
+      name: '${namePrefix}-vnet-hub-${primaryNameSuffix}'
       addressPrefix: '10.1.1.0/24'
       subnets: [ 
         {
@@ -74,12 +85,12 @@ var vnetConfigurationSet = {
       ]
       peerings: [
         {
-          peerTo: '${namePrefix}-vnet-spoke-${primaryDeploymentId}'
+          peerTo: '${namePrefix}-vnet-spoke-${primaryNameSuffix}'
         }
       ]
       globalPeerings: [
         {
-          peerTo: '${namePrefix}-vnet-spoke-${secondaryDeploymentId}'
+          peerTo: '${namePrefix}-vnet-spoke-${secondaryNameSuffix}'
           resourceGroup: secondaryDeploymentResourceGroup
         }
       ]
@@ -87,7 +98,7 @@ var vnetConfigurationSet = {
   ]
   Secondary: [
     {
-      name: '${namePrefix}-vnet-spoke-${secondaryDeploymentId}'
+      name: '${namePrefix}-vnet-spoke-${secondaryNameSuffix}'
       addressPrefix: '10.2.2.0/24'
       subnets: [
         {
@@ -109,18 +120,18 @@ var vnetConfigurationSet = {
       ]
       peerings: [
         {
-          peerTo: '${namePrefix}-vnet-hub-${secondaryDeploymentId}'
+          peerTo: '${namePrefix}-vnet-hub-${secondaryNameSuffix}'
         }
       ]
       globalPeerings: [
         {
-          peerTo: '${namePrefix}-vnet-hub-${primaryDeploymentId}'
+          peerTo: '${namePrefix}-vnet-hub-${primaryNameSuffix}'
           resourceGroup: primaryDeploymentResourceGroup
         }
       ]
     }
     {
-      name: '${namePrefix}-vnet-hub-${secondaryDeploymentId}'
+      name: '${namePrefix}-vnet-hub-${secondaryNameSuffix}'
       addressPrefix: '10.2.1.0/24'
       subnets: [ 
         {
@@ -135,12 +146,12 @@ var vnetConfigurationSet = {
       ]
       peerings: [
         {
-          peerTo: '${namePrefix}-vnet-spoke-${secondaryDeploymentId}'
+          peerTo: '${namePrefix}-vnet-spoke-${secondaryNameSuffix}'
         }
       ]
       globalPeerings: [
         {
-          peerTo: '${namePrefix}-vnet-spoke-${primaryDeploymentId}'
+          peerTo: '${namePrefix}-vnet-spoke-${primaryNameSuffix}'
           resourceGroup: primaryDeploymentResourceGroup
         }
       ]
@@ -206,11 +217,11 @@ module sql 'modules/azure-sql.bicep' = {
   params: {
     location: location
     sqlAdministratorLoginPassword: sqlAdminPassword
-    sqlServerName: '${namePrefix}-sql-${deploymentId}'
+    sqlServerName: '${namePrefix}-sql-${nameSuffix}'
     sqlDatabaseName: '${namePrefix}-db-awlt'
     isSecondary: isSecondary
     primaryDeploymentResourceGroup: primaryDeploymentResourceGroup
-    primarySqlServerName: '${namePrefix}-sql-${primaryDeploymentId}'
+    primarySqlServerName: '${namePrefix}-sql-${primaryNameSuffix}'
   }
 }
 
@@ -219,7 +230,7 @@ module sqlPrivateLink 'modules/private-link.bicep' = {
   params: {
     location: location
     namePrefix: namePrefix
-    nameSuffix: '${deploymentId}-sql'
+    nameSuffix: '${nameSuffix}-sql'
     resourceType: 'Microsoft.Sql/servers'
     resourceName: sql.outputs.sqlServerName
     groupType: 'sqlServer'
@@ -251,8 +262,6 @@ module privateDnsZoneLinks 'modules/private-dns-link.bicep' = [for (vnetSettings
 }]
 
 // Create the DNS records for the SQL private link.
-// TODO: Why do we need this? There are already DNS records provided by the Private endpoint, ex. adt-sql-19020-eus.database.windows.net.
-//       Is it because the DNS records of the Private endpoint don't bridge the peerings?
 module sqlPrivateLinkIpConfigs 'modules/private-link-ipconfigs.bicep' = {
   name: 'azure-sql-private-link-ip-configs-deploy'
   scope: resourceGroup(primaryDeploymentResourceGroup)
@@ -262,12 +271,23 @@ module sqlPrivateLinkIpConfigs 'modules/private-link-ipconfigs.bicep' = {
   }
 }
 
+module sqlFailoverGroup 'modules/azure-sql-failover.bicep' = if (isSecondary) {
+  name: 'azure-sql-failover-group'
+  scope: resourceGroup(primaryDeploymentResourceGroup)
+  params: {
+    azureSqlFailoverGroupName: '${namePrefix}-sql-${deploymentId}'
+    azureSqlServerPrimaryName: '${namePrefix}-sql-${primaryNameSuffix}'
+    azureSqlServerSecondaryId: sql.outputs.sqlServerId
+    databaseName: '${namePrefix}-db-awlt'
+  }
+}
+
 module appServicePlan 'modules/app-service-plan.bicep' = {
   name: 'app-service-plan-deploy'
   params: {
     location: location
     namePrefix: namePrefix
-    nameSuffix: deploymentId
+    nameSuffix: nameSuffix
   }
 }
 
@@ -275,7 +295,7 @@ module appService 'modules/app.bicep' = {
   name: 'app-service-deploy'
   params: {
     location: location
-    appName: '${namePrefix}-app-${deploymentId}-myapp'
+    appName: '${namePrefix}-app-${nameSuffix}-myapp'
     serverFarm: appServicePlan.outputs.serverFarmId
 
     // Spoke VNet
