@@ -250,12 +250,35 @@ module privateDnsZoneLinks 'modules/private-dns-link.bicep' = [for (vnetSettings
   }
 }]
 
-// What's up with this?
+// Create the DNS records for the SQL private link.
+// TODO: Why do we need this? There are already DNS records provided by the Private endpoint, ex. adt-sql-19020-eus.database.windows.net.
+//       Is it because the DNS records of the Private endpoint don't bridge the peerings?
 module sqlPrivateLinkIpConfigs 'modules/private-link-ipconfigs.bicep' = {
   name: 'azure-sql-private-link-ip-configs-deploy'
   scope: resourceGroup(primaryDeploymentResourceGroup)
   params: {
     privateDnsZoneName: privateDnsZone.name
     privateLinkNic: sqlPrivateLink.outputs.privateLinkNic
+  }
+}
+
+module appServicePlan 'modules/app-service-plan.bicep' = {
+  name: 'app-service-plan-deploy'
+  params: {
+    location: location
+    namePrefix: namePrefix
+    nameSuffix: deploymentId
+  }
+}
+
+module appService 'modules/app.bicep' = {
+  name: 'app-service-deploy'
+  params: {
+    location: location
+    appName: '${namePrefix}-app-${deploymentId}-myapp'
+    serverFarm: appServicePlan.outputs.serverFarmId
+
+    // Spoke VNet
+    subnet: vnets[0].outputs.subnets[0].id
   }
 }
