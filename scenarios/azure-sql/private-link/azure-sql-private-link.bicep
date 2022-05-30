@@ -12,21 +12,12 @@ param deploymentId string
 param envNamePrimary string
 param envNameSecondary string
 
-//@description('The deployment identifier of the primary deployment.')
-//param primaryDeploymentId string = ''
-
-//@description('The deployment identifier of the deployment deployment.')
-//param secondaryDeploymentId string = ''
-
 @description('An environment name prefix for all resources.')
 param namePrefix string = 'adt'
 
 @description('The admin password used for Azure SQL.')
 @secure()
 param sqlAdminPassword string
-
-//var deploymentId = isSecondary ? secondaryDeploymentId: primaryDeploymentId
-
 
 var primaryNameSuffix = '${deploymentId}-${envNamePrimary}'
 var secondaryNameSuffix = '${deploymentId}-${envNameSecondary}'
