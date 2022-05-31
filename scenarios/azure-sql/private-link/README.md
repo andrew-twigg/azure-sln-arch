@@ -8,6 +8,8 @@ This example shows a secure and highly available deployment if Azure SQL.
 * Azure SQL read/write primary and readonly secondary with auto-failover of the DNS CNAME to save needing to update connection strings.
 * Configuration of the Private DNS, adding the SQL Private endpoint records, and adding the VNet links to all VNets across regions.
 
+![Azure SQL Private Link](.assets/azure-sql-private-link.png)
+
 ## References
 
 * [Multi-region web app with private connectivity to database](https://docs.microsoft.com/en-us/azure/architecture/example-scenario/sql-failover/app-service-private-sql-multi-region)
