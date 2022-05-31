@@ -19,7 +19,10 @@ param namePrefix string = 'adt'
 @secure()
 param sqlAdminPassword string
 
+@description('Name suffix of the primary environment.')
 var primaryNameSuffix = '${deploymentId}-${envNamePrimary}'
+
+@description('Name suffix of the secondary environment.')
 var secondaryNameSuffix = '${deploymentId}-${envNameSecondary}'
 
 var nameSuffix = isSecondary ? secondaryNameSuffix : primaryNameSuffix
