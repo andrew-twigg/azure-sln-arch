@@ -8,6 +8,10 @@ This example shows a secure and highly available deployment if Azure SQL.
 * Azure SQL read/write primary and readonly secondary with auto-failover of the DNS CNAME to save needing to update connection strings.
 * Configuration of the Private DNS, adding the SQL Private endpoint records, and adding the VNet links to all VNets across regions.
 
+> Note: [Private Endpoint Limitations](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview#limitations)
+>
+> NSGs on the Private endpoint subnet or the NIC do not apply to a private endpoint. There is a [public preview](https://azure.microsoft.com/en-us/updates/public-preview-of-private-link-network-security-group-support/) of Private Link NSG support.
+
 ![Azure SQL Private Link](.assets/azure-sql-private-link.png)
 
 ## References
@@ -18,6 +22,7 @@ This example shows a secure and highly available deployment if Azure SQL.
 * [Azure SQL active geo-replication and failover](https://docs.microsoft.com/en-us/azure/azure-sql/database/active-geo-replication-configure-portal?view=azuresql&tabs=azure-cli)
 * [Web app private link with Azure SQL DB and storage](https://azure.microsoft.com/en-gb/resources/templates/web-app-regional-vnet-private-endpoint-sql-storage/)
 * [Web app private connectivity to Azure SQL Database](https://docs.microsoft.com/en-us/azure/architecture/example-scenario/private-web-app/private-web-app#deploy-this-scenario)
+* [Private endpoint limitations](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview#limitations)
 
 ## Bicep Setup
 
@@ -48,4 +53,46 @@ az deployment group create -g $rg2 -f azure-sql-private-link.bicep \
         envNamePrimary=$env1 \
         envNameSecondary=$env2 \
         sqlAdminPassword=<something>
+```
+
+## Testing Connectivity
+
+From one of the App Service consoles...
+
+```sh
+C:\home\site\wwwroot>nameresolver adt-sql-5419.database.windows.net
+Server: 168.63.129.16
+
+Non-authoritative answer:
+Name: adt-sql-5419-wus.privatelink.database.windows.net
+Addresses:
+	10.1.1.4
+Aliases:
+	adt-sql-5419-wus.database.windows.net
+	adt-sql-5419-wus.privatelink.database.windows.net
+
+C:\home\site\wwwroot>tcpping adt-sql-5419.database.windows.net:1433
+Connected to adt-sql-5419.database.windows.net:1433, time taken: 121ms
+Connected to adt-sql-5419.database.windows.net:1433, time taken: 201ms
+Connected to adt-sql-5419.database.windows.net:1433, time taken: <1ms
+Connected to adt-sql-5419.database.windows.net:1433, time taken: <1ms
+Complete: 4/4 successful attempts (100%). Average success time: 80.5ms
+
+C:\home\site\wwwroot>nameresolver adt-sql-5419.secondary.database.windows.net
+Server: 168.63.129.16
+
+Non-authoritative answer:
+Name: adt-sql-5419-eus.privatelink.database.windows.net
+Addresses:
+	10.2.1.4
+Aliases:
+	adt-sql-5419-eus.database.windows.net
+	adt-sql-5419-eus.privatelink.database.windows.net
+
+C:\home\site\wwwroot>tcpping adt-sql-5419.secondary.database.windows.net:1433
+Connected to adt-sql-5419.secondary.database.windows.net:1433, time taken: 170ms
+Connected to adt-sql-5419.secondary.database.windows.net:1433, time taken: 63ms
+Connected to adt-sql-5419.secondary.database.windows.net:1433, time taken: 62ms
+Connected to adt-sql-5419.secondary.database.windows.net:1433, time taken: 63ms
+Complete: 4/4 successful attempts (100%). Average success time: 89.5ms
 ```
