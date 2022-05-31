@@ -7,9 +7,13 @@ param isSecondary bool = false
 @description('The resource group name of the primary deployment. This is for referencing resources when deploying the secondary.')
 param primaryDeploymentResourceGroup string = ''
 
+@description('Deployment id to make this deployment unique. Same across all regions.')
 param deploymentId string
 
+@description('Environment name for primary environment.')
 param envNamePrimary string
+
+@description('Environment name for secondary environment.')
 param envNameSecondary string
 
 @description('An environment name prefix for all resources.')
@@ -19,10 +23,7 @@ param namePrefix string = 'adt'
 @secure()
 param sqlAdminPassword string
 
-@description('Name suffix of the primary environment.')
 var primaryNameSuffix = '${deploymentId}-${envNamePrimary}'
-
-@description('Name suffix of the secondary environment.')
 var secondaryNameSuffix = '${deploymentId}-${envNameSecondary}'
 
 var nameSuffix = isSecondary ? secondaryNameSuffix : primaryNameSuffix
