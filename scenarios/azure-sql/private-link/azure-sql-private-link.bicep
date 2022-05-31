@@ -29,7 +29,7 @@ var secondaryNameSuffix = '${deploymentId}-${envNameSecondary}'
 var nameSuffix = isSecondary ? secondaryNameSuffix : primaryNameSuffix
 
 // This is only needed when deploying the secondary region.
-var secondaryDeploymentResourceGroup = isSecondary ? resourceGroup().name: ''
+var secondaryDeploymentResourceGroup = isSecondary ? resourceGroup().name : ''
 
 // Networking Configuration Set
 // https://docs.microsoft.com/bs-latn-ba/azure/azure-resource-manager/bicep/patterns-configuration-set
@@ -40,10 +40,12 @@ var vnetConfigurationSet = {
       addressPrefix: '10.1.2.0/24'
       subnets: [
         {
-          name: 'AppSvcSubnet'
+          name: '${namePrefix}-sub-spoke-${primaryNameSuffix}-app'
           addressPrefix: '10.1.2.0/25'
-          privateEndpointNetworkPolicies: 'Enabled'
+          privateEndpointNetworkPolicies: 'Disabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
+          udrName: null
+          nsgName: '${namePrefix}-nsg-spoke-${primaryNameSuffix}-app'
           delegations: [
             {
               name: 'appservice'
@@ -52,7 +54,7 @@ var vnetConfigurationSet = {
               }
             }
           ]
-        } 
+        }
       ]
       peerings: [
         {
@@ -69,12 +71,15 @@ var vnetConfigurationSet = {
     {
       name: '${namePrefix}-vnet-hub-${primaryNameSuffix}'
       addressPrefix: '10.1.1.0/24'
-      subnets: [ 
+      subnets: [
         {
-          name: 'PrivateLinkSubnet'
+          name: '${namePrefix}-sub-hub-${primaryNameSuffix}-privatelink'
           addressPrefix: '10.1.1.0/25'
-          privateEndpointNetworkPolicies: 'Disabled'
+          // Public preview of NSGs on Private Endpoints
+          privateEndpointNetworkPolicies: 'Enabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
+          udrName: null
+          nsgName: '${namePrefix}-nsg-hub-${primaryNameSuffix}-privatelink'
           delegations: null
         }
       ]
@@ -97,12 +102,12 @@ var vnetConfigurationSet = {
       addressPrefix: '10.2.2.0/24'
       subnets: [
         {
-          name: 'AppSvcSubnet'
+          name: '${namePrefix}-sub-spoke-${secondaryNameSuffix}-app'
           addressPrefix: '10.2.2.0/25'
-          privateEndpointNetworkPolicies: 'Enabled'
+          privateEndpointNetworkPolicies: 'Disabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
           udrName: null
-          nsgName: null
+          nsgName: '${namePrefix}-nsg-spoke-${secondaryNameSuffix}-app'
           delegations: [
             {
               name: 'appservice'
@@ -111,7 +116,7 @@ var vnetConfigurationSet = {
               }
             }
           ]
-        } 
+        }
       ]
       peerings: [
         {
@@ -128,14 +133,15 @@ var vnetConfigurationSet = {
     {
       name: '${namePrefix}-vnet-hub-${secondaryNameSuffix}'
       addressPrefix: '10.2.1.0/24'
-      subnets: [ 
+      subnets: [
         {
-          name: 'PrivateLinkSubnet'
+          name: '${namePrefix}-sub-hub-${secondaryNameSuffix}-privatelink'
           addressPrefix: '10.2.1.0/25'
-          privateEndpointNetworkPolicies: 'Disabled'
+          // Public preview of NSGs on Private Endpoints
+          privateEndpointNetworkPolicies: 'Enabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
           udrName: null
-          nsgName: null
+          nsgName: '${namePrefix}-nsg-hub-${secondaryNameSuffix}-privatelink'
           delegations: null
         }
       ]
@@ -158,9 +164,9 @@ var environmentVnetConfig = isSecondary ? vnetConfigurationSet.Secondary : vnetC
 
 // Regional VNet configuration.
 
-module vnets 'modules/vnet.bicep' = [for vnetSettings in environmentVnetConfig : {
+module vnets 'modules/vnet.bicep' = [for vnetSettings in environmentVnetConfig: {
   name: 'vnet-deploy-${vnetSettings.name}'
-  params: { 
+  params: {
     location: location
     vnetSettings: vnetSettings
   }
@@ -168,7 +174,7 @@ module vnets 'modules/vnet.bicep' = [for vnetSettings in environmentVnetConfig :
 
 // Regional VNet peering configuration.
 
-module vnetPeerings 'modules/vnet-peering.bicep' = [for vnetSettings in environmentVnetConfig : {
+module vnetPeerings 'modules/vnet-peering.bicep' = [for vnetSettings in environmentVnetConfig: {
   name: 'vnet-peering-deploy-${vnetSettings.name}'
   dependsOn: vnets
   params: {
@@ -187,7 +193,7 @@ module vnetPeerings 'modules/vnet-peering.bicep' = [for vnetSettings in environm
 // Note: Modules are used for global peerings because needs to update resources in a different resource group scope.
 //       Modules are needed for this.
 
-module vnetPeeringsGlobalPrimary 'modules/vnet-peering-global.bicep' = [for vnetSettings in vnetConfigurationSet.Primary : if (isSecondary) {
+module vnetPeeringsGlobalPrimary 'modules/vnet-peering-global.bicep' = [for vnetSettings in vnetConfigurationSet.Primary: if (isSecondary) {
   name: 'vnet-peering-global-deploy-${vnetSettings.name}'
   dependsOn: vnets
   scope: resourceGroup(primaryDeploymentResourceGroup)
@@ -196,7 +202,7 @@ module vnetPeeringsGlobalPrimary 'modules/vnet-peering-global.bicep' = [for vnet
   }
 }]
 
-module vnetPeeringsGlobalSecondary 'modules/vnet-peering-global.bicep' = [for vnetSettings in vnetConfigurationSet.Secondary : if (isSecondary) {
+module vnetPeeringsGlobalSecondary 'modules/vnet-peering-global.bicep' = [for vnetSettings in vnetConfigurationSet.Secondary: if (isSecondary) {
   name: 'vnet-peering-global-deploy-${vnetSettings.name}'
   dependsOn: vnets
   scope: resourceGroup()
@@ -232,7 +238,7 @@ module sqlPrivateLink 'modules/private-link.bicep' = {
 
     // Hub VNet, Private Link subnet
     // Don't like this indexing, but wanting to use the output to avoid 'dependsOn'
-    subnet: vnets[1].outputs.subnets[0].id 
+    subnet: vnets[1].outputs.subnets[0].id
   }
 }
 
@@ -265,6 +271,45 @@ module sqlPrivateLinkIpConfigs 'modules/private-link-ipconfigs.bicep' = {
     privateLinkNic: sqlPrivateLink.outputs.privateLinkNic
   }
 }
+
+// TODO: This is the NSG rules to only allow the SQL traffic from the App subnet.
+//       Needs to be completed because the private link nic needs to be referenced inside a module. Also needs to work across regions.
+//
+//module nsgRuleHubPrivateEndpoint 'modules/nsg-rules.bicep' = {
+//  name: 'nsg-rules-hub-vnet-private-endpoint-subnet'
+////  dependsOn: vnets
+//  params: {
+//    nsgName: environmentVnetConfig[1].subnets[0].nsgName // vnets[1].outputs.subnets[0].networkSecurityGroup.id
+//    securityRules: [
+//      {
+//        name: 'AllowSpokeVnetAppSubnetInBound'
+//        properties: {
+//          protocol: 'Tcp'
+//          sourcePortRange: '*'
+//          destinationPortRange: '1433'
+//          sourceAddressPrefix: vnets[1].outputs.subnets[0].properties.addressPrefix
+//          destinationAddressPrefix: reference(sqlPrivateLink.outputs.privateLinkNic, '2021-08-01').ipConfigurations
+//          access: 'Deny'
+//          priority: 1000
+//          direction: 'Inbound'
+//        }
+//      }
+//      {
+//        name: 'DenyVnetInBound'
+//        properties: {
+//          protocol: '*'
+//          sourcePortRange: '*'
+//          destinationPortRange: '*'
+//          sourceAddressPrefix: 'VirtualNetwork'
+//          destinationAddressPrefix: 'VirtualNetwork'
+//          access: 'Deny'
+//          priority: 1000
+//          direction: 'Inbound'
+//        }
+//      }
+//    ]
+//  }
+//}
 
 module sqlFailoverGroup 'modules/azure-sql-failover.bicep' = if (isSecondary) {
   name: 'azure-sql-failover-group'
