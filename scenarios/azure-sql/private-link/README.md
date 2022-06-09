@@ -14,6 +14,10 @@ This example shows a secure and highly available deployment if Azure SQL.
 
 ![Azure SQL Private Link](.assets/azure-sql-private-link.png)
 
+## TODOs
+
+* Update the DNS configuration to use [Private DNS Zone Groups](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-dns#private-dns-zone-group) as shown in this [quickstart](https://github.com/Azure/azure-quickstart-templates/blob/master/demos/private-endpoint-sql-from-appservice/azuredeploy.json).
+
 ## References
 
 * [Multi-region web app with private connectivity to database](https://docs.microsoft.com/en-us/azure/architecture/example-scenario/sql-failover/app-service-private-sql-multi-region)
