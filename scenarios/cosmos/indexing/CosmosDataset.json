@@ -1,0 +1,1 @@
+{ "type":"DocumentDbCollection", "linkedServiceName": {"referenceName": "CosmosLinkedService", "type": "LinkedServiceReference"}, "typeProperties": {"collectionName": "FoodCollection"} }

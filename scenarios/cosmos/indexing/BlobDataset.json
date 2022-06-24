@@ -1,0 +1,1 @@
+{ "type":"AzureBlob", "typeProperties": { "format": { "type": "JsonFormat", "filePattern": "arrayOfObjects" }, "fileName": "NutritionData.json", "folderPath": "nutritiondata" }, "linkedServiceName": { "referenceName": "AzureStorageLinkedService", "type": "LinkedServiceReference"}, "parameters": {} }
