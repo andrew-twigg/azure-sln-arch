@@ -13,10 +13,11 @@ namespace TopicFilters;
 public class Program
 {
     private const string TopicName = "TopicSubscriptionWithRuleOperationsSample";
-    private const string NoFilterSubscriptionName = "NoFilterSubscription";
+    private const string DefaultFilterSubscriptionName = "DefaultSubscription";
     private const string SqlFilterOnlySubscriptionName = "RedSqlFilterSubscription";
     private const string SqlFilterWithActionSubscriptionName = "BlueSqlFilterWithActionSubscription";
     private const string CorrelationFilterSubscriptionName = "ImportantCorrelationFilterSubscription";
+    private const string NoFilterSubscriptionName = "NoFilterSubscriptionName";
 
     /// <summary>
     /// sfsdf
@@ -43,12 +44,12 @@ public class Program
         ServiceBusSender sender = client.CreateSender(TopicName);
 
         // First Subscription is already created with default rule. Leave as is.
-        WriteLine($"Creating subscription {NoFilterSubscriptionName}");
-        await adminClient.CreateSubscriptionAsync(TopicName, NoFilterSubscriptionName);
+        WriteLine($"Creating subscription {DefaultFilterSubscriptionName}");
+        await adminClient.CreateSubscriptionAsync(TopicName, DefaultFilterSubscriptionName);
 
-        WriteLine($"SubscriptionName: {NoFilterSubscriptionName}, Removing and re-adding Default Rule");
-        await adminClient.DeleteRuleAsync(TopicName, NoFilterSubscriptionName, RuleProperties.DefaultRuleName);
-        await adminClient.CreateRuleAsync(TopicName, NoFilterSubscriptionName,
+        WriteLine($"SubscriptionName: {DefaultFilterSubscriptionName}, Removing and re-adding Default Rule");
+        await adminClient.DeleteRuleAsync(TopicName, DefaultFilterSubscriptionName, RuleProperties.DefaultRuleName);
+        await adminClient.CreateRuleAsync(TopicName, DefaultFilterSubscriptionName,
             new CreateRuleOptions(RuleProperties.DefaultRuleName, new TrueRuleFilter()));
 
         // 2nd Subscription: Add SqlFilter on Subscription 2
@@ -59,7 +60,7 @@ public class Program
         await adminClient.CreateSubscriptionAsync(
             new CreateSubscriptionOptions(TopicName, SqlFilterOnlySubscriptionName),
             new CreateRuleOptions { Name = "RedSqlRule", Filter = new SqlRuleFilter("Color = 'Red'") });
- 
+
         // 3rd Subscription: Add the SqlFilter Rule and Action
         // See https://docs.microsoft.com/en-us/azure/service-bus-messaging/topic-filters#actions to learn more about actions.
         WriteLine($"Creating subscription {SqlFilterWithActionSubscriptionName}");
@@ -89,11 +90,16 @@ public class Program
             WriteLine($"GetRules:: SubscriptionName: {CorrelationFilterSubscriptionName}, CorrelationFilter Name: {rule.Name}, Rule: {rule.Filter}");
         }
 
+        // 5th Subscription: Receive no messages
+        WriteLine($"Creating subscription {NoFilterSubscriptionName}");
+        await adminClient.CreateSubscriptionAsync(TopicName, NoFilterSubscriptionName);
+        await adminClient.DeleteRuleAsync(TopicName, NoFilterSubscriptionName, RuleProperties.DefaultRuleName);
+
         // Send messages to Topic
         await SendMessagesAsync(sender);
 
         // Receive messages from 'NoFilterSubscription'. Should receive all 9 messages 
-        await ReceiveMessagesAsync(client, NoFilterSubscriptionName);
+        await ReceiveMessagesAsync(client, DefaultFilterSubscriptionName);
 
         // Receive messages from 'SqlFilterOnlySubscription'. Should receive all messages with Color = 'Red' i.e 3 messages
         await ReceiveMessagesAsync(client, SqlFilterOnlySubscriptionName);
@@ -105,6 +111,10 @@ public class Program
         // Receive messages from 'CorrelationFilterSubscription'. Should receive all messages  with Color = 'Red' and CorrelationId = "important"
         // i.e 1 message
         await ReceiveMessagesAsync(client, CorrelationFilterSubscriptionName);
+
+        // Are there any messages on the no filter subscription?
+        await ReceiveMessagesAsync(client, NoFilterSubscriptionName);
+
         ResetColor();
 
         WriteLine("=======================================================================");
