@@ -1,5 +1,13 @@
 .DS_Store
-.vscode/
 azure-pipelines-canary-k8s/
 
 *.md.swp
+
+#
+# Visual Studio Code
+#
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
