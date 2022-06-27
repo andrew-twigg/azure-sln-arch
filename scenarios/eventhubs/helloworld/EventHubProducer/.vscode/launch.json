@@ -11,7 +11,10 @@
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/bin/Debug/net6.0/EventHubProducer.dll",
-            "args": [],
+            "args": [
+                "--event-hub-namespace", "adt-ehns-31779",
+                "--event-hub-name", "adt-eh-31779"
+            ],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",

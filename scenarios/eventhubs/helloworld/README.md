@@ -8,66 +8,35 @@ rg=adt-rg-$id
 loc=westeurope
 
 az group create -g $rg -l $loc
-
 az eventhubs namespace create -g $rg -n adt-eh-$id
 ```
 
-Get the connection string.
+Deploy the environment.
 
 ```sh
-cs=$(az eventhubs namespace authorization-rule keys list -g $rg \
-    --name RootManageSharedAccessKey \
-    --namespace-name adt-eh-$id \
-    --query "primaryConnectionString" -o tsv)
+userId=$(az ad user list --upn andrew.twigg@hitachivantara.com --query '[].id' -o tsv)
+az deployment group create -g $rg \
+    -f Infrastructure/main.bicep \
+    -p nameSuffix=$id userObjectId=$userId
 ```
 
-Create event hub.
+## Run the apps
 
 ```sh
-hubname=adt-hub-$id
-az eventhubs eventhub create -g $rg -n $hubname --namespace-name adt-eh-$id
+eventHubNs=adt-ehns-$id
+eventHubName=adt-eh-$id
 ```
 
-## Create the Producer App
-
-Create a console app.
+### Producer app
 
 ```sh
-dotnet new console -n EventHubProducer
 cd EventHubProducer
-
-dotnet add package Azure.Messaging.EventHubs
-dotnet add package Microsoft.Extensions.Configuration.UserSecrets
-dotnet build
+dotnet run --event-hub-namespace $eventHubNs --event-hub-name $eventHubName
 ```
 
-Initialise the secrets and add the connection string.
+### Consumer app
 
 ```sh
-dotnet user-secrets init
-dotnet user-secrets set "ConnectionStrings:EventHub" $cs
-```
-
-Add the Event Hub name to tbe appsettings.json.
-
-## Create the Consumer App
-
-Create a console app.
-
-```sh
-dotnet new console -n EventHubConsumer
 cd EventHubConsumer
-
-dotnet add package Azure.Messaging.EventHubs
-dotnet add package Microsoft.Extensions.Configuration.UserSecrets
-dotnet build
+dotnet run --event-hub-namespace $eventHubNs --event-hub-name $eventHubName
 ```
-
-Initialise the secrets and add the connection string.
-
-```sh
-dotnet user-secrets init
-dotnet user-secrets set "ConnectionStrings:EventHub" $cs
-```
-
-Add the Event Hub name to the the appsettings.json.
