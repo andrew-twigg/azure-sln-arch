@@ -34,7 +34,7 @@ This section includes Service Bus samples including simple quickstarts to demons
 | Service Bus Standard | Two region, no data replication     | Queue 99.9999, Data 99.9                                                      |                                                                              |          |
 | Service Bus Standard | Two region, active replication(*)   | Queue 99.9999, Data 99.9999                                                   | Dupe data. Consumer dedupe (Each consumer gets all messages).                |          |
 | Service Bus Standard | Two region, passive replication(**) | Queue 99.9999, Data 99.9999                                                   | Dupe data. Data loss. Consumer dedupe (For failover period). Cost optimised. |          |
-| Service Bus Premium  | Two region, no data replication     | Not stated. 3x sync data replication in region.                               |                                                                              | Built-in |
+| Service Bus Premium  | Single region, Zone redundant       | Not stated. 3x sync data replication in region.                               |                                                                              | Built-in |
 |                      |                                     |                                                                               |                                                                              |          |
 
 * (*) Achievable through cross-region federation all-active replication pattern.
