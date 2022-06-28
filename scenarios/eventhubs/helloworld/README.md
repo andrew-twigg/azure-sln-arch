@@ -11,10 +11,11 @@ az group create -g $rg -l $loc
 az eventhubs namespace create -g $rg -n adt-eh-$id
 ```
 
-Deploy the environment.
+Deploy the environment. Run under the account for the local user logged in to Azure.
 
 ```sh
-userId=$(az ad user list --upn andrew.twigg@hitachivantara.com --query '[].id' -o tsv)
+userUpn=$(az account show --query user.name -o tsv)
+userId=$(az ad user list --upn $userUpn --query '[].id' -o tsv)
 az deployment group create -g $rg \
     -f Infrastructure/main.bicep \
     -p nameSuffix=$id userObjectId=$userId
