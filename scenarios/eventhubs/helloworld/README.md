@@ -8,7 +8,6 @@ rg=adt-rg-$id
 loc=westeurope
 
 az group create -g $rg -l $loc
-az eventhubs namespace create -g $rg -n adt-eh-$id
 ```
 
 Deploy the environment. Run under the account for the local user logged in to Azure.
