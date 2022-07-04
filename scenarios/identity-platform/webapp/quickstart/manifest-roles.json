@@ -1,0 +1,11 @@
+[
+  {
+    "allowedMemberTypes": [
+      "User"
+    ],
+    "description": "Approvers can mark documents as approved",
+    "displayName": "Approver",
+    "isEnabled": "true",
+    "value": "approver"
+  }
+]

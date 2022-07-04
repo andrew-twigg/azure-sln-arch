@@ -1,5 +1,7 @@
 # Quickstart: Add sign-in with Microsoft to a web app
 
+Registers an app in AAD and adds a role. The web app has an authz policy on the Privacy section to check for the role. You have a [manually](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps#assign-users-and-groups-to-roles) assign the role to the user in the app.
+
 ## References
 
 * [Quickstart](https://docs.microsoft.com/en-us/azure/active-directory/develop/web-app-quickstart?pivots=devlang-aspnet-core)
@@ -28,6 +30,12 @@ The logout URL needs to be set. This CLI command fails, not sure why. Found [thi
 
 ```sh
 az ad app update --id $appId --set web.logoutUrl=https://localhost:44321/signout-oidc2
+```
+
+Add some roles. You can also do this on create.
+
+```sh
+az ad app update --id $appId --app-roles @manifest-roles.json
 ```
 
 Add a client secret...
