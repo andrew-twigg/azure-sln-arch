@@ -10,3 +10,8 @@
 * [Credential Scanner static analysis tool](https://docs.microsoft.com/en-us/azure/security/develop/security-code-analysis-overview#credential-scanner)
 * [Zero Trust](https://docs.microsoft.com/en-us/azure/active-directory/develop/zero-trust-for-developers)
 * [App Sign-in Flows](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-sign-in-flow)
+* [Microsoft.AspNetCore.Identity GitHub](https://github.com/dotnet/AspNetCore/tree/main/src/Identity)
+* [OWASP Cheat Sheet DotNet](https://cheatsheetseries.owasp.org/cheatsheets/DotNet_Security_Cheat_Sheet.html)
+* [MS Learn OWASP and Dynamic Analyzers](https://docs.microsoft.com/en-us/learn/modules/owasp-and-dynamic-analyzers/?WT.mc_id=api_CatalogApi)
+* [OWASP ZAP Project](https://owasp.org/www-project-zap/)
+* [OWASP ZAP Extension for VSTS](https://github.com/deliveron/owasp-zap-vsts-extension)
