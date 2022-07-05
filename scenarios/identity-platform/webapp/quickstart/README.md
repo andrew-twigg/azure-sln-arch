@@ -21,7 +21,7 @@ az ad app create \
     --web-redirect-uris https://localhost:44321/signin-oidc \
     --enable-id-token-issuance true
 
-appId=$(az ad app list --query "[?displayName=='adt-app-19031'].appId" -o tsv)
+appId=$(az ad app list --query "[?displayName=='adt-app-$id'].appId" -o tsv)
 
 rg=adt-rg-$id
 ```

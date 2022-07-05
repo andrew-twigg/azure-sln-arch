@@ -15,3 +15,4 @@
 * [MS Learn OWASP and Dynamic Analyzers](https://docs.microsoft.com/en-us/learn/modules/owasp-and-dynamic-analyzers/?WT.mc_id=api_CatalogApi)
 * [OWASP ZAP Project](https://owasp.org/www-project-zap/)
 * [OWASP ZAP Extension for VSTS](https://github.com/deliveron/owasp-zap-vsts-extension)
+* [App Manifest reference](https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-app-manifest)
