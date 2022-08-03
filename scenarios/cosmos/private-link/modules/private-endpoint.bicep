@@ -7,12 +7,6 @@ param namePrefix string
 @description('An environment name suffix for all resources.')
 param nameSuffix string
 
-//@description('Private link resource type')
-//param resourceType string
-
-//@description('Private link resource name')
-//param resourceName string
-
 @description('Private link service resource id')
 param resourceId string
 
@@ -33,7 +27,6 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-08-01' = {
       {
         name: privateEndpointConnectionName
         properties: {
-          //privateLinkServiceId: resourceId(resourceType, resourceName)
           privateLinkServiceId: resourceId
           groupIds: [
             groupType
