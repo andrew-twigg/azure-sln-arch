@@ -57,12 +57,6 @@ var vnetConfigurationSet = {
           peerTo: '${namePrefix}-vnet-hub-${primaryNameSuffix}'
         }
       ]
-      globalPeerings: [
-        {
-          peerTo: '${namePrefix}-vnet-hub-${secondaryNameSuffix}'
-          resourceGroup: secondaryDeploymentResourceGroup
-        }
-      ]
     }
     {
       name: '${namePrefix}-vnet-hub-${primaryNameSuffix}'
@@ -82,12 +76,6 @@ var vnetConfigurationSet = {
       peerings: [
         {
           peerTo: '${namePrefix}-vnet-spoke-${primaryNameSuffix}'
-        }
-      ]
-      globalPeerings: [
-        {
-          peerTo: '${namePrefix}-vnet-spoke-${secondaryNameSuffix}'
-          resourceGroup: secondaryDeploymentResourceGroup
         }
       ]
     }
@@ -119,12 +107,6 @@ var vnetConfigurationSet = {
           peerTo: '${namePrefix}-vnet-hub-${secondaryNameSuffix}'
         }
       ]
-      globalPeerings: [
-        {
-          peerTo: '${namePrefix}-vnet-hub-${primaryNameSuffix}'
-          resourceGroup: primaryDeploymentResourceGroup
-        }
-      ]
     }
     {
       name: '${namePrefix}-vnet-hub-${secondaryNameSuffix}'
@@ -144,12 +126,6 @@ var vnetConfigurationSet = {
       peerings: [
         {
           peerTo: '${namePrefix}-vnet-spoke-${secondaryNameSuffix}'
-        }
-      ]
-      globalPeerings: [
-        {
-          peerTo: '${namePrefix}-vnet-spoke-${primaryNameSuffix}'
-          resourceGroup: primaryDeploymentResourceGroup
         }
       ]
     }
@@ -173,35 +149,6 @@ module vnets 'modules/vnet.bicep' = [for vnetSettings in environmentVnetConfig: 
 module vnetPeerings 'modules/vnet-peering.bicep' = [for vnetSettings in environmentVnetConfig: {
   name: 'vnet-peering-deploy-${vnetSettings.name}'
   dependsOn: vnets
-  params: {
-    vnetSettings: vnetSettings
-  }
-}]
-
-// Cross-regional Global VNet peering configuration.
-//
-// This peers the hub networks of both primary and secondary regions with the spoke networks of the other region.
-// This is for app connectivity from spoke VNets to backend services active in a specific region.
-// Azure SQL is active read/write in one region, and readonly in secondary region until a failover.
-//
-// Only happens when deploying a secondary because assumes the primary has been deployed so can reference existing resources.
-//
-// Note: Modules are used for global peerings because needs to update resources in a different resource group scope.
-//       Modules are needed for this.
-
-module vnetPeeringsGlobalPrimary 'modules/vnet-peering-global.bicep' = [for vnetSettings in vnetConfigurationSet.Primary: if (isSecondary) {
-  name: 'vnet-peering-global-deploy-${vnetSettings.name}'
-  dependsOn: vnets
-  scope: resourceGroup(primaryDeploymentResourceGroup)
-  params: {
-    vnetSettings: vnetSettings
-  }
-}]
-
-module vnetPeeringsGlobalSecondary 'modules/vnet-peering-global.bicep' = [for vnetSettings in vnetConfigurationSet.Secondary: if (isSecondary) {
-  name: 'vnet-peering-global-deploy-${vnetSettings.name}'
-  dependsOn: vnets
-  scope: resourceGroup()
   params: {
     vnetSettings: vnetSettings
   }
