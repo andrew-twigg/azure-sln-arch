@@ -100,3 +100,20 @@ Connected to adt-sql-5419.secondary.database.windows.net:1433, time taken: 62ms
 Connected to adt-sql-5419.secondary.database.windows.net:1433, time taken: 63ms
 Complete: 4/4 successful attempts (100%). Average success time: 89.5ms
 ```
+
+Following forced failover:
+
+> Note: Trace is from a different deployment session. Hence IDs different.
+
+```sh
+D:\home\site\wwwroot>nameresolver adt-sql-11053.database.windows.net
+Server: 168.63.129.16
+
+Non-authoritative answer:
+Name: adt-sql-11053-eus.privatelink.database.windows.net
+Addresses: 
+	10.2.1.4
+Aliases: 
+	adt-sql-11053-eus.database.windows.net
+	adt-sql-11053-eus.privatelink.database.windows.net
+```
