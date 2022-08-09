@@ -70,10 +70,10 @@ Server: 168.63.129.16
 Non-authoritative answer:
 Name: adt-sql-5419-wus.privatelink.database.windows.net
 Addresses:
-	10.1.1.4
+    10.1.1.4
 Aliases:
-	adt-sql-5419-wus.database.windows.net
-	adt-sql-5419-wus.privatelink.database.windows.net
+    adt-sql-5419-wus.database.windows.net
+    adt-sql-5419-wus.privatelink.database.windows.net
 
 C:\home\site\wwwroot>tcpping adt-sql-5419.database.windows.net:1433
 Connected to adt-sql-5419.database.windows.net:1433, time taken: 121ms
@@ -88,10 +88,10 @@ Server: 168.63.129.16
 Non-authoritative answer:
 Name: adt-sql-5419-eus.privatelink.database.windows.net
 Addresses:
-	10.2.1.4
+    10.2.1.4
 Aliases:
-	adt-sql-5419-eus.database.windows.net
-	adt-sql-5419-eus.privatelink.database.windows.net
+    adt-sql-5419-eus.database.windows.net
+    adt-sql-5419-eus.privatelink.database.windows.net
 
 C:\home\site\wwwroot>tcpping adt-sql-5419.secondary.database.windows.net:1433
 Connected to adt-sql-5419.secondary.database.windows.net:1433, time taken: 170ms
@@ -111,9 +111,9 @@ Server: 168.63.129.16
 
 Non-authoritative answer:
 Name: adt-sql-11053-eus.privatelink.database.windows.net
-Addresses: 
-	10.2.1.4
-Aliases: 
-	adt-sql-11053-eus.database.windows.net
-	adt-sql-11053-eus.privatelink.database.windows.net
+Addresses:
+    10.2.1.4
+Aliases:
+    adt-sql-11053-eus.database.windows.net
+    adt-sql-11053-eus.privatelink.database.windows.net
 ```
