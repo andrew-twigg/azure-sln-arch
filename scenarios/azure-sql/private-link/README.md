@@ -30,6 +30,8 @@ This example shows a secure and highly available deployment if Azure SQL.
 
 ## Bicep Setup
 
+### Linux / Mac
+
 ```sh
 id=$RANDOM
 
@@ -57,6 +59,27 @@ az deployment group create -g $rg2 -f azure-sql-private-link.bicep \
         envNamePrimary=$env1 \
         envNameSecondary=$env2 \
         sqlAdminPassword=<something>
+```
+
+### Windows
+
+```sh
+$id=Get-Random
+
+$env1='wus'
+$env2='eus'
+
+$rg1="adt-rg-$id-$env1"
+$rg2="adt-rg-$id-$env2"
+
+$loc1='westus'
+$loc2='eastus'
+
+az group create -g $rg1 -l $loc1
+az group create -g $rg2 -l $loc2
+
+az deployment group create -g $rg1 -f azure-sql-private-link.bicep -p  deploymentId=$id envNamePrimary=$env1 envNameSecondary=$env2 sqlAdminPassword=<something>
+az deployment group create -g $rg2 -f azure-sql-private-link.bicep -p  isSecondary=true primaryDeploymentResourceGroup=$rg1 deploymentId=$id envNamePrimary=$env1 envNameSecondary=$env2 sqlAdminPassword=<something>
 ```
 
 ## Testing Connectivity
