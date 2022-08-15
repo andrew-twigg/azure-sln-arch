@@ -7,6 +7,9 @@ param appName string
 @description('Resource id of subnet to use for app service reginal vnet integration')
 param subnet string
 
+@description('The .NET framework version')
+param netFrameworkVersion string = 'v6.0'
+
 param serverFarm string
 
 resource app 'Microsoft.Web/sites@2021-03-01' = {
@@ -14,7 +17,9 @@ resource app 'Microsoft.Web/sites@2021-03-01' = {
   location: location
   properties: {
     serverFarmId: serverFarm
+    
     siteConfig: {
+      netFrameworkVersion: netFrameworkVersion
       appSettings: [
         {
           name: 'WEBSITE_VNET_ROUTE_ALL'

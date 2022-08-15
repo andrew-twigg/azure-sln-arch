@@ -10,7 +10,7 @@ Key features:
 * [Tutorial: Connect to SQL Database from .NET App Service without secrets using a managed identity](https://docs.microsoft.com/en-us/azure/app-service/tutorial-connect-msi-sql-database)
 * [Using AAD auth with SqlClient](https://docs.microsoft.com/en-us/sql/connect/ado-net/sql/azure-active-directory-authentication)
 
-## Bicep Setup
+## Bicep Infra Setup
 
 ### Linux / Mac
 
@@ -64,7 +64,7 @@ az deployment group create -g $rg1 -f main.bicep -p  deploymentId=$id envNamePri
 az deployment group create -g $rg2 -f main.bicep -p  isSecondary=true primaryDeploymentResourceGroup=$rg1 deploymentId=$id envNamePrimary=$env1 envNameSecondary=$env2 sqlAdminPassword=<something>
 ```
 
-## Testing Network Connectivity
+### Testing Network Connectivity
 
 From one of the App Service consoles...
 
@@ -122,3 +122,78 @@ Aliases:
     adt-sql-11053-eus.database.windows.net
     adt-sql-11053-eus.privatelink.database.windows.net
 ```
+
+## Deploy the App
+
+### Generate the Database Schema
+
+> Note: You need to open a firewall connection to generate the DB schema.
+
+```sh
+cd msdocs-app-service-sqldb-dotnetcore/DotNetCoreSqlDb/
+
+dotnet tool install -g dotnet-ef
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+
+Generates the schema as follows:
+
+```sh
+➜  DotNetCoreSqlDb git:(master) ✗ dotnet ef database update
+Build started...
+Build succeeded.
+info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
+      Entity Framework Core 6.0.0 initialized 'MyDatabaseContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.0' with options: None
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (38ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (33ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (23ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (64ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE [__EFMigrationsHistory] (
+          [MigrationId] nvarchar(150) NOT NULL,
+          [ProductVersion] nvarchar(32) NOT NULL,
+          CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (21ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (23ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (34ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [MigrationId], [ProductVersion]
+      FROM [__EFMigrationsHistory]
+      ORDER BY [MigrationId];
+info: Microsoft.EntityFrameworkCore.Migrations[20402]
+      Applying migration '20220815151401_InitialCreate'.
+Applying migration '20220815151401_InitialCreate'.
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (25ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE [Todo] (
+          [ID] int NOT NULL IDENTITY,
+          [Description] nvarchar(max) NULL,
+          [CreatedDate] datetime2 NOT NULL,
+          CONSTRAINT [PK_Todo] PRIMARY KEY ([ID])
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (26ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+      VALUES (N'20220815151401_InitialCreate', N'6.0.0');
+Done.
+```
+
+### Deploy to App Service
+
+```sh
+dotnet publish -c Release
+```
+
+Right click the publish and select deploy to web app.
