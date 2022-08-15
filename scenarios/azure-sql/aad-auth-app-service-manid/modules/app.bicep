@@ -15,9 +15,11 @@ param serverFarm string
 resource app 'Microsoft.Web/sites@2021-03-01' = {
   name: appName
   location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: serverFarm
-    
     siteConfig: {
       netFrameworkVersion: netFrameworkVersion
       appSettings: [

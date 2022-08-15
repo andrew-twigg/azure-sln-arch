@@ -1,6 +1,7 @@
 # Azure SQL AAD Auth from App Service with Managed Identity
 
 Key features:
+
 * Demonstrates managed identity as a turn-key solution for securing access to Azure SQL Database from Azure App Service
 * Eliminates secrets from the app tier
 * Builds on the secure + HA [multi-region private endpoints](../private-link/README.md) scenario to add AAD auth
@@ -123,11 +124,45 @@ Aliases:
     adt-sql-11053-eus.privatelink.database.windows.net
 ```
 
+## Connect to SQL Database from .NET App Service
+
+### Setup the SQL AD Admin
+
+> Note: A user account has been created in AD for admin to represent the SQL Admin AD account.
+
+```sh
+azureuser=$(az ad user list --filter "userPrincipalName eq 'adt-sql-30282-wus-admin@demoware.onmicrosoft.com'" --query '[].id' --output tsv)
+az sql server ad-admin create -g $rg1 --server-name adt-sql-$id-wus --display-name ADMIN --object-id $azureuser
+```
+
+### Grant permissions to the managed identity
+
+This step adds the managed identity to a group which has permissions on the SQL database.
+
+```sh
+groupid=$(az ad group create --display-name AzureSqlDbAccessGroup --mail-nickname AzureSqlDbAccessGroup --query 'id' -o tsv)
+msiobjectid=$(az webapp identity show -g $rg1 -n adt-app-$id-wus-myapp --query principalId -o tsv)
+az ad group member add --group $groupid --member-id $msiobjectid
+az ad group member list -g $groupid
+```
+
+Create a user in SQL to represent the group and assign permissions.
+
+> Note: You need to login to SQL DB using the Azure SQL AD Admin account create above.
+
+```sh
+CREATE USER [AzureSqlDbAccessGroup] FROM EXTERNAL PROVIDER;
+ALTER ROLE db_datareader ADD MEMBER [AzureSqlDbAccessGroup];
+ALTER ROLE db_datawriter ADD MEMBER [AzureSqlDbAccessGroup];
+ALTER ROLE db_ddladmin ADD MEMBER [AzureSqlDbAccessGroup];
+```
+
 ## Deploy the App
 
 ### Generate the Database Schema
 
 > Note: You need to open a firewall connection to generate the DB schema.
+> Note: Your CLI account will need to also have permissions on SQL. Add it to the group.
 
 ```sh
 cd msdocs-app-service-sqldb-dotnetcore/DotNetCoreSqlDb/
