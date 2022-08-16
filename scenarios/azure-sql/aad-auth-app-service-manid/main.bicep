@@ -318,7 +318,7 @@ module sqlFailoverGroup 'modules/azure-sql-failover.bicep' = if (isSecondary) {
     azureSqlFailoverGroupName: '${namePrefix}-sql-${deploymentId}'
     azureSqlServerPrimaryName: '${namePrefix}-sql-${primaryNameSuffix}'
     azureSqlServerSecondaryId: sql.outputs.sqlServerId
-    databaseName: '${namePrefix}-db-awlt'
+    databaseName: '${namePrefix}-db-${deploymentId}'
   }
 }
 
