@@ -126,6 +126,8 @@ Aliases:
 
 ## Connect to SQL Database from .NET App Service
 
+> Note: App Service supports [Service Connector](https://docs.microsoft.com/en-us/azure/service-connector/overview) to Azure SQL Database. I couldn't get this to work across VNet hub and spoke network topology. This uses a direct connection from the application to SQL Database.
+
 ### Setup the SQL AD Admin
 
 > Note: A user account has been created in AD for admin to represent the SQL Admin AD account.
