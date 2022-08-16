@@ -44,27 +44,6 @@ az deployment group create -g $rg2 -f main.bicep \
         sqlAdminPassword=<something>
 ```
 
-### Windows
-
-```sh
-$id=Get-Random
-
-$env1='wus'
-$env2='eus'
-
-$rg1="adt-rg-$id-$env1"
-$rg2="adt-rg-$id-$env2"
-
-$loc1='westus'
-$loc2='eastus'
-
-az group create -g $rg1 -l $loc1
-az group create -g $rg2 -l $loc2
-
-az deployment group create -g $rg1 -f main.bicep -p  deploymentId=$id envNamePrimary=$env1 envNameSecondary=$env2 sqlAdminPassword=<something>
-az deployment group create -g $rg2 -f main.bicep -p  isSecondary=true primaryDeploymentResourceGroup=$rg1 deploymentId=$id envNamePrimary=$env1 envNameSecondary=$env2 sqlAdminPassword=<something>
-```
-
 ### Testing Network Connectivity
 
 From one of the App Service consoles...
@@ -133,9 +112,12 @@ Aliases:
 > Note: A user account has been created in AD for admin to represent the SQL Admin AD account.
 
 ```sh
-azureuser=$(az ad user list --filter "userPrincipalName eq 'adt-sql-30282-wus-admin@demoware.onmicrosoft.com'" --query '[].id' --output tsv)
+azureuser=$(az ad user list --filter "userPrincipalName eq 'azuresqladmin@demoware.onmicrosoft.com'" --query '[].id' --output tsv)
 az sql server ad-admin create -g $rg1 --server-name adt-sql-$id-wus --display-name ADMIN --object-id $azureuser
+az sql server ad-admin create -g $rg2 --server-name adt-sql-$id-eus --display-name ADMIN --object-id $azureuser
 ```
+
+!SO6hRT7fvNq
 
 ### Grant permissions to the managed identity
 
@@ -143,10 +125,17 @@ This step adds the managed identity to a group which has permissions on the SQL 
 
 ```sh
 groupid=$(az ad group create --display-name AzureSqlDbAccessGroup --mail-nickname AzureSqlDbAccessGroup --query 'id' -o tsv)
-msiobjectid=$(az webapp identity show -g $rg1 -n adt-app-$id-wus-myapp --query principalId -o tsv)
-az ad group member add --group $groupid --member-id $msiobjectid
+
+msiobjectidwus=$(az webapp identity show -g $rg1 -n adt-app-$id-wus-myapp --query principalId -o tsv)
+msiobjectideus=$(az webapp identity show -g $rg2 -n adt-app-$id-eus-myapp --query principalId -o tsv)
+
+az ad group member add --group $groupid --member-id $msiobjectidwus
+az ad group member add --group $groupid --member-id $msiobjectideus
+
 az ad group member list -g $groupid
 ```
+
+![Azure AD SQL DB Access Group](.assets/azure-ad-sql-db-access-group.png)
 
 Create a user in SQL to represent the group and assign permissions.
 
