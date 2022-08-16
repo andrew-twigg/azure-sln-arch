@@ -6,6 +6,8 @@ Key features:
 * Eliminates secrets from the app tier
 * Builds on the secure + HA [multi-region private endpoints](../private-link/README.md) scenario to add AAD auth
 
+![Azure SQL App Service Managed ID](.assets/azure-sql-aad-manid.png)
+
 ## References
 
 * [Tutorial: Connect to SQL Database from .NET App Service without secrets using a managed identity](https://docs.microsoft.com/en-us/azure/app-service/tutorial-connect-msi-sql-database)
@@ -112,12 +114,15 @@ Aliases:
 > Note: A user account has been created in AD for admin to represent the SQL Admin AD account.
 
 ```sh
-azureuser=$(az ad user list --filter "userPrincipalName eq 'azuresqladmin@demoware.onmicrosoft.com'" --query '[].id' --output tsv)
-az sql server ad-admin create -g $rg1 --server-name adt-sql-$id-wus --display-name ADMIN --object-id $azureuser
-az sql server ad-admin create -g $rg2 --server-name adt-sql-$id-eus --display-name ADMIN --object-id $azureuser
-```
+sqlAdminsGroup=$(az ad group create --display-name AzureSqlDbAdminGroup --mail-nickname AzureSqlDbAccessGroup --query 'id' -o tsv)
 
-!SO6hRT7fvNq
+az sql server ad-admin create -g $rg1 --server-name adt-sql-$id-wus --display-name ADMIN --object-id $sqlAdminsGroup
+az sql server ad-admin create -g $rg2 --server-name adt-sql-$id-eus --display-name ADMIN --object-id $sqlAdminsGroup
+
+// Add the logged in user to the admins group
+signedInUser=$(az ad signed-in-user show --query id -o tsv)
+az ad group member add --group $sqlAdminsGroup --member-id $signedInUser
+```
 
 ### Grant permissions to the managed identity
 
