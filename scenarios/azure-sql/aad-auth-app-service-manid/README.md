@@ -142,12 +142,14 @@ az ad group member list -g $groupid
 
 ![Azure AD SQL DB Access Group](.assets/azure-ad-sql-db-access-group.png)
 
-Create a user in SQL to represent the group and assign permissions.
+Create a user in SQL database to represent the group and assign permissions.
 
-> Note: You need to login to SQL DB using the Azure SQL AD Admin account create above.
+> Note: You need to login to SQL DB using the Azure SQL AD Admin account create above to be able to administer the users.
+> Note: I had issues applying the migrations because [didn't have access to the schema](https://github.com/dotnet/efcore/issues/17774). See [Is setting a default schema required/recommended?](https://github.com/MicrosoftDocs/azure-docs/issues/51090). Had to set the default schema.
 
 ```sh
 CREATE USER [AzureSqlDbAccessGroup] FROM EXTERNAL PROVIDER;
+ALTER USER [AzureSQLDBAccessGroup] WITH DEFAULT_SCHEMA=[dbo]
 ALTER ROLE db_datareader ADD MEMBER [AzureSqlDbAccessGroup];
 ALTER ROLE db_datawriter ADD MEMBER [AzureSqlDbAccessGroup];
 ALTER ROLE db_ddladmin ADD MEMBER [AzureSqlDbAccessGroup];
