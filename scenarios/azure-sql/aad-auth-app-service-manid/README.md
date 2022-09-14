@@ -161,6 +161,7 @@ ALTER ROLE db_ddladmin ADD MEMBER [AzureSqlDbAccessGroup];
 
 > Note: You need to open a firewall connection to generate the DB schema.
 > Note: Your CLI account will need to also have permissions on SQL. Add it to the group.
+> Note: Local dev envs connect to SQL database with AD interactive auth. Cloud deployments are MSI.
 
 ```sh
 cd msdocs-app-service-sqldb-dotnetcore/DotNetCoreSqlDb/
